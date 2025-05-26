@@ -1,0 +1,112 @@
+<script setup>
+const props = defineProps({
+  image: String,
+  title: String,
+  description: String,
+  date: String,
+  time: String,
+  location: String,
+  buttonText: {
+    type: String,
+    default: 'Læs mere'
+  }
+})
+</script>
+
+<template>
+  <div class="eventCard">
+    <div class="eventImage">
+      <img :src="image" alt="Event image" />
+    </div>
+
+    <div class="eventContent">
+      <h2 class="eventTitle">{{ title }}</h2>
+      <p class="eventDescription">{{ description }}</p>
+
+      <div class="eventInfo">
+        <div>
+          <strong>Dato</strong><br />
+          {{ date }}
+        </div>
+        <div>
+          <strong>Tid</strong><br />
+          {{ time }}
+        </div>
+        <div>
+          <strong>Lokation</strong><br />
+          {{ location }}
+        </div>
+      </div>
+    </div>
+
+    <div class="LæsMereBtn">
+      <button class="event-button">{{ buttonText }}</button>
+    </div>
+  </div>
+</template>
+
+<style scoped> 
+.eventCard {
+  display: flex;
+  align-items: flex-start;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  padding: 1rem;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.eventImage img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+}
+
+.eventContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.eventTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.eventDescription {
+  font-size: 0.95rem;
+  color: #333;
+  margin: 0;
+}
+
+.eventMeta {
+  display: flex;
+  gap: 2rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.eventAction {
+  align-self: center;
+}
+
+.LæsMereBtn {
+  background-color: #0056a0;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.LæsMereBtn:hover {
+  background-color: #004080;
+}
+</style>
