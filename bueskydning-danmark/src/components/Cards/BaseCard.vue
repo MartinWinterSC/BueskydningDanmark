@@ -59,16 +59,19 @@ const props = defineProps({
   border-radius: 8px;
   overflow: hidden;
   background: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   max-width: 300px;
+  width: 100%; /* Sørger for at kortet tilpasser gridens bredde */
+  margin: 0 auto; /* Bruges hvis kortet står alene i 1fr grid */
 }
 
 .CardImage {
   width: 100%;
   height: 160px;
   object-fit: cover;
+    display: block;
 }
 
 .CardContent {

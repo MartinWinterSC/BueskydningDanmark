@@ -12,8 +12,7 @@ import CommunityMainView from '../views/community/CommunityMainView.vue'
 
 import CalendarMainView from '../views/calendar/CalendarMainView.vue'
 
-import OrdinaryMainView from '../views/ordinary/OrdinaryMainView.vue'
-    import EquipmentView from '../views/ordinary/EquipmentView.vue'
+import EquipmentView from '../views/EquipmentView.vue'
 
 import EliteMainView from '../views/elite/EliteMainView.vue'
     import NationalTeamView from '../views/elite/NationalTeamView.vue'
@@ -66,11 +65,7 @@ const router = createRouter({
       component: CalendarMainView,
     },
     
-    {
-      path: '/OrdinaryMainView',
-      name: 'OrdinaryMainView',
-      component: OrdinaryMainView,
-    },{
+  {
       path: '/EquipmentView',
       name: 'EquipmentView',
       component: EquipmentView,

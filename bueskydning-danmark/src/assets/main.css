@@ -1,24 +1,42 @@
-@import './base.css';
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+
+:root {
+  --color-background: var(--redBackground);
+  --color-background-soft: var(--);
+  --color-background-mute: var(--);
+
+  --color-button: var(--ButtonColor);
+  --color-button-hover: var(--);
+
+  --color-heading: var(--headerFont);
+  --color-text: var(--textFont);
+
+  --section-gap: 160px;
+
+
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
   font-weight: normal;
 }
 
-a,
-.green {
-  text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
-  padding: 3px;
+#app {
+  max-width: 1920px;
+  margin: 0 auto;
+  font-weight: normal;
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+main {
+  max-width: 1640px;
+  margin: 0 auto;
+}
+
+p{
+  color: black;
 }
 
 @media (min-width: 1024px) {
@@ -28,8 +46,19 @@ a,
   }
 
   #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
   }
 }
+
+@media (max-width: 767px) {
+  body {
+    font-size: 15px;
+  }
+
+  main {
+    padding: 0.5rem;
+  }
+}
+
+
