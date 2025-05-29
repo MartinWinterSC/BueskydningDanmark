@@ -204,11 +204,16 @@ h1{
 .newArcherContainer h2,
 .newArcherContainer p {
   color: white;
+  margin-top: 0;
 }
 
-.NewArcherContent p {
+.newArcherContent{
+  margin: 0;
+}
+
+.newArcherContent p {
   font-size: 1rem;
-  line-height: 1.6;
+  line-height: 1.5;
   margin-bottom: var(--space-md);
   color: white;
 }
@@ -216,7 +221,10 @@ h1{
 .NewArcherContentFooter{
   display: flex;
   justify-content: center;
-
+  margin: 0;
+}
+.NewArcherContentFooter *{
+  margin: 0;
 }
 
 .cardGrid {
@@ -231,8 +239,8 @@ h1{
 /* Media queries */
 @media (max-width: 768px) {
   .newArcherSection {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
   }
   
   .NewArcherContent h2 {
@@ -245,11 +253,11 @@ h1{
 
    .newArcherContainer {
     position: relative;
-    transform: none;
     top: unset;
-    right: unset;
-    width: 100%;
-    margin-top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    margin-top: -20px;
     border-radius: 15px;
     padding: 20px;
   }
@@ -258,6 +266,7 @@ h1{
     width: 100%;     /* Make image full width */
     height: auto;    /* Let height adjust automatically */
     border-radius: 15px;
+    margin-bottom: -20px;
   }
 }
 
