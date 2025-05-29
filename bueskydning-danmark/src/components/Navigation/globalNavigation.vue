@@ -3,35 +3,36 @@ import globalNavData from './globalNavData.js'
 import BueskydningLogo from '@/assets/BueskydningLogo.svg'
 </script>
 
-
 <template>
-<header>
-  <nav class="nav">
-    <ul class="navList">
-        <li v-for="item in globalNavData" :key="item.label" class="navItem">
-         <router-link v-if="item.to" :to="item.to" class="navLink">
-            <img
-              v-if="item.isLogo"
-              src="@/assets/BueskydningLogo.svg"
-              alt="Home"
-              class="navLogo"
-            />
-            <span v-else>{{ item.label }}</span>
-          </router-link>
+  <header>
+    <nav class="nav">
+      <div class="navInner">
+        <!-- Logo -->
+        <router-link to="/" class="navLogoContainer">
+          <img src="@/assets/BueskydningLogo.svg" alt="Logo" class="navLogo" />
+        </router-link>
 
-             <span v-else class="navLabel">{{ item.label }}</span>
+        <!-- Navigation Items -->
+        <ul class="navList">
+          <li v-for="item in globalNavData" :key="item.label" class="navItem">
+            <router-link v-if="item.to" :to="item.to" class="navLink">
+              <span>{{ item.label }}</span>
+            </router-link>
+            <span v-else class="navLabel">{{ item.label }}</span>
 
-        <ul v-if="item.children" class="submenu">
-          <li v-for="child in item.children" :key="child.label" class="
-          dropdownItem">
-            <router-link v-if="child.to" :to="child.to" class="dropdownLink">{{ child.label }}</router-link>
-            <span v-else class="dropdownLabel">{{ child.label }}</span>
+            <ul v-if="item.children" class="submenu">
+              <li v-for="child in item.children" :key="child.label" class="dropdownItem">
+                <router-link v-if="child.to" :to="child.to" class="dropdownLink">
+                  {{ child.label }}
+                </router-link>
+                <span v-else class="dropdownLabel">{{ child.label }}</span>
+              </li>
+            </ul>
           </li>
         </ul>
-      </li>
-    </ul>
-  </nav>
-</header>
+      </div>
+    </nav>
+  </header>
 </template>
 
 <style scoped>
@@ -45,16 +46,35 @@ import BueskydningLogo from '@/assets/BueskydningLogo.svg'
 
 .nav {
   background: #98161D;
-  padding: 1rem;;
+  padding: 1rem;
+}
+
+.navInner {
+  display: grid;
+  grid-template-columns: auto .8fr;
+  align-items: center;
+  column-gap: 2rem;
+  width: 100%;
+}
+
+.navLogoContainer {
+  flex-shrink: 0;
+}
+
+.navLogo {
+  width: 10rem;
+  height: auto;
 }
 
 .navList {
-  list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  justify-content: space-evenly;
+  align-items: center;
+  list-style: none;
   margin: 0;
   padding: 0;
+  flex-wrap: wrap; /* Optional, for responsiveness */
+  width: 100%;
 }
 
 .navItem {
@@ -64,9 +84,8 @@ import BueskydningLogo from '@/assets/BueskydningLogo.svg'
 .navLink,
 .navLabel {
   font-weight: bold;
-  color: #333;
-  text-decoration: none;
   color: white;
+  text-decoration: none;
 }
 
 .navLink:hover {
@@ -91,11 +110,11 @@ import BueskydningLogo from '@/assets/BueskydningLogo.svg'
 .dropdownLink {
   display: block;
   padding: 0.25rem 0.5rem;
-  color: #444;
+  color: #fff;
   text-decoration: none;
 }
 
 .dropdownLink:hover {
-  background: #eee;
+  background: #c22b30;
 }
 </style>
