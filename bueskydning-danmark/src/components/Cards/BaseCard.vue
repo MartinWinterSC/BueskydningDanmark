@@ -1,4 +1,6 @@
 <script setup>
+import StandardBtn from '../Buttons/StandardBtn.vue';
+
 const props = defineProps({
     // Define any props if needed
     variant: {
@@ -41,14 +43,17 @@ const props = defineProps({
         <template v-if="variant === 'News'">
             <p class="CardDate">{{ date }}</p>
             <p class ="CardSummary">{{ summary }}</p>
+            <div class="CardFooter">
+              <StandardBtn variant="primary" @click="$emit('click')">Læs mere</StandardBtn>
+            </div>
         </template>
 
-        <template v-else-if="variant === 'Simple'"></template>
+        <template v-else-if="variant === 'Simple'">
+          
+        </template>
     </div>
 
-    <div class="CardFooter">
-        
-    </div>
+    
 
     </div>
 </template>
@@ -96,6 +101,13 @@ const props = defineProps({
   font-size: 0.95rem;
   color: black;
   flex-grow: 1;
+}
+
+.CardFooter {
+  padding: var(--space-sm);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>

@@ -1,6 +1,7 @@
 <script setup>
 import TextImageSection from '@/components/SectionComponents/TextImageSection.vue';
 import BaseCard from '@/components/Cards/BaseCard.vue';
+import AthleteCard from '@/components/Cards/AtheleteCard.vue';
 
 const Newscards = [
   {
@@ -71,7 +72,7 @@ const Magasincards = [
 
 <template>
     <main>
-        <section class="HomeSection">
+    <section class="HomeSection">
       <h1>Om Bueskydning Danmark</h1>
       <TextImageSection 
         Breadtekst="Velkommen til Fællesskabet. Dette er stedet, hvor du kan holde dig opdateret med  nyheder fra bueskydningsverdenen, dykke ned i inspirerende magasiner, udforske tidligere indhold og deltage i forummet, hvor du kan stille spørgsmål, dele erfaringer og hjælpe andre bueskyttere. "
@@ -109,7 +110,6 @@ const Magasincards = [
       </div>
     </section>
     </main>
- 
           
 </template>
 

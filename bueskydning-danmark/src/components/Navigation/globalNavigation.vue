@@ -1,6 +1,6 @@
 <script setup>
 import globalNavData from './globalNavData.js'
-
+import BueskydningLogo from '@/assets/BueskydningLogo.svg'
 </script>
 
 
@@ -9,8 +9,17 @@ import globalNavData from './globalNavData.js'
   <nav class="nav">
     <ul class="navList">
         <li v-for="item in globalNavData" :key="item.label" class="navItem">
-        <router-link v-if="item.to" :to="item.to" class="navLink">{{ item.label }}</router-link>
-        <span v-else class="navLabel">{{ item.label }}</span>
+         <router-link v-if="item.to" :to="item.to" class="navLink">
+            <img
+              v-if="item.isLogo"
+              src="@/assets/BueskydningLogo.svg"
+              alt="Home"
+              class="navLogo"
+            />
+            <span v-else>{{ item.label }}</span>
+          </router-link>
+
+             <span v-else class="navLabel">{{ item.label }}</span>
 
         <ul v-if="item.children" class="submenu">
           <li v-for="child in item.children" :key="child.label" class="
@@ -26,9 +35,17 @@ import globalNavData from './globalNavData.js'
 </template>
 
 <style scoped>
+
+
+.navLogo {
+  width: 10rem;
+  height: auto;
+  vertical-align: middle;
+}
+
 .nav {
   background: #98161D;
-  padding: 1rem;
+  padding: 1rem;;
 }
 
 .navList {

@@ -1,18 +1,15 @@
-<script>
-export default {
-  name: 'FooterComponent',
-  data() {
-    return {
-      email: ''
-    }
-  },
-  methods: {
-    subscribeNewsletter() {
-      if (this.email) {
-        alert(`Tak for tilmeldingen! Email: ${this.email}`)
-        this.email = ''
-      }
-    }
+<script setup>
+import { ref } from 'vue';
+
+import FacebookLogo from '@/assets/FacebookLogo.png';
+import InstagramLogo from '@/assets/InstagramLogo.png';
+import Logo from '@/assets/BueskydningLogo.svg';
+const email = ref('');
+
+function subscribeNewsletter() {
+  if (email.value) {
+    alert(`Tak for tilmeldingen! Email: ${email.value}`);
+    email.value = '';
   }
 }
 </script>
@@ -23,8 +20,16 @@ export default {
       <!-- Logo and Social Media Section -->
       <div class="footerSection">
         <div class="socialSection">
-          <p class="followText">Følg os på</p>
-          <div class="socialIcons"></div>
+            <img :src="Logo" alt="Logo" class="logo" />
+          <h3 class="followText">Følg os på</h3>
+          <div class="socialIcons">
+            <a href="https://facebook.com" target="_blank" rel="noopener">
+              <img :src="FacebookLogo" alt="Facebook" class="socialIcon" />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener">
+              <img :src="InstagramLogo" alt="Instagram" class="socialIcon" />
+            </a>
+          </div>
         </div>
       </div>
 
@@ -40,21 +45,21 @@ export default {
       </div>
 
       <!-- Links Section -->
-      <div class="footerSection links-section">
+      <div class="footerSection linksSection">
         <h3 class="sectionTitle">Links</h3>
         <nav class="footerNav">
-          <a href="#" class="footer-link">Fælleskab</a>
-          <a href="#" class="footer-link">Kalender</a>
-          <a href="#" class="footer-link">Stævner</a>
-          <a href="#" class="footer-link">Træning</a>
-          <a href="#" class="footer-link">Information</a>
-          <a href="#" class="footer-link">Bredde</a>
-          <a href="#" class="footer-link">Elite</a>
+          <a href="#" class="footerLink">Fælleskab</a>
+          <a href="#" class="footerLink">Kalender</a>
+          <a href="#" class="footerLink">Stævner</a>
+          <a href="#" class="footerLink">Træning</a>
+          <a href="#" class="footerLink">Information</a>
+          <a href="#" class="footerLink">Bredde</a>
+          <a href="#" class="footerLink">Elite</a>
         </nav>
       </div>
 
       <!-- Newsletter Section -->
-      <div class="footerSection newsletter-section">
+      <div class="footerSection newsletterSection">
         <h3 class="sectionTitle">Tilmeld vores newsletter</h3>
         <p class="newsletterDescription">
           Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque.
@@ -67,7 +72,7 @@ export default {
             class="newsletterInput"
             required
           >
-          <button type="submit" class="newsletter-button">Tilmeld</button>
+          <button type="submit" class="newsletterButton">Tilmeld</button>
         </form>
       </div>
     </div>
@@ -88,9 +93,8 @@ export default {
 .footerContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
-  width: 100%;  /* Fylder hele .footer */
-  box-sizing: border-box;
+  gap: var(--space-md);
+  width: 100%;
 }
 
 .footerSection {
@@ -99,14 +103,17 @@ export default {
 }
 
 /* Logo Section */
-.logoSection {
-  gap: 20px;
+.logo {
+  width: 300px;
+  height: auto;
+  margin-bottom: 20px;
 }
 
 .followText {
   font-size: 16px;
-  margin-bottom: 10px;
-  font-weight: 500;
+  margin-bottom: var(--space-md);
+  font-weight: bold;
+  color: white;
 }
 
 .socialIcons {
@@ -120,10 +127,6 @@ export default {
   justify-content: center;
   width: 40px;
   height: 40px;
-  background-color: white;
-  color: #8B2635;
-  border-radius: 50%;
-  text-decoration: none;
   transition: transform 0.2s ease;
 }
 
@@ -140,6 +143,7 @@ export default {
 }
 
 .contactInfo p {
+  color: white;
   margin: 8px 0;
   line-height: 1.4;
 }
@@ -159,6 +163,7 @@ export default {
 }
 
 .footerLink:hover {
+  color: var(--BtnColorhover);
   opacity: 0.8;
   text-decoration: underline;
 }
@@ -168,6 +173,7 @@ export default {
   font-size: 14px;
   line-height: 1.4;
   margin-bottom: 20px;
+  color: white;
 }
 
 .newsletterForm {
@@ -185,18 +191,18 @@ export default {
 }
 
 .newsletterButton {
-  padding: 12px 20px;
-  background-color: white;
-  color: #98161D;
+  padding: 8px 20px;
   border: none;
-  border-radius: 25px;
+  background-color: var(--BtnColor);
+  border-radius: 16px;
   font-weight: bold;
   cursor: pointer;
+  color: white;
   transition: background-color 0.2s ease;
 }
 
 .newsletterButton:hover {
-  background-color: #f0f0f0;
+  background-color: var(--BtnColorhover);
 }
 
 /* Responsive Design */

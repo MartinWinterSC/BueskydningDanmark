@@ -1,8 +1,10 @@
+import BueskydningLogo from '@/assets/BueskydningLogo.svg'
+
 export default [
-    {label: 'Home', to: '/'},
+    {label: 'Home', to: '/', isLogo: true},
     
     {
-        label: 'Community',
+        label: 'Fællesskab',
         to: '/communityMainView',
         children: [
             {label: 'Nyheder', to: '/newsView'},
@@ -29,12 +31,12 @@ export default [
         label: 'Bredde',
         to: null,
         children: [
-            {label: 'Certified youth archerclub', to: null},
-            {label: 'Archery for schools', to: null},
+            {label: 'Certificeret ungdomsklub', to: null},
+            {label: 'Bueskydning for skoler', to: null},
             {label: 'DIF', to: null},
             {label: 'Soldaterprojekt', to: null},
-            {label: 'Membersystem', to: null},
-            {label: 'Equipment', to: '/EquipmentView'},
+            {label: 'Medlemssystem', to: null},
+            {label: 'Udstyr', to: '/EquipmentView'},
             {label: 'Webshop', to: null},
         ]
     },
@@ -44,22 +46,22 @@ export default [
         label: 'Elite',
         to: '/EliteMainView',
         children: [
-            {label: 'National Team', to: '/NationalTeamView'},
-            {label: 'Archerrepresentative', to: null},
+            {label: 'Landsholdet', to: '/NationalTeamView'},
+            {label: 'Skytterepræsentant', to: null},
             {label: 'Talent center', to: null},
-            {label: 'Talent development', to: null},
-            {label: 'School and education', to: null},
+            {label: 'Talent udvikling', to: null},
+            {label: 'Skole og uddannelse', to: null},
             {label: 'Antidoping', to: null},
 
         ]
     },
 
     {
-        label: 'Training',
+        label: 'Træning',
         to: null,
         children: [
-            {label: 'technical training', to: null},
-            {label: 'Mental training', to: null},
+            {label: 'Teknisk træning', to: null},
+            {label: 'Mental træning', to: null},
         ]
     },
 
@@ -67,7 +69,7 @@ export default [
         label: 'Information',
         to: null,
         children: [
-            {label: 'ContactInformation', to: '/NationalTeamView'},
+            {label: 'Kontaktinformation', to: null},
             {label: 'Clubs overview', to: null},
             {label: 'Committee', to: null},
             {label: 'Courses', to: null},

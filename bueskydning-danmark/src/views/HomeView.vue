@@ -6,6 +6,7 @@ import localNavigation from '@/components/Navigation/localNavigation.vue';
 import instrucktorImg from '@/assets/Billeder/BoernOgInstruktoerBueskydning.jpeg';
 import HeroImage from '@/assets/Billeder/heroImage.png';
 import nySkytteImg from '@/assets/Billeder/nySkytte.png';
+import StandardBtn from '@/components/Buttons/StandardBtn.vue';
 
 
 const cards = [
@@ -31,10 +32,15 @@ const cards = [
     image: 'https://via.placeholder.com/150'
   },
 ];
+
+const breadtekst = `Bueskydning Danmark er øverste faglige myndighed inden for Bueskydning i Danmark. Vi har en høj standart inden for vidensområderne; sikkerhed og regler, træningslære og afvikling af konkurrencer. Vi tilbyder bueskydning til alle niveauer. Vi ønsker at fremme bueskydning som amatøridræt såvel praktisk som teoretisk samt understøtte de skytter, som ønsker at dygtiggøre sig imod eliteskydning. Vi ønsker at engagere de skytter, der ønsker fællesskabet, og de skytter, der finder motivation i det autonome medlemskab via tilbud, som gør bueskydning relevant og nærværende.
+
+
+Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danmarks Idrætsforbund (DIF) samt det internationale, europæiske og nordiske forbund i bueskydning; World Archery (WA), World Archery Europe (WAE) og World Archery Nordic (WAN). Via disse medlemsskaber og vores position, som værende den øverste faglige myndighed indenfor Bueskydning i Danmark, har vi ansvaret for at repræsentere dansk bueskydning samt vores foreninger i som udenfor Danmark.`;
+
 </script>
 
 <template>
-
    <section class="HeroSection">
       <img :src="HeroImage" alt="Hero Image" class="HeroImage" />
       <div class="HeroContent">
@@ -50,24 +56,33 @@ const cards = [
     <section class="HomeSection">
       <h1>Om Bueskydning Danmark</h1>
       <TextImageSection 
-        Breadtekst="Bueskydning Danmark er øverste faglige myndighed inden for Bueskydning i Danmark. Vi har en høj standart inden for vidensområderne; sikkerhed og regler, træningslære og afvikling af konkurrencer. Vi tilbyder bueskydning til alle niveauer. Vi ønsker at fremme bueskydning som amatøridræt såvel praktisk som teoretisk samt understøtte de skytter, som ønsker at dygtiggøre sig imod eliteskydning. Vi ønsker at engagere de skytter, der ønsker fællesskabet, og de skytter, der finder motivation i det autonome medlemskab via tilbud, som gør bueskydning relevant og nærværende."
+        :Breadtekst= breadtekst
          :image="instrucktorImg"
       />
     </section>
 
     <section class="newArcherSection">
-      <div class="NewArcherImg">
-        <img :src="nySkytteImg" alt="New Archer Image" />
-      </div>
-      <div class="NewArcherBlock">
-        <div class="NewArcherContent">
-          <h2>Er du ny skytte?</h2>
-          <p>Drømmer du om at prøve kræfter med bueskydning? Uanset om du er barn, voksen eller noget midt imellem, er bueskydning en sport for alle. Som ny skytte bliver du en del af et fællesskab, hvor der er plads til både sjov, fordybelse og personlig udvikling.</p>
+    <img :src="nySkytteImg" alt="New Archer Image" class="newArcherImg" />
+    <div class="newArcherContainer">
+
+      <div class="newArcherContent">
+        <h2>Er du ny skytte?</h2>
+        <div class="NewArcherContentText">
+          <p>
+            Drømmer du om at prøve kræfter med bueskydning? Uanset om du er barn, voksen eller noget midt imellem, er bueskydning en sport for alle.
+            Som ny skytte bliver du en del af et fællesskab, hvor der er plads til både sjov, fordybelse og personlig udvikling.
+          </p>
           <p>Find ud af hvor du kan afprøve bueskydning henne tæt på dig</p>
         </div>
-        <button class="NewArcherButton">Se klub oversigt</button>
       </div>
-    </section>
+
+      <div class="NewArcherContentFooter">
+        <StandardBtn variant="primary" @click="$router.push('')">Se klub oversigt</StandardBtn>
+      </div>
+      
+    </div>
+
+  </section>
 
      <section class="HomeSection">
       <h1>Kalender</h1>
@@ -87,17 +102,19 @@ const cards = [
 
 
 <style scoped>
-
 .HomeSection {
-  margin-bottom: 60px;
+  margin-bottom: var(--space-lg);
 }
 
 .HomeSection h1 {
   font-size: 2.5rem;
   font-weight: bold;
   position: relative;
-  padding-bottom: 1rem;
-   padding-top: 1.5rem;
+  padding-bottom: var(--space-md);
+}
+
+h1{
+   padding-top:var(--space-lg);
 }
 
 /*Det her er til at lave linjen under titler */
@@ -115,7 +132,7 @@ const cards = [
 .HeroSection {
   position: relative;
   width: 100%;
-  overflow: hidden; /* prevents sidescrolling */
+  overflow: hidden; /* for at slippe for sidescrolling */
 }
 
 .HeroImage {
@@ -147,67 +164,65 @@ const cards = [
 
 .newArcherSection {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
-  margin-bottom: 60px;
-  padding: 40px 0;
-}
-
-.NewArcherImg {
- width: auto;
- height: auto;
-}
-
-.NewArcherImg img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  border-radius: 8px;
-}
-
-.NewArcherBlock {
-  background-color: #98161D;
-  padding: 3rem;
-  border-radius: 12px;
+  grid-template-columns: 1fr 400px 400px;
   position: relative;
+  margin: 0 5vw;
 }
 
-.NewArcherContent h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
+.newArcherImg {
+  grid-column: 1 / span 2;
+  height: 60vh;
+  position: relative;
+  z-index: 1;
+  border-radius: 15px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.newArcherContainer * {
+  margin: 25px 0;
+}
+
+.newArcherContainer {
+  grid-column: 2 / span 2;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  z-index: 2;
+  background-color: #98161D;
+  padding: 40px;
+  border-radius: 15px;
+}
+
+
+.NewArcherContentText{
+  max-width: 60ch;
+  margin: 0 auto;   
+}
+
+.newArcherContainer h2,
+.newArcherContainer p {
   color: white;
 }
 
 .NewArcherContent p {
   font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 15px;
+  margin-bottom: var(--space-md);
   color: white;
 }
 
-.NewArcherButton {
-  background-color: #1e40af;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
-}
+.NewArcherContentFooter{
+  display: flex;
+  justify-content: center;
 
-.NewArcherButton:hover {
-  background-color: #1d4ed8;
 }
 
 .cardGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 20px;
+  gap: var(--space-md);
   justify-content: center;
   max-width: 1000px;
   margin: 0 auto;
@@ -220,16 +235,29 @@ const cards = [
     gap: 20px;
   }
   
-  .NewArcherBlock {
-    padding: 30px;
-  }
-  
   .NewArcherContent h2 {
     font-size: 1.5rem;
   }
   
   .HomeSection h1 {
     font-size: 2rem;
+  }
+
+   .newArcherContainer {
+    position: relative;
+    transform: none;
+    top: unset;
+    right: unset;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 15px;
+    padding: 20px;
+  }
+
+   .newArcherImg {
+    width: 100%;     /* Make image full width */
+    height: auto;    /* Let height adjust automatically */
+    border-radius: 15px;
   }
 }
 
@@ -245,5 +273,6 @@ const cards = [
   .cardGrid {
     grid-template-columns: repeat(3, 1fr);
   }
+  
 }
 </style>
