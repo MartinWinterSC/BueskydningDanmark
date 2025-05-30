@@ -25,8 +25,12 @@ const Forumscards = [
 </script>
 
 <template>
-
-<section class="forumSection">
+  <main>
+    <div class="headerSection">
+      <h1>Forum</h1>
+    </div>
+    
+    <section class="forumSection">
          <h2>Nye posts</h2>
         <div class="cardGrid">
         <BaseCard 
@@ -46,8 +50,34 @@ const Forumscards = [
       </div>
     </section>
 
+  </main>
+
+
+
 </template>
 
 <style>
+.cardGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  justify-content: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
 
+/* Tablet: 2 kolonner */
+@media (min-width: 640px) {
+  .cardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 3 kolonner */
+@media (min-width: 1024px) {
+  .cardGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+}
 </style>

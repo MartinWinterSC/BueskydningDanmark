@@ -31,35 +31,63 @@ const props = defineProps({
 </script>
 
 <template>
-   <div class="Card" :class="variant">
+  <!-- Horizontal variant -->
+  <div v-if="variant === 'horizontalNews'" class="CardHorizontal">
+    <div class="CardImageHorizontal">
+      <img :src="image" alt="Card Image" />
+    </div>
+    <div class="CardContentHorizontal">
+      <h3 class="cardTitle">{{ title }}</h3>
+      <p class="CardSummary">{{ summary }}</p>
+      <div class="CardFooterHorizontal">
+        <StandardBtn variant="action" @click="$emit('click')">Læs mere</StandardBtn>
+      </div>
+    </div>
+  </div>
 
+  <!-- Vertical layout (News, Simple) -->
+  <div v-else class="Card" :class="variant">
     <div class="CardImage">
-        <img :src="image" alt="Card Image" />
+      <img :src="image" alt="Card Image" />
     </div>
 
     <div class="CardContent">
-        <h3 class="cardTitle"> {{ title }}</h3>
-<!-- Conditional rendering baseret på variant - hvis det er news vises date og summart-->
-        <template v-if="variant === 'News'">
-            <p class="CardDate">{{ date }}</p>
-            <p class ="CardSummary">{{ summary }}</p>
-            <div class="CardFooter">
-              <StandardBtn variant="primary" @click="$emit('click')">Læs mere</StandardBtn>
-            </div>
-        </template>
+      <h3 class="cardTitle">{{ title }}</h3>
 
-        <template v-else-if="variant === 'Simple'">
-          
-        </template>
+      <template v-if="variant === 'News'">
+        <p class="CardDate">{{ date }}</p>
+        <p class="CardSummary">{{ summary }}</p>
+        <div class="CardFooter">
+          <StandardBtn variant="primary" @click="$emit('click')">Læs mere</StandardBtn>
+        </div>
+      </template>
+
+      <template v-else-if="variant === 'Simple'">
+        <!-- Add content here if needed -->
+      </template>
     </div>
-
-    
-
-    </div>
+  </div>
 </template>
 
 
 <style scoped>
+.cardTitle {
+  font-size: 1.1rem;
+  color: black;
+  font-weight: bold;
+}
+
+.CardSummary {
+  font-size: 0.95rem;
+  color: black;
+}
+
+.CardDate {
+  font-size: 0.9rem;
+  color: black;
+}
+
+/* Vertikalt layout */
 .Card {
   border-radius: 8px;
   overflow: hidden;
@@ -68,15 +96,15 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   max-width: 300px;
-  width: 100%; /* Sørger for at kortet tilpasser gridens bredde */
-  margin: 0 auto; /* Bruges hvis kortet står alene i 1fr grid */
+  width: 100%;
+  margin: 0 auto;
 }
 
 .CardImage {
   width: 100%;
   height: 160px;
   object-fit: cover;
-    display: block;
+  display: block;
 }
 
 .CardContent {
@@ -86,23 +114,6 @@ const props = defineProps({
   gap: 0.5rem;
 }
 
-.cardTitle {
-  font-size: 1.1rem;
-  color: black;
-  font-weight: bold;
-}
-
-.CardDate {
-  font-size: 0.9rem;
-  color: black;
-}
-
-.CardSummary {
-  font-size: 0.95rem;
-  color: black;
-  flex-grow: 1;
-}
-
 .CardFooter {
   padding: var(--space-sm);
   display: flex;
@@ -110,4 +121,49 @@ const props = defineProps({
   align-items: center;
 }
 
+/* Horisontalt layout */
+.CardHorizontal {
+  display: flex;
+  gap: 1rem;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  align-items: center;
+  max-width: 500px;
+}
+
+.CardImageHorizontal {
+  flex-shrink: 0;
+  width: 150px;
+  height: 100px;
+}
+
+.CardImageHorizontal img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.CardContentHorizontal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+
+.CardFooterHorizontal {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Card animationer */
+.Card.Simple:hover {
+  transform: translateY(-4px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 </style>

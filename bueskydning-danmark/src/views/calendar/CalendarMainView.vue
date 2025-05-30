@@ -4,7 +4,10 @@ import EventCard from '@/components/Cards/CalendarCards.vue'
 
 <template>
     <main>
-
+        <div class="headerSection">
+            <h1>Kalender</h1>
+        </div>
+        
         <EventCard 
         image="https://via.placeholder.com/150"
         title="Event Title"

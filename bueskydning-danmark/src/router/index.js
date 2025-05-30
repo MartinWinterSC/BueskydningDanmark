@@ -3,11 +3,10 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 // Applicable pages
-import LandingView from '../views/LandingView.vue'
-
 import CommunityMainView from '../views/community/CommunityMainView.vue'
     import NewsView from '../views/community/NewsView.vue'
     import ArticlesView from '../views/community/ArticlesView.vue'
+    import ArticlesPostView from '../views/community/ArticlesPostView.vue'
     import ForumView from '../views/community/ForumView.vue'
 
 import CalendarMainView from '../views/calendar/CalendarMainView.vue'
@@ -15,6 +14,7 @@ import CalendarMainView from '../views/calendar/CalendarMainView.vue'
 import EquipmentView from '../views/EquipmentView.vue'
 
 import EliteMainView from '../views/elite/EliteMainView.vue'
+  import NationalTeamOverviewView from '../views/elite/NationalTeamsOverviewView.vue'
     import NationalTeamView from '../views/elite/NationalTeamView.vue'
 
 const router = createRouter({
@@ -33,13 +33,8 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue'),
     },
-
-    {
-      path: '/',
-      name: 'landing',
-      component: LandingView,
-    },
     
+    //Fællesskab sider
     {
       path: '/communityMainView',
       name: 'communityMainView',
@@ -53,32 +48,49 @@ const router = createRouter({
       path: '/articlesView',
       name: 'articlesView',
       component: ArticlesView,
+    },
+    {
+      path: '/articlesPostView',
+      name: 'articlesPostView',
+      component: ArticlesPostView,
     },{
       path: '/ForumView',
       name: 'ForumView',
       component: ForumView,
     },
-    
+
+    // Kalender side
     {
       path: '/CalendarMainView',
       name: 'CalendarMainView',
       component: CalendarMainView,
     },
     
-  {
+    // Bredde sider
+    {
       path: '/EquipmentView',
       name: 'EquipmentView',
       component: EquipmentView,
     },
     
+    // Elite sider
     {
       path: '/EliteMainView',
       name: 'EliteMainView',
       component: EliteMainView,
-    },{
-      path: '/NationalTeamView',
+      props:true,
+    },
+    {
+      path: '/NationalTeamOverviewView/:id',
+      name: 'NationalTeamOverviewView',
+      component: NationalTeamOverviewView,
+      props: true,
+    },
+    {
+      path: '/NationalTeamView/:id',
       name: 'NationalTeamView',
       component: NationalTeamView,
+      props: true,
     },
   ],
 })

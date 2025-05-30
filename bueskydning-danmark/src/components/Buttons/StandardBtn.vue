@@ -17,8 +17,6 @@ const BtnVariants = computed(() => {
   switch (props.variant) {
     case 'secondary':
       return 'button--secondary';
-    case 'danger':
-      return 'button--danger';
     default:
       return 'button--primary';
   }
@@ -27,7 +25,7 @@ const BtnVariants = computed(() => {
 
 <template>
   <button
-    :class="['base-button', BtnVariants]"
+    :class="['baseButton', BtnVariants]"
     @click="$emit('click')"
     :disabled="disabled"
   >
@@ -38,7 +36,7 @@ const BtnVariants = computed(() => {
 
 
 <style scoped>
-.base-button {
+.baseButton {
   font-size: 1rem;
   font-weight: 600;
   padding: var(--space-sm) var(--space-md);
@@ -55,7 +53,7 @@ const BtnVariants = computed(() => {
 }
 
 .button--primary:hover {
-  background-color: var(--BtnColor-hover);
+  background-color: var(--BtnColorhover);
 }
 
 .button--secondary {
@@ -67,17 +65,4 @@ const BtnVariants = computed(() => {
   background-color: #e5e7eb;
 }
 
-.button--danger {
-  background-color: #dc2626;
-  color: white;
-}
-
-.button--danger:hover {
-  background-color: #b91c1c;
-}
-
-.button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
 </style>

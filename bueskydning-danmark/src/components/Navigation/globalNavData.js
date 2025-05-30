@@ -1,7 +1,7 @@
 import BueskydningLogo from '@/assets/BueskydningLogo.svg'
 
 export default [
-    {label: 'Home', to: '/', isLogo: true},
+    {label:'', to: '/', isLogo: true},
     
     {
         label: 'Fællesskab',
@@ -46,7 +46,7 @@ export default [
         label: 'Elite',
         to: '/EliteMainView',
         children: [
-            {label: 'Landsholdet', to: '/NationalTeamView'},
+            {label: 'Landsholdet', to: '/NationalTeamOverviewView/1'},
             {label: 'Skytterepræsentant', to: null},
             {label: 'Talent center', to: null},
             {label: 'Talent udvikling', to: null},

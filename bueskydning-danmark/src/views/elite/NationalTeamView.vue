@@ -2,6 +2,10 @@
 import { ref, computed } from 'vue';
 import AthleteCard from '@/components/Cards/AtheleteCard.vue';
 
+const props = defineProps({
+  id: String
+})
+
 
 const athletes = ref([
   { id: 1, name: 'Oliver Staudt', category: 'Herre recurve', elite: true, club: 'Aalborg', image: '/placeholder.svg' },
@@ -20,7 +24,7 @@ function handleClick(athlete) {
 
 <template>
   <section class="BaseSection">
-    <h1>Landsholdet</h1>
+    <h1>Landsholdet {{ props.id }}</h1>
 
     <div class="Container">
       <AthleteCard
