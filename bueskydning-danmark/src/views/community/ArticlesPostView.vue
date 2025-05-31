@@ -78,10 +78,14 @@ const toggleBookmark = () => {
 </script>
 
 <template>
+  <main>
   <div class="PostContainer">
-    <div class="postHeader">
-      <h1 class="postTitle">Post name</h1>
+    <div class="headerSection">
+    <div class="titleWithLine">
+         <h1>Post Name</h1>
+        <div class="line"></div>
     </div>
+  </div>
 
     <!-- Flyttes evt til eget resuable component (breadcrumbs) -->
     <nav class="navigation">
@@ -109,7 +113,7 @@ const toggleBookmark = () => {
             :class="{ active: isLiked }"
             @click="toggleLike"
           >
-            <span class="heartIcon">♡</span>
+            <span class="heartIcon"></span>
           </button>
           <button 
             class="actionBtn"
@@ -179,6 +183,7 @@ const toggleBookmark = () => {
 
     </div>
   </div>
+  </main>
 </template>
 
 

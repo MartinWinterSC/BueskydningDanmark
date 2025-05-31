@@ -37,8 +37,9 @@ function subscribeNewsletter() {
       <div class="footerSection">
         <h3 class="sectionTitle">Kontakt</h3>
         <div class="contactInfo">
-          <p><strong>Email:</strong> generic@email.com</p>
-          <p><strong>Telefon:</strong> 123456789</p>
+          <p><strong>Email:</strong> info@bueskydningdanmark.dk</p>
+          <p><strong>Telefon:</strong> +45 50274237</p>
+          <p><strong>Telefon tid:</strong> 9.00-15.00 i hverdage</p>
           <p><strong>Adresse:</strong> Brønby Stadion 20<br>2605 Brønby</p>
           <p><strong>CVR:</strong> 89262712</p>
         </div>

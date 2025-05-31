@@ -1,84 +1,94 @@
 <script setup>
+import { ref } from 'vue';
 import BaseCard from '@/components/Cards/BaseCard.vue';
+import StandardBtn from '@/components/Buttons/StandardBtn.vue';
+import NewsletterModal from '@/components/Modals/NewsletterModal.vue';
+
+const showNewsletterModal = ref(false)
 
 const readMore = (id) => {
 };
 
 const signupNewsletter = () => {
 };
+
+const openNewsletterModal = () => {
+  showNewsletterModal.value = true
+}
+
+const handleNewsletterSubmit = (formData) => {
+  console.log('Newsletter signup data:', formData)
+}
 </script>
 
 <template>
   <main>
-  <div class="headerSection">
-    <h1>Nyheder</h1>
+    <div class="headerSection">
+    <div class="titleWithLine">
+         <h1>Nyheder</h1>
+        <div class="line"></div>
+    </div>
   </div>
 
-  <div class="contentWrapper">
-    <section class="mainContent">
-      <div class="sectionHeader">
-        <h2 class="sectionTitle">Det nyeste</h2>
-        <div class="sectionDivider"></div>
-      </div>
+    <div class="contentWrapper">
+      <section class="contentSection">
+        <div class="SubHeaderSection">
+          <h2>Seneste nyheder</h2>
+        </div>
 
-      <!-- Featured News Article -->
-      <BaseCard
-        variant="News"
-        title="HOLD DM 2025 – DIF DM-UGEN"
-        summary="Bueskydning Danmark ser igen i 2025 frem til KÆMPE......"
-        date="2025"
-        image=""
-        @click="readMore('main-article')"
-      />
-    </section>
+        <div class="featuredNews" @click="readMore('main-article')">
+          <div class="newsImage">
+            <img src="" alt="DM-UGEN Aalborg" />
+          </div>
+          <div class="newsContent">
+            <h3 class="newsTitle">HOLD DM 2025 – DIF DM-UGEN</h3>
+            <p class="newsExcerpt">
+              Bueskydning Danmark ser igen i 2025 frem til KÆMPE......
+            </p>
+            <StandardBtn class="readMoreBtn" variant="primary">Læs mere</StandardBtn>
+          </div>
+        </div>
+      </section>
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
+      <aside class="sidebar">
+        <div class="newsletterSection">
+          <h3 class="newsletterTitle">Tilmeld dig vores nyhedsbrev her</h3>
+          <p class="newsletterText">
+            Skriv dig op til vores nyhedsbrev og hold dig opdateret på det nyeste som sker
+          </p>
+          <StandardBtn variant="primary" @click="openNewsletterModal">Tilmeld nyhedsbrev</StandardBtn>
+        </div>
 
-      <!-- Newsletter Signup -->
-      <div class="newsletterSection">
-        <h3 class="newsletterTitle">Tilmeld dig vores nyhedsbrev her</h3>
-        <p class="newsletterText">
-          Skriv dig op til vores nyhedsbrev og hold dig opdateret på det nyeste som sker
-        </p>
-        <button class="newsletterBtn" @click="signupNewsletter">Tilmeld nyhedsbrev</button>
-      </div>
+        <div class="sidebarNews">
+          <BaseCard
+            variant="horizontalNews"
+            title="Koldt hoved og god teknik"
+            summary="Nedenstående artikel er bragt i bladet BUESKYDNING i..."
+            date="Maj 2025"
+            image="https://via.placeholder.com/120x80"
+            @click="readMore('sidebar-1')"
+          />
 
-      <!-- Additional News Articles -->
-      <div class="sidebarArticles">
-        <BaseCard
-          variant="horizontalNews"
-          title="Koldt hoved og god teknik"
-          summary="Nedenstående artikel er bragt i bladet BUESKYDNING i..."
-          date="Maj 2025"
-          image="https://via.placeholder.com/120x80"
-          @click="readMore('sidebar-1')"
-        />
+          <BaseCard
+            variant="horizontalNews"
+            title="Invitation til Sommerskydning 2025"
+            summary="Bueskydning Danmark er klar med invitationen for..."
+            date="April 2025"
+            image="https://via.placeholder.com/120x80"
+            @click="readMore('sidebar-2')"
+          />
+        </div>
+      </aside>
+    </div>
 
-        <BaseCard
-          variant="horizontalNews"
-          title="Invitation til Sommerskydning 2025"
-          summary="Bueskydning Danmark er klar med invitationen for..."
-          date="April 2025"
-          image="https://via.placeholder.com/120x80"
-          @click="readMore('sidebar-2')"
-        />
-      </div>
-    </aside>
-  </div>
-</main>
+    <NewsletterModal 
+      v-model="showNewsletterModal" 
+      @submit="handleNewsletterSubmit" 
+    />
+  </main>
 </template>
 
-
 <style scoped>
-
-.siteTitle {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--headerFont);
-  margin-bottom: var(--space-md);
-}
-
 .contentWrapper {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -87,68 +97,39 @@ const signupNewsletter = () => {
   align-items: start;
 }
 
-.sectionHeader {
-  margin-bottom: var(--space-lg);
-}
-
-.sectionTitle {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--headerFont);
-  margin-bottom: var(--space-xs);
-}
-
-.sectionDivider {
-  height: 4px;
-  width: 100%;
-  background-color: var(--Main-color);
-}
-
-.featuredArticle {
+.featuredNews {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 }
 
-.articleImage img {
+.newsImage img {
   width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 8px;
 }
 
-.articleContent {
+.newsContent {
   display: flex;
   flex-direction: column;
 }
 
-.articleTitle {
+.newsTitle {
   font-size: 1.25rem;
   font-weight: bold;
   margin-bottom: var(--space-sm);
 }
 
-.articleExcerpt {
+.newsExcerpt {
   color: var(--textFont);
   margin-bottom: var(--space-md);
   line-height: var(--text-line-Height);
 }
 
 .readMoreBtn {
-  background-color: var(--BtnColor);
-  color: var(--BtnTextColor);
-  border: none;
   padding: var(--space-sm) var(--space-lg);
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
   align-self: flex-start;
-}
-
-.readMoreBtn:hover {
-  background-color: var(--BtnColorhover);
 }
 
 .sidebar {
@@ -175,87 +156,13 @@ const signupNewsletter = () => {
   margin-bottom: var(--space-md);
 }
 
-.newsletterBtn {
-  background-color: var(--BtnColor);
-  color: var(--BtnTextColor);
-  padding: var(--space-sm) var(--space-md);
-  border: none;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-}
-
-.newsletterBtn:hover {
-  background-color: var(--BtnColorhover);
-}
-
-.sidebarArticles {
+.sidebarNews {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
 }
 
-.sidebarArticle {
-  display: flex;
-  gap: var(--space-md);
-  padding-bottom: var(--space-md);
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.sidebarArticle:last-child {
-  border-bottom: none;
-}
-
-.sidebarArticleImage {
-  width: 120px;
-  height: 80px;
-  flex-shrink: 0;
-}
-
-.sidebarArticleImage img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.sidebarArticleContent {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.sidebarArticleTitle {
-  font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: var(--space-xs);
-}
-
-.sidebarArticleExcerpt {
-  font-size: 0.85rem;
-  line-height: 1.4;
-  flex: 1;
-  margin-bottom: var(--space-sm);
-}
-
-.sidebarReadMore {
-  background-color: var(--BtnColor);
-  color: var(--BtnTextColor);
-  padding: var(--space-xs) var(--space-md);
-  border: none;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  cursor: pointer;
-  align-self: flex-start;
-}
-
-.sidebarReadMore:hover {
-  background-color: var(--BtnColorhover);
-}
-
-/* Responsive tweaks */
+/* Responsive */
 @media (max-width: 1024px) {
   .contentWrapper {
     grid-template-columns: 1fr;
@@ -264,16 +171,4 @@ const signupNewsletter = () => {
     order: 1;
   }
 }
-
-@media (max-width: 767px) {
-  .sidebarArticle {
-    flex-direction: column;
-  }
-
-  .sidebarArticleImage {
-    width: 100%;
-    height: 180px;
-  }
-}
-
 </style>

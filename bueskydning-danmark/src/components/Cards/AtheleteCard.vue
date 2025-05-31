@@ -1,33 +1,20 @@
-<script>
-export default {
-  name: 'AthleteCard',
-  props: {
-    athlete: {
-      type: Object,
-      required: true,
-      default: () => ({
-        id: 1,
-        name: 'Oliver Staudt',
-        category: 'Herre recurve',
-        club: 'Aalborg Bueskyttelaug',
-        image: '/placeholder.svg?height=200&width=200'
-      })
-    }
-  },
-  methods: {
-    handleCardClick() {
-      this.$emit('cardClicked', this.athlete);
-      console.log('CardClicked:', this.athlete.name);
-    }
+<script setup>
+const props = defineProps({
+  athlete: {
+    type: Object,
+    required: true
   }
+});
+
+const emit = defineEmits(['cardClicked']);
+
+function handleCardClick() {
+  emit('cardClicked', props.athlete);
 }
 </script>
 
 <template>
-  <div 
-    class="athleteCard"
-    @click="handleCardClick"
-  >
+  <div class="athleteCard" @click="handleCardClick">
     <div class="athleteImage">
       <img :src="athlete.image" :alt="athlete.name" />
     </div>

@@ -27,10 +27,13 @@ const Forumscards = [
 <template>
   <main>
     <div class="headerSection">
-      <h1>Forum</h1>
+    <div class="titleWithLine">
+         <h1>Forum</h1>
+        <div class="line"></div>
     </div>
+  </div>
     
-    <section class="forumSection">
+    <section class="SubHeaderSection">
          <h2>Nye posts</h2>
         <div class="cardGrid">
         <BaseCard 
@@ -40,7 +43,7 @@ const Forumscards = [
       </div>
     </section>
 
-    <section class="forumSection">
+    <section class="SubHeaderSection">
          <h2>Populære posts</h2>
         <div class="cardGrid">
         <BaseCard 
@@ -64,6 +67,7 @@ const Forumscards = [
   justify-content: center;
   max-width: 1000px;
   margin: 0 auto;
+  margin-top: 1rem;
 }
 
 /* Tablet: 2 kolonner */

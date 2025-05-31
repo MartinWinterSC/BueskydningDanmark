@@ -1,31 +1,124 @@
 <script setup>
 import { ref, computed } from 'vue';
 import AthleteCard from '@/components/Cards/AtheleteCard.vue';
+import AtheleteModal from '@/components/Modals/AtheleteModal.vue';
+
 
 const props = defineProps({
   id: String
 })
 
+const selectedAthlete = ref(null);
+const showModal = ref(false);
 
+//temp Data
 const athletes = ref([
-  { id: 1, name: 'Oliver Staudt', category: 'Herre recurve', elite: true, club: 'Aalborg', image: '/placeholder.svg' },
-  { id: 2, name: 'Anna Hansen', category: 'Dame compound', elite: true, club: 'København', image: '/placeholder.svg' },
-  { id: 3, name: 'Jonas Madsen', category: 'Herre recurve', elite: true, club: 'Odense', image: '/placeholder.svg' },
-  { id: 4, name: 'Oliver Staudt', category: 'Herre recurve', elite: true, club: 'Aalborg', image: '/placeholder.svg' },
-  { id: 5, name: 'Anna Hansen', category: 'Dame compound', elite: true, club: 'København', image: '/placeholder.svg' },
-  { id: 6, name: 'Jonas Madsen', category: 'Herre recurve', elite: true, club: 'Odense', image: '/placeholder.svg' },
+  {
+    id: 1,
+    name: 'Oliver Staudt',
+    category: 'Herre recurve',
+    elite: true,
+    club: 'Aalborg',
+    image: '/https://via.placeholder.com/300x300',
+    Banner: 'https://via.placeholder.com/300x300',
+    clubLogo: 'https://via.placeholder.com/300x300',
+    birthdate: '1998-06-15',
+    bow: 'Recurve',
+    bestScore: 683,
+    worldRanking: 42
+  },
+  {
+    id: 2,
+    name: 'Anna Hansen',
+    category: 'Dame compound',
+    elite: true,
+    club: 'København',
+     image: '/https://via.placeholder.com/300x300',
+    Banner: 'https://via.placeholder.com/300x300',
+    clubLogo: 'https://via.placeholder.com/300x300',
+    birthdate: '2001-03-22',
+    bow: 'Compound',
+    bestScore: 705,
+    worldRanking: 18
+  },
+  {
+    id: 3,
+    name: 'Jonas Madsen',
+    category: 'Herre recurve',
+    elite: true,
+    club: 'Odense',
+    image: '/https://via.placeholder.com/300x300',
+    Banner: 'https://via.placeholder.com/300x300',
+    clubLogo: 'https://via.placeholder.com/300x300',
+    birthdate: '1995-11-04',
+    bow: 'Recurve',
+    bestScore: 665,
+    worldRanking: 57
+  },
+  {
+    id: 4,
+    name: 'Frederikke Olsen',
+    category: 'Dame recurve',
+    elite: true,
+    club: 'Viborg',
+    image: '/https://via.placeholder.com/300x300',
+    Banner: 'https://via.placeholder.com/300x300',
+    clubLogo: 'https://via.placeholder.com/300x300',
+    birthdate: '2002-08-30',
+    bow: 'Recurve',
+    bestScore: 672,
+    worldRanking: 30
+  },
+  {
+    id: 5,
+    name: 'Emil Thomsen',
+    category: 'Herre compound',
+    elite: true,
+    club: 'Aarhus',
+    image: '/https://via.placeholder.com/300x300',
+    Banner: 'https://via.placeholder.com/300x300',
+    clubLogo: 'https://via.placeholder.com/300x300',
+    birthdate: '1993-05-12',
+    bow: 'Compound',
+    bestScore: 712,
+    worldRanking: 25
+  },
+  {
+    id: 6,
+    name: 'Sofie Jensen',
+    category: 'Dame recurve',
+    elite: true,
+    club: 'Esbjerg',
+    image: '/https://via.placeholder.com/300x300',
+    Banner: 'https://via.placeholder.com/300x300',
+    clubLogo: 'https://via.placeholder.com/300x300',
+    birthdate: '2000-12-10',
+    bow: 'Recurve',
+    bestScore: 678,
+    worldRanking: 39
+  }
 ]);
 
 
 function handleClick(athlete) {
-  console.log('Athlete clicked:', athlete.name);
+  selectedAthlete.value = athlete;
+  showModal.value = true;
+}
+
+function closeModal() {
+  showModal.value = false;
 }
 </script>
 
 <template>
-  <section class="BaseSection">
-    <h1>Landsholdet {{ props.id }}</h1>
+   <div class="headerSection">
+    <div class="titleWithLine">
+          <h1>Landsholdet {{ props.id }}</h1>
+        <div class="line"></div>
+    </div>
+  </div>
 
+  <section class="BaseSection">
     <div class="Container">
       <AthleteCard
         v-for="athlete in athletes"
@@ -35,20 +128,17 @@ function handleClick(athlete) {
       />
     </div>
   </section>
+  <AtheleteModal
+  :athlete="selectedAthlete"
+  :visible="showModal"
+  @close="closeModal"
+/>
 </template>
 
 <style scoped>
 
 .BaseSection {
   padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.BaseSection h1 {
-  margin-bottom: 2rem;
-  font-size: 1.8rem;
 }
 
 /* Responsive flex container */

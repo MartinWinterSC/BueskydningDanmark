@@ -5,13 +5,13 @@ import HomeView from '../views/HomeView.vue'
 // Applicable pages
 import CommunityMainView from '../views/community/CommunityMainView.vue'
     import NewsView from '../views/community/NewsView.vue'
-    import ArticlesView from '../views/community/ArticlesView.vue'
     import ArticlesPostView from '../views/community/ArticlesPostView.vue'
     import ForumView from '../views/community/ForumView.vue'
 
 import CalendarMainView from '../views/calendar/CalendarMainView.vue'
 
-import EquipmentView from '../views/EquipmentView.vue'
+import BreddeMain from '../views/bredde/BreddeMainView.vue'
+import EquipmentView from '../views/bredde/EquipmentView.vue'
 
 import EliteMainView from '../views/elite/EliteMainView.vue'
   import NationalTeamOverviewView from '../views/elite/NationalTeamsOverviewView.vue'
@@ -37,58 +37,59 @@ const router = createRouter({
     //Fællesskab sider
     {
       path: '/communityMainView',
-      name: 'communityMainView',
+      name: 'Fællesskabet',
       component: CommunityMainView,
     },
     {
       path: '/newsView',
-      name: 'newsView',
+      name: 'Nyheder',
       component: NewsView,
-    },{
-      path: '/articlesView',
-      name: 'articlesView',
-      component: ArticlesView,
     },
     {
       path: '/articlesPostView',
-      name: 'articlesPostView',
+      name: 'Artikle',
       component: ArticlesPostView,
     },{
       path: '/ForumView',
-      name: 'ForumView',
+      name: 'Forum',
       component: ForumView,
     },
 
     // Kalender side
     {
       path: '/CalendarMainView',
-      name: 'CalendarMainView',
+      name: 'Kalender',
       component: CalendarMainView,
     },
     
     // Bredde sider
     {
+      path: '/BreddeMainView',
+      name:'/Bredde',
+      component: BreddeMain,
+    },
+    {
       path: '/EquipmentView',
-      name: 'EquipmentView',
+      name: 'Udstyr',
       component: EquipmentView,
     },
     
     // Elite sider
     {
       path: '/EliteMainView',
-      name: 'EliteMainView',
+      name: 'Elite',
       component: EliteMainView,
       props:true,
     },
     {
       path: '/NationalTeamOverviewView/:id',
-      name: 'NationalTeamOverviewView',
+      name: 'Landsholds Oversigt',
       component: NationalTeamOverviewView,
       props: true,
     },
     {
       path: '/NationalTeamView/:id',
-      name: 'NationalTeamView',
+      name: 'Landsholdet',
       component: NationalTeamView,
       props: true,
     },

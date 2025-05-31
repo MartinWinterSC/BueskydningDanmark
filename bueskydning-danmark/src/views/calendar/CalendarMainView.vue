@@ -1,12 +1,18 @@
 <script setup>
 import EventCard from '@/components/Cards/CalendarCards.vue'
+import Calendar from '@/components/Calendar.vue';
 </script>
 
 <template>
     <main>
         <div class="headerSection">
-            <h1>Kalender</h1>
-        </div>
+    <div class="titleWithLine">
+         <h1>Kalender</h1>
+        <div class="line"></div>
+    </div>
+
+    <Calendar />
+  </div>
         
         <EventCard 
         image="https://via.placeholder.com/150"

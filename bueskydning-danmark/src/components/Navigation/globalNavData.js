@@ -8,7 +8,6 @@ export default [
         to: '/communityMainView',
         children: [
             {label: 'Nyheder', to: '/newsView'},
-            {label: 'Artikler', to: '/articlesView'},
             {label: 'Forum', to: '/ForumView'},
             {label: 'Arkiv', to: null},
         ]
@@ -29,7 +28,7 @@ export default [
 
     {
         label: 'Bredde',
-        to: null,
+        to: '/BreddeMainView',
         children: [
             {label: 'Certificeret ungdomsklub', to: null},
             {label: 'Bueskydning for skoler', to: null},

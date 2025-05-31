@@ -74,14 +74,19 @@ const Magasincards = [
 <template>
     <main>
     <section class="headerSection">
-      <h1>Fællesskabet</h1>
+       <div class="headerSection">
+        <div class="titleWithLine">
+            <h1>Fællesskabet</h1>
+            <div class="line"></div>
+        </div>
+       </div>
       <TextImageSection 
         Breadtekst="Velkommen til Fællesskabet. Dette er stedet, hvor du kan holde dig opdateret med  nyheder fra bueskydningsverdenen, dykke ned i inspirerende magasiner, udforske tidligere indhold og deltage i forummet, hvor du kan stille spørgsmål, dele erfaringer og hjælpe andre bueskyttere. "
         Image="https://via.placeholder.com/150" 
       />
     </section>
 
-    <section class="CardSection">
+    <section class="SubHeaderSection">
          <h2>News</h2>
         <div class="cardGrid">
         <BaseCard 
@@ -94,28 +99,28 @@ const Magasincards = [
       </div>
     </section>
 
-    <section class="CardSection">
-         <h2>Forum posts</h2>
+    <section class="SubHeaderSection">
+        <h2>Forum</h2>
         <div class="cardGrid">
         <BaseCard 
           v-for="(Forumscards,index) in Forumscards"
           :key="Forumscards.title"
           v-bind="Forumscards"/>
-      </div>
+        </div>
        <div class="seeMoreBtnContainer">
          <StandardBtn variant="primary">Se flere Posts</StandardBtn>
       </div>
     </section>
 
-     <section class="CardSection">
+     <section class="SubHeaderSection">
         <h2>Magsiner</h2>
          <div class="cardGrid">
         <BaseCard 
           v-for="(Magasincards,index) in Magasincards"
           :key="Magasincards.title"
           v-bind="Magasincards"/>
-      </div>
-      <div class="seeMoreBtnContainer">
+        </div>
+        <div class="seeMoreBtnContainer">
          <StandardBtn variant="primary">Se flere magasiner</StandardBtn>
       </div>
     </section>
@@ -125,73 +130,11 @@ const Magasincards = [
 
 <style scoped>
 
-.cardGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  justify-content: center;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.headerSection h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  position: relative;
-  padding-bottom: var(--space-md);
-}
-
-.headerSection {
-  margin-bottom: var(--space-lg);
-}
-
-h1{
-   padding-top:var(--space-lg);
-}
-
-/*Det her er til at lave linjen under titler */
-.headerSection h1::after {
-  content: '';
-  position: absolute;
-  left:0;
-  bottom: 0;
-  width: 100%;
-  height: 3px;
-  background-color: #98161D;
-}
-
-
 .seeMoreBtnContainer{
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 1rem
-}
-
-.CardSection h2 {
-  font-size: 2rem;
-  font-weight: bold;
-  position: relative;
-  padding-bottom: var(--space-md);
-}
-
-h2{
-   padding-top:var(--space-lg);
-}
-
-/*Det her er til at lave linjen under titler */
-.CardSection h2::after {
-  content: '';
-  position: absolute;
-  left:0;
-  bottom: 0;
-  width: 100%;
-  height: 3px;
-  background-color: #98161D;
-}
-
-.CardSection {
-  margin-bottom: var(--space-lg);
 }
 
 .cardGrid {
@@ -200,7 +143,9 @@ h2{
   gap: var(--space-md);
   justify-content: center;
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0 1 auto;
+  margin-top: 1rem;
+  
 }
 
 /* Tablet: 2 kolonner */

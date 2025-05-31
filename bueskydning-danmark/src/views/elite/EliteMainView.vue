@@ -22,7 +22,12 @@ function handleClick(NavPoint) {
 <template>
   <main>
  <section class="BaseSection">
-    <h1>Elite </h1>
+     <div class="headerSection">
+      <div class="titleWithLine">
+         <h1>Elite</h1>
+        <div class="line"></div>
+    </div>
+  </div>
 
     <section>
       <img src="" alt="" />
@@ -54,31 +59,6 @@ function handleClick(NavPoint) {
 </template>
 
 <style scoped>
-
-.BaseSection {
-  padding: 2rem;
-  background-color: #f9f9f9;
-  border-radius: 16px;
-  
-}
-
-.BaseSection h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  position: relative;
-  padding-bottom: var(--space-md);
-}
-
-.BaseSection h1::after {
-  content: '';
-  position: absolute;
-  left:0;
-  bottom: 0;
-  width: 100%;
-  height: 3px;
-  background-color: #98161D;
-}
-
 
 /* Responsive flex container */
 .Container {
