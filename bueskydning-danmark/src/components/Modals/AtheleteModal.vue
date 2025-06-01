@@ -15,11 +15,11 @@ const emit = defineEmits(['close']);
 
       <!-- Athlete content -->
       <div class="athlete-profile">
-        <img class="background" :src="athlete.background || '/your-default-bg.jpg'" />
+        <img class="background" :src="athlete.background || ''" />
         <div class="left-panel">
           <img class="portrait" :src="athlete.image" />
           <div class="club-banner">
-            <img :src="athlete.clubLogo || '/your-club-logo.png'" />
+            <img :src="athlete.clubLogo || ''" />
           </div>
         </div>
         <div class="right-panel">

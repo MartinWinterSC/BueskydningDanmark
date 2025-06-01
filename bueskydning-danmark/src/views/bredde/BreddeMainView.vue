@@ -12,7 +12,7 @@ import templatePage from '@/components/SectionComponents/SimplePageTemplate.vue'
   </div>
 
     <templatePage 
-        image="https://via.placeholder.com/1200x600"
+        image=""
         title="2.1.3.6 Præmier/deltagerantal"
         subTitle="Regler for medaljefordeling i Bueskydning Danmark">
 

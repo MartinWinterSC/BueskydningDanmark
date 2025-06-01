@@ -6,6 +6,30 @@ import NewsletterModal from '@/components/Modals/NewsletterModal.vue';
 
 const showNewsletterModal = ref(false)
 
+const ArticleCards = [
+  {
+    variant: 'News',
+    title: 'Testing',
+    date: '2023-10-01',
+    summary: 'this is a test so far, I just wanna see if this works',
+    image: ''
+  },
+  {
+    variant: 'News',
+    title: 'Testing 2',
+    date: '2023-10-01',
+    summary: 'this is a test so far, I just wanna see if this works',
+    image: ''
+  },
+   {
+    variant: 'News',
+    title: 'Testing 3',
+    date: '2023-10-01',
+    summary: 'this is a test so far, I just wanna see if this works',
+    image: ''
+  },
+];
+
 const readMore = (id) => {
 };
 
@@ -36,7 +60,7 @@ const handleNewsletterSubmit = (formData) => {
           <h2>Seneste nyheder</h2>
         </div>
 
-        <div class="featuredNews" @click="readMore('main-article')">
+        <div class="featuredNews" @click="readMore('')">
           <div class="newsImage">
             <img src="" alt="DM-UGEN Aalborg" />
           </div>
@@ -65,7 +89,7 @@ const handleNewsletterSubmit = (formData) => {
             title="Koldt hoved og god teknik"
             summary="Nedenstående artikel er bragt i bladet BUESKYDNING i..."
             date="Maj 2025"
-            image="https://via.placeholder.com/120x80"
+            image=""
             @click="readMore('sidebar-1')"
           />
 
@@ -74,12 +98,22 @@ const handleNewsletterSubmit = (formData) => {
             title="Invitation til Sommerskydning 2025"
             summary="Bueskydning Danmark er klar med invitationen for..."
             date="April 2025"
-            image="https://via.placeholder.com/120x80"
+            image=""
             @click="readMore('sidebar-2')"
           />
         </div>
       </aside>
     </div>
+
+     <section class="SubHeaderSection">
+         <h2>Articles</h2>
+        <div class="cardGrid">
+        <BaseCard 
+          v-for="(ArticleCards,index) in ArticleCards"
+          :key="ArticleCards.title"
+          v-bind="ArticleCards"/>
+      </div>
+    </section>
 
     <NewsletterModal 
       v-model="showNewsletterModal" 

@@ -6,12 +6,12 @@ import BaseCard from '@/components/Cards/BaseCard.vue';
 const router = useRouter();
 
 const EliteNavPoints = ref([
-  { id: 1, name: 'Landsholdet', image: '/placeholder.svg' },
-  { id: 2, name: 'Skytterepræsentant', image: '/placeholder.svg' },
-  { id: 3, name: 'Talecenter', image: '/placeholder.svg' },
-  { id: 4, name: 'Talentudvikling', image: '/placeholder.svg' },
-  { id: 5, name: 'Skole og uddannelse', image: '/placeholder.svg' },
-  { id: 6, name: 'Antidoping', image: '/placeholder.svg' },
+  { id: 1, name: 'Landsholdet', image: '' },
+  { id: 2, name: 'Skytterepræsentant', image: '' },
+  { id: 3, name: 'Talecenter', image: '' },
+  { id: 4, name: 'Talentudvikling', image: '' },
+  { id: 5, name: 'Skole og uddannelse', image: '' },
+  { id: 6, name: 'Antidoping', image: '' },
 ]);
 
 function handleClick(NavPoint) {
@@ -58,8 +58,7 @@ function handleClick(NavPoint) {
 
 </template>
 
-<style scoped>
-
+<style scoped> 
 /* Responsive flex container */
 .Container {
   display: flex;

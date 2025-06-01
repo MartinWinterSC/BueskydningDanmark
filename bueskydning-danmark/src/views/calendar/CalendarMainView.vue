@@ -15,7 +15,7 @@ import Calendar from '@/components/Calendar.vue';
   </div>
         
         <EventCard 
-        image="https://via.placeholder.com/150"
+        image=""
         title="Event Title"
         description="This is a description of the event."
         date="2023-10-01"
@@ -24,7 +24,7 @@ import Calendar from '@/components/Calendar.vue';
         buttonText="Læs mere" />
 
         <EventCard 
-        image="https://via.placeholder.com/150"
+        image=""
         title="Event Title"
         description="This is a description of the event."
         date="2023-10-01"

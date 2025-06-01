@@ -8,7 +8,7 @@ const isBookmarked = ref(false)
 // Placeholder data til post som skal erstattes med aktuelt data fra wordpress eller API
 const post = ref({
   title: "Emne: Træningsips til bedre fokus og stabilitet - hvad virker for jer?",
-  image: "https://via.placeholder.com/500x300",
+  image: "",
   imageAlt: "Training exercise demonstration",
   content: [
     "Hej alle sammen!",
@@ -32,14 +32,14 @@ const comments = ref([
     id: 1,
     username: "Mads",
     timestamp: "6 måneder",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar: "",
     text: "Velkommen til sporten - fedt at høre om din motivation! Et par hurtige tips: Du kan prøve vejrtrækningsøvelser, det hjælper både med ro og koncentration. Sørg for at få trænet med stabilitet af at styrke alle små muskler i fitness, især mavemuskler! Og rytmisk, så man meget bruger som til at hvile og træk stille. Mvh Brian"
   },
   {
     id: 2,
     username: "Marianne",
     timestamp: "6 måneder",
-    avatar: "/placeholder.svg?height=40&width=40",
+    avatar: "",
     text: "Fedt at høre om din træning! Jeg har haft god gavn af at styrketræning og balanceøvelser - især core og ben. Træntræning med fokus på åftræk og sige hjælper også med at holde teknikken skarp. For koncentration bruger jeg faste rutiner og små mentale pauser mellem serier. Hilsen Marianne"
   }
 ])
@@ -48,22 +48,22 @@ const sidebarItems = ref([
   {
     id: 1,
     title: "Emme: Lær det rette mindset til bueskydning",
-    image: "/placeholder.svg?height=120&width=200"
+    image: ""
   },
   {
     id: 2,
     title: "Emme: Bueskydning i naturen",
-    image: "/placeholder.svg?height=120&width=200"
+    image: ""
   },
   {
     id: 3,
     title: "Emme: Salg af brugt udstyr den 2016",
-    image: "/placeholder.svg?height=120&width=200"
+    image: ""
   },
   {
     id: 4,
     title: "Emme: Recurvebue sælges",
-    image: "/placeholder.svg?height=120&width=200"
+    image: ""
   }
 ])
 
@@ -82,7 +82,7 @@ const toggleBookmark = () => {
   <div class="PostContainer">
     <div class="headerSection">
     <div class="titleWithLine">
-         <h1>Post Name</h1>
+         {{ post.title }}
         <div class="line"></div>
     </div>
   </div>

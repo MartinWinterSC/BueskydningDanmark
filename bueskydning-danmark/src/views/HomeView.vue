@@ -15,21 +15,21 @@ const cards = [
     title: 'Testing',
     date: '2023-10-01',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
   {
     variant: 'News',
     title: 'Testing 2',
     date: '2023-10-01',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
    {
     variant: 'News',
     title: 'Testing 3',
     date: '2023-10-01',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
 ];
 
@@ -102,31 +102,7 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
 
 
 <style scoped>
-.HomeSection {
-  margin-bottom: var(--space-lg);
-}
 
-.HomeSection h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  position: relative;
-  padding-bottom: var(--space-md);
-}
-
-h1{
-   padding-top:var(--space-lg);
-}
-
-/*Det her er til at lave linjen under titler */
-.HomeSection h1::after {
-  content: '';
-  position: absolute;
-  left:0;
-  bottom: 0;
-  width: 100%;
-  height: 3px;
-  background-color: #98161D;
-}
 
 /* Hero sektion */
 .HeroSection {
@@ -150,7 +126,15 @@ h1{
   color: white;
   text-align: center;
   z-index: 1;
-  padding: 1rem;
+  padding: 1rem
+}
+
+.HeroContent h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  margin-bottom: 0.5rem;
 }
 
 .LocalNav {

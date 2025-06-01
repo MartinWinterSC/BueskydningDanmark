@@ -37,8 +37,11 @@
   --text-line-Height: 1.6;
 
   --Font-MobileSize: 16px;
+  --font-MobileH1-Size: 24px
+  --font-Mobileh2-size: 20px;
+
   --Font-baseSize: 18px;
-  --Font-h1Size: 34px;
+  --Font-h1Size: 32px;
   --Font-h2Size: 28px;
 
 
@@ -64,6 +67,7 @@ p{
   color: var(--textFont);
 }
 
+/* Header h1 */
 .headerSection h1 {
   font-size: var(--Font-h1Size);
   font-weight: bold;

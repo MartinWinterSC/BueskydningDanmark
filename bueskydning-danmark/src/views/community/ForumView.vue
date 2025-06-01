@@ -7,19 +7,19 @@ const Forumscards = [
     variant: 'Simple',
     title: 'Testing',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
   {
     variant: 'Simple',
     title: 'Testing 2',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
    {
     variant: 'Simple',
     title: 'Testing 3',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
 ];
 </script>

@@ -77,19 +77,19 @@ const router = createRouter({
     // Elite sider
     {
       path: '/EliteMainView',
-      name: 'Elite',
+      name: 'EliteMainView',
       component: EliteMainView,
       props:true,
     },
     {
-      path: '/NationalTeamOverviewView/:id',
-      name: 'Landsholds Oversigt',
+      path: '/Landshold/:id',
+      name: 'NationalTeamOverviewView',
       component: NationalTeamOverviewView,
       props: true,
     },
     {
-      path: '/NationalTeamView/:id',
-      name: 'Landsholdet',
+      path: '/Landsholdet/:id',
+      name: 'NationalTeamView',
       component: NationalTeamView,
       props: true,
     },

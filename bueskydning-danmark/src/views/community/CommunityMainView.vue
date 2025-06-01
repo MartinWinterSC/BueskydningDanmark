@@ -1,7 +1,6 @@
 <script setup>
 import TextImageSection from '@/components/SectionComponents/TextImageSection.vue';
 import BaseCard from '@/components/Cards/BaseCard.vue';
-import AthleteCard from '@/components/Cards/AtheleteCard.vue';
 import StandardBtn from '@/components/Buttons/StandardBtn.vue';
 
 const Newscards = [
@@ -10,21 +9,21 @@ const Newscards = [
     title: 'Testing',
     date: '2023-10-01',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
   {
     variant: 'News',
     title: 'Testing 2',
     date: '2023-10-01',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
    {
     variant: 'News',
     title: 'Testing 3',
     date: '2023-10-01',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
 ];
 
@@ -33,19 +32,19 @@ const Forumscards = [
     variant: 'Simple',
     title: 'Testing',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
   {
     variant: 'Simple',
     title: 'Testing 2',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
    {
     variant: 'Simple',
     title: 'Testing 3',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
 ];
 
@@ -54,19 +53,19 @@ const Magasincards = [
     variant: 'Simple',
     title: 'Testing',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
   {
     variant: 'Simple',
     title: 'Testing 2',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
    {
     variant: 'Simple',
     title: 'Testing 3',
     summary: 'this is a test so far, I just wanna see if this works',
-    image: 'https://via.placeholder.com/150'
+    image: ''
   },
 ];
 </script>
@@ -82,7 +81,7 @@ const Magasincards = [
        </div>
       <TextImageSection 
         Breadtekst="Velkommen til Fællesskabet. Dette er stedet, hvor du kan holde dig opdateret med  nyheder fra bueskydningsverdenen, dykke ned i inspirerende magasiner, udforske tidligere indhold og deltage i forummet, hvor du kan stille spørgsmål, dele erfaringer og hjælpe andre bueskyttere. "
-        Image="https://via.placeholder.com/150" 
+        Image="" 
       />
     </section>
 

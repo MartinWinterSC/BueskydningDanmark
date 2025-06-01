@@ -1,4 +1,6 @@
 <script setup>
+import StandardBtn from '../Buttons/StandardBtn.vue';
+
 const props = defineProps({
   image: String,
   title: String,
@@ -39,24 +41,23 @@ const props = defineProps({
       </div>
     </div>
 
-    <div class="LæsMereBtn">
-      <button class="event-button">{{ buttonText }}</button>
-    </div>
+      <StandardBtn variant="primary" @click="$emit('click')">Læs mere</StandardBtn>
   </div>
 </template>
 
 <style scoped> 
+
 .eventCard {
   display: flex;
   align-items: flex-start;
   background: white;
-  border-radius: 8px;
+  border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   padding: 1rem;
+  margin: 1rem;
   gap: 1rem;
-  width: 100%;
-  max-width: 1000px;
+  width: 70%;
 }
 
 .eventImage img {
@@ -84,8 +85,9 @@ const props = defineProps({
   margin: 0;
 }
 
-.eventMeta {
+.eventInfo {
   display: flex;
+  flex-direction: row;
   gap: 2rem;
   margin-top: 0.5rem;
   font-size: 0.9rem;
@@ -95,18 +97,5 @@ const props = defineProps({
   align-self: center;
 }
 
-.LæsMereBtn {
-  background-color: #0056a0;
-  color: white;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 9999px;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
 
-.LæsMereBtn:hover {
-  background-color: #004080;
-}
 </style>

@@ -1,100 +1,94 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-const today = new Date()
-const currentDate = ref(new Date())
-const events = ref({}) // key: 'YYYY-MM-DD', value: [events]
+const currentDate = ref(new Date());
+const currentMonth = ref(new Date().getMonth());
+const currentYear = ref(new Date().getFullYear());
 
-const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-
-const currentMonthYear = computed(() => {
-  return currentDate.value.toLocaleDateString('default', {
-    month: 'long',
-    year: 'numeric',
-  })
-})
-
-const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate()
+const weekdays = ['Man', 'Tir', 'Ons', 'Tors', 'Fre', 'Lør', 'Søn'];
+const Months = ['Januar', 'Febuar', 'Marts', 'April', 'Maj', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'December'];
 
 const calendarDays = computed(() => {
-  const year = currentDate.value.getFullYear()
-  const month = currentDate.value.getMonth()
-  const firstDay = new Date(year, month, 1).getDay()
-  const daysInMonth = getDaysInMonth(year, month)
+  const days = [];
 
-  const days = []
+//Første dag i måned
+const firstDayofMonth = new Date(currentYear.value, currentMonth.value, 1);
+//sidste dag i måned - vi sætter 1,0 for at den retunrere den sidste dag i den aktuelle måned da javascript Date API giver en sidste dag i måned hvis du sætter den til 0.
+const lastDayofMonth = new Date(currentYear.value, currentMonth.value + 1,0);
 
-  // Add padding before first day
-  for (let i = 0; i < firstDay; i++) {
-    days.push({ day: '', date: '', events: [] })
+const startDay = firstDayofMonth.getDay();
+const totalDays = lastDayofMonth.getDate();
+
+  for (let i = 0; i < startDay; i++) {
+    const date = new Date(currentYear.value, currentMonth.value, i - startDay + 1)
+    days.push(date)
   }
 
-  for (let d = 1; d <= daysInMonth; d++) {
-    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`
-    days.push({
-      day: d,
-      date: dateStr,
-      events: events.value[dateStr] || [],
-    })
+  for (let i = 1; i <= totalDays; i++) {
+    const date = new Date(currentYear.value, currentMonth.value, i)
+    days.push(date)
   }
 
-  return days
-})
-
-const addEvent = (date) => {
-  if (!date) return
-  const text = prompt(`Add event for ${date}`)
-  if (text) {
-    if (!events.value[date]) {
-      events.value[date] = []
-    }
-    events.value[date].push(text)
+ while (days.length % 7 !== 0) {
+    const lastDate = days[days.length - 1];
+    const nextDate = new Date(lastDate.getFullYear(), lastDate.getMonth(), lastDate.getDate() + 1);
+    days.push(nextDate);
   }
-}
 
-const isToday = (dateStr) => {
-  const date = new Date(dateStr)
+  return days;
+});
+
+function isToday(date) {
+  const today = new Date();
   return (
     date.getDate() === today.getDate() &&
     date.getMonth() === today.getMonth() &&
     date.getFullYear() === today.getFullYear()
-  )
+  );
 }
 
-const prevMonth = () => {
-  const date = new Date(currentDate.value)
-  date.setMonth(date.getMonth() - 1)
-  currentDate.value = date
+function prevMonth() {
+  if (currentMonth.value === 0) {
+    currentMonth.value = 11;
+    currentYear.value--;
+  } else {
+    currentMonth.value--;
+  }
 }
 
-const nextMonth = () => {
-  const date = new Date(currentDate.value)
-  date.setMonth(date.getMonth() + 1)
-  currentDate.value = date
+function nextMonth() {
+  if (currentMonth.value === 11) {
+    currentMonth.value = 0;
+    currentYear.value++;
+  } else {
+    currentMonth.value++;
+  }
 }
 </script>
 
 <template>
   <div class="calendar">
-    <div class="header">
+    <div class="calendarHeader">
       <button @click="prevMonth">‹</button>
-      <h2>{{ currentMonthYear }}</h2>
+     <h2>{{ Months[currentMonth] }} {{ currentYear }}</h2>
       <button @click="nextMonth">›</button>
     </div>
 
     <div class="weekdays">
       <div v-for="day in weekdays" :key="day">{{ day }}</div>
     </div>
-
+    
     <div class="days">
-      <div
+      <!--v-for loop som kører-->
+    <!-- toISOString metoden retunrere et dato objekt som en string med ISO standard hvilekn er en dato format som  YYYY-MM-DDTHH:mm:ss.sssZ -->
+     <div
         v-for="day in calendarDays"
-        :key="day.date"
+        :key="day.toISOString()"
         class="day"
-        :class="{ today: isToday(day.date) }"
-        @click="addEvent(day.date)"
+        :class="{ today: isToday(day), 'otherMonth': day.getMonth() !== currentMonth }"
+        @click="addEvent(day)"
       >
-        <div class="date-number">{{ day.day }}</div>
+         <div class="dateNumber">{{ day.getDate() }}</div>
         <ul class="events">
           <li v-for="(event, index) in day.events" :key="index">{{ event }}</li>
         </ul>
@@ -109,57 +103,93 @@ const nextMonth = () => {
 .calendar {
   max-width: 600px;
   margin: auto;
-  font-family: sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.header {
+.calendarHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.calendarHeader h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.navButton:hover {
+  background-color: #e9ecef;
 }
 
 .weekdays, .days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  text-align: center;
 }
 
-.weekdays div {
+.weekdays {
+  background-color: #f8f9fa;
+}
+
+.weekday {
   font-weight: bold;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #ccc;
+  padding: 0.75rem 0;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
+  color: #666;
+  font-size: 0.9rem;
 }
 
 .day {
-  border: 1px solid #eee;
+  border: 1px solid #f0f0f0;
   padding: 0.5rem;
-  min-height: 80px;
+  min-height: 100px;
   cursor: pointer;
   position: relative;
+  background-color: white;
+  transition: background-color 0.2s;
+}
+
+.day:hover {
+  background-color: #f8f9fa;
 }
 
 .day.today {
-  background-color: #d0f0ff;
-  border: 2px solid #00aaff;
+  background-color: #e3f2fd;
+  border: 2px solid #2196f3;
 }
 
-.date-number {
+.day.otherMonth {
+  background-color: #fafafa;
+  color: #ccc;
+}
+
+.day.otherMonth .dateNumber {
+  color: #ccc;
+}
+
+.dateNumber {
   font-weight: bold;
   margin-bottom: 0.25rem;
+  font-size: 1rem;
+  color: #333;
 }
 
-.events {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  font-size: 0.75rem;
-}
-
-.events li {
-  background: #f0f0f0;
-  margin-top: 2px;
-  padding: 2px 4px;
-  border-radius: 4px;
-}
 </style>

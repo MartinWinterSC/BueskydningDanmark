@@ -10,12 +10,12 @@ function handleClick(team) {
 }
 
 const NationalTeams = ref([
-  { id: 1, name: 'Recurve landsholdet', image: '/placeholder.svg' },
-  { id: 2, name: 'Compound landsholdet', image: '/placeholder.svg' },
-  { id: 3, name: '3D landsholdet', image: '/placeholder.svg' },
-  { id: 4, name: 'Herre landsholdet', image: '/placeholder.svg' },
-  { id: 5, name: 'Kvinde landsholdet', image: '/placeholder.svg' },
-  { id: 6, name: 'Ungdoms landsholdet', image: '/placeholder.svg' },
+  { id: 1, name: 'Recurve landsholdet', image: '' },
+  { id: 2, name: 'Compound landsholdet', image: '' },
+  { id: 3, name: '3D landsholdet', image: '' },
+  { id: 4, name: 'Herre landsholdet', image: '' },
+  { id: 5, name: 'Kvinde landsholdet', image: '' },
+  { id: 6, name: 'Ungdoms landsholdet', image: '' },
 ]);
 
 </script>
