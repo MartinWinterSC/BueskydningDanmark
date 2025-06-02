@@ -36,8 +36,6 @@ import BueskydningLogo from '@/assets/BueskydningLogo.svg'
 </template>
 
 <style scoped>
-
-
 .navLogo {
   width: 10rem;
   height: auto;

@@ -7,10 +7,6 @@ const props = defineProps({
     type: String,
     default: 'primary',
   },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const BtnVariants = computed(() => {

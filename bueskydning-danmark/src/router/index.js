@@ -17,6 +17,8 @@ import EliteMainView from '../views/elite/EliteMainView.vue'
   import NationalTeamOverviewView from '../views/elite/NationalTeamsOverviewView.vue'
     import NationalTeamView from '../views/elite/NationalTeamView.vue'
 
+import klubOversigtView from '@/views/klubOversigtView.vue'
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -24,6 +26,12 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+    },
+
+    {
+      path: '/klubOversigtView',
+      name: 'klubOversigtView',
+      component: klubOversigtView,
     },
     {
       path: '/about',

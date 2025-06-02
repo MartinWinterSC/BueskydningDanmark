@@ -1,7 +1,13 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, } from 'vue'
 
-const currentDate = ref(new Date());
+const props = defineProps({
+  events: {
+    type: Array,
+    default: () => []
+  }
+})
+
 const currentMonth = ref(new Date().getMonth());
 const currentYear = ref(new Date().getFullYear());
 
@@ -15,7 +21,6 @@ const calendarDays = computed(() => {
 const firstDayofMonth = new Date(currentYear.value, currentMonth.value, 1);
 //sidste dag i måned - vi sætter 1,0 for at den retunrere den sidste dag i den aktuelle måned da javascript Date API giver en sidste dag i måned hvis du sætter den til 0.
 const lastDayofMonth = new Date(currentYear.value, currentMonth.value + 1,0);
-
 const startDay = firstDayofMonth.getDay();
 const totalDays = lastDayofMonth.getDate();
 
@@ -37,6 +42,12 @@ const totalDays = lastDayofMonth.getDate();
 
   return days;
 });
+
+function getEventsForDate(date) {
+  const dayString = date.toISOString().split('T')[0]
+  return props.events.filter(event => event.date === dayString)
+}
+
 
 function isToday(date) {
   const today = new Date();
@@ -90,7 +101,7 @@ function nextMonth() {
       >
          <div class="dateNumber">{{ day.getDate() }}</div>
         <ul class="events">
-          <li v-for="(event, index) in day.events" :key="index">{{ event }}</li>
+          <li v-for="(event, index) in getEventsForDate(day)" :key="index" :class="'event ' + event.type">{{ event.title }}</li>
         </ul>
       </div>
     </div>
@@ -192,4 +203,26 @@ function nextMonth() {
   color: #333;
 }
 
+
+.events {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+}
+
+.event {
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  color: white;
+}
+
+.event.møde {
+  background-color: #007bff;
+}
+
+.event.marketing {
+  background-color: #28a745;
+}
 </style>

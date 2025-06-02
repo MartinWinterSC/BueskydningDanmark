@@ -7,6 +7,7 @@ import instrucktorImg from '@/assets/Billeder/BoernOgInstruktoerBueskydning.jpeg
 import HeroImage from '@/assets/Billeder/heroImage.png';
 import nySkytteImg from '@/assets/Billeder/nySkytte.png';
 import StandardBtn from '@/components/Buttons/StandardBtn.vue';
+import UptoTopBtn from '@/components/Buttons/UptoTopBtn.vue';
 
 
 const cards = [
@@ -84,7 +85,7 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
       </div>
 
       <div class="NewArcherContentFooter">
-        <StandardBtn variant="primary" @click="$router.push('')">Se klub oversigt</StandardBtn>
+        <StandardBtn variant="primary" @click="$router.push('klubOversigtView')">Se klub oversigt</StandardBtn>
       </div>
       
     </div>
@@ -113,13 +114,12 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
           v-bind="card"/>
       </div>
     </section>
+    <UptoTopBtn />
   </main>
 </template>
 
 
 <style scoped>
-
-
 /* Hero sektion */
 .HeroSection {
   position: relative;

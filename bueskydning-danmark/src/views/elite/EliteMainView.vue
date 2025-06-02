@@ -65,6 +65,7 @@ function handleClick(NavPoint) {
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 
 /* Each card item */
