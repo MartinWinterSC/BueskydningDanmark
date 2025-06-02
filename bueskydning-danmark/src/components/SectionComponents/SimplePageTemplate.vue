@@ -30,7 +30,6 @@ defineProps({
   width: 100%;
   height: auto;
   margin-bottom: var(--space-md);
-  border-radius: var(--radius-md);
   object-fit: cover;
 }
 

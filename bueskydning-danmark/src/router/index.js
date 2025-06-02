@@ -82,7 +82,7 @@ const router = createRouter({
       props:true,
     },
     {
-      path: '/Landshold/:id',
+      path: '/NationalTeamOverviewView/:id',
       name: 'NationalTeamOverviewView',
       component: NationalTeamOverviewView,
       props: true,

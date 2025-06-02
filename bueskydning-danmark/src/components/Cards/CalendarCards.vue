@@ -49,15 +49,17 @@ const props = defineProps({
 
 .eventCard {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   background: white;
   border-radius: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   padding: 1rem;
-  margin: 1rem;
+  margin: 1rem auto;
   gap: 1rem;
-  width: 70%;
+  max-width: 700px;
+  width: 100%;
 }
 
 .eventImage img {

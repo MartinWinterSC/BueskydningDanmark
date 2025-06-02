@@ -5,7 +5,7 @@ import Calendar from '@/components/Calendar.vue';
 
 <template>
     <main>
-        <div class="headerSection">
+    <div class="headerSection">
     <div class="titleWithLine">
          <h1>Kalender</h1>
         <div class="line"></div>

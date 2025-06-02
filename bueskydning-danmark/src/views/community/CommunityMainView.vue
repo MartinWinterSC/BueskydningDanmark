@@ -85,8 +85,11 @@ const Magasincards = [
       />
     </section>
 
-    <section class="SubHeaderSection">
-         <h2>News</h2>
+    <section class="headerSection"> 
+        <div class="titleWithLine">
+          <h2>News</h2>
+          <div class="line"></div>
+        </div>
         <div class="cardGrid">
         <BaseCard 
           v-for="(Newscards,index) in Newscards"
@@ -98,8 +101,11 @@ const Magasincards = [
       </div>
     </section>
 
-    <section class="SubHeaderSection">
-        <h2>Forum</h2>
+    <section class="headerSection"> 
+        <div class="titleWithLine">
+         <h2>Forum</h2>
+         <div class="line"></div>
+        </div>
         <div class="cardGrid">
         <BaseCard 
           v-for="(Forumscards,index) in Forumscards"
@@ -111,8 +117,11 @@ const Magasincards = [
       </div>
     </section>
 
-     <section class="SubHeaderSection">
-        <h2>Magsiner</h2>
+     <section class="headerSection"> 
+        <div class="titleWithLine">
+         <h2>Magasiner</h2>
+         <div class="line"></div>
+        </div>
          <div class="cardGrid">
         <BaseCard 
           v-for="(Magasincards,index) in Magasincards"

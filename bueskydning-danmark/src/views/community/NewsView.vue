@@ -173,7 +173,8 @@ const handleNewsletterSubmit = (formData) => {
 }
 
 .newsletterSection {
-  background-color: #f3f4f6;
+  background-color: #98161D;
+  color: white;
   padding: var(--space-lg);
   border-radius: 8px;
 }
@@ -185,6 +186,7 @@ const handleNewsletterSubmit = (formData) => {
 }
 
 .newsletterText {
+  color: white;
   font-size: 0.9rem;
   line-height: 1.5;
   margin-bottom: var(--space-md);

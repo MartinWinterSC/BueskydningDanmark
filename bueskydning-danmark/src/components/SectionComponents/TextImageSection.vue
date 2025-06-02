@@ -55,7 +55,6 @@ const props = defineProps({
     width: 100%;
     max-width: 60vh;
     height: auto;
-    border-radius: 16px;
     object-fit: cover;
 }
 

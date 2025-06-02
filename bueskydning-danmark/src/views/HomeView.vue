@@ -2,7 +2,7 @@
 import TextImageSection from '@/components/SectionComponents/TextImageSection.vue';
 import BaseCard from '@/components/Cards/BaseCard.vue';
 import localNavigation from '@/components/Navigation/localNavigation.vue';
-
+import Calendar from '@/components/Calendar.vue';
 import instrucktorImg from '@/assets/Billeder/BoernOgInstruktoerBueskydning.jpeg';
 import HeroImage from '@/assets/Billeder/heroImage.png';
 import nySkytteImg from '@/assets/Billeder/nySkytte.png';
@@ -53,8 +53,15 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
     </section>
 
   <main>
+
+    <div class="headerSection">
+    <div class="titleWithLine">
+         <h1>Om Bueskydning Danmark</h1>
+        <div class="line"></div>
+    </div>
+    </div>
+
     <section class="HomeSection">
-      <h1>Om Bueskydning Danmark</h1>
       <TextImageSection 
         :Breadtekst= breadtekst
          :image="instrucktorImg"
@@ -84,12 +91,21 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
 
   </section>
 
-     <section class="HomeSection">
-      <h1>Kalender</h1>
+  <section class="headerSection">
+    <div class="titleWithLine">
+         <h2>Kalender</h2>
+        <div class="line"></div>
+    </div>
+    <div>
+      <Calendar />
+    </div>
     </section>
 
-    <section class="HomeSection">
-      <h1>Nyheder</h1>
+    <section class="headerSection"> 
+        <div class="titleWithLine">
+         <h2>Nyeste Nyheder</h2>
+         <div class="line"></div>
+        </div>
        <div class="cardGrid">
         <BaseCard 
           v-for="(card,index) in cards"
@@ -108,7 +124,6 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
 .HeroSection {
   position: relative;
   width: 100%;
-  overflow: hidden; /* for at slippe for sidescrolling */
 }
 
 .HeroImage {
@@ -139,11 +154,12 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
 
 .LocalNav {
   position: absolute;
-  width: 70%;
-  bottom: 0rem;
+  width: 65%;
+  bottom: -2.5rem;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
+  padding-bottom: 1.5rem;
 }
 
 .newArcherSection {
@@ -158,7 +174,6 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
   height: 60vh;
   position: relative;
   z-index: 1;
-  border-radius: 15px;
   object-fit: cover;
   width: 100%;
 }

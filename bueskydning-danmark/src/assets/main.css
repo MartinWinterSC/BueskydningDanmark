@@ -71,7 +71,15 @@ p{
 .headerSection h1 {
   font-size: var(--Font-h1Size);
   font-weight: bold;
-  padding-top: var(--space-lg); /* keep this */
+  padding-top: var(--space-lg); 
+  margin: 0;
+  white-space: nowrap;
+}
+
+.headerSection h2 {
+  font-size: var(--Font-h2Size);
+  font-weight: bold;
+  padding-top: var(--space-lg); 
   margin: 0;
   white-space: nowrap;
 }
