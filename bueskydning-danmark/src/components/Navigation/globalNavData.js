@@ -1,7 +1,7 @@
 import BueskydningLogo from '@/assets/BueskydningLogo.svg'
 
 export default [
-    {label:'', to: '/', isLogo: true},
+    // {label:'', to: '/', isLogo: true},
     
     {
         label: 'Fællesskab',

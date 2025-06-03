@@ -4,6 +4,7 @@
   box-sizing: border-box;
   margin: 0;
   font-weight: normal;
+  transition: 0.3S;
 }
 
 :root {
@@ -37,7 +38,7 @@
   --text-line-Height: 1.6;
 
   --Font-MobileSize: 16px;
-  --font-MobileH1-Size: 24px
+  --font-MobileH1-Size: 24px;
   --font-Mobileh2-size: 20px;
 
   --Font-baseSize: 18px;

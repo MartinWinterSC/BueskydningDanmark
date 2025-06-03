@@ -68,6 +68,28 @@ const Magasincards = [
     image: ''
   },
 ];
+
+const baseURL = "https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/";
+const categoryPrint = "print";
+
+const fetchRequest = [
+  fetch(baseURL + categoryPrint)
+];
+
+fetchRequest[0]
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Something went wrong, go look at the code dumbass");
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log("Fetched data:", data); // ✅ This will print your data
+  })
+  .catch(error => {
+    console.error("Fetch error:", error); // ✅ Catch any issues
+  });
+
 </script>
 
 <template>
