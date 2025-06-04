@@ -18,6 +18,8 @@ import EliteMainView from '../views/elite/EliteMainView.vue'
     import NationalTeamView from '../views/elite/NationalTeamView.vue'
 
 import klubOversigtView from '@/views/klubOversigtView.vue'
+import proevBueskydning from '@/views/bredde/proevBueskydning.vue'
+import contact from '@/views/Contact.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -81,6 +83,11 @@ const router = createRouter({
       name: 'Udstyr',
       component: EquipmentView,
     },
+    {
+      path: '/proevBueskydning',
+      name: 'ProevBueskydning',
+      component: proevBueskydning,
+    },
     
     // Elite sider
     {
@@ -100,6 +107,11 @@ const router = createRouter({
       name: 'NationalTeamView',
       component: NationalTeamView,
       props: true,
+    },
+    {
+      path: '/contact',
+      name: 'contact',
+      component: contact,
     },
   ],
   scrollBehavior() {

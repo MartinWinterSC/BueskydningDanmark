@@ -25,6 +25,10 @@ const props = defineProps({
     image: {
         type: String,
         required: true,
+    },
+    link: {
+        type: String,
+        required: false,
     }
 
 });
@@ -46,27 +50,29 @@ const props = defineProps({
   </div>
 
   <!-- Vertical layout (News, Simple) -->
-  <div v-else class="Card" :class="variant">
-    <div class="CardImage">
-      <img :src="image" alt="Card Image" />
+  <a :href="link" target="_blank" rel="noopener" class="CardLinkWrapper">
+    <div class="Card" :class="variant">
+      <div class="CardImage">
+        <img :src="image" alt="Card Image" />
+      </div>
+
+      <div class="CardContent">
+        <h3 class="cardTitle">{{ title }}</h3>
+
+        <template v-if="variant === 'News'">
+          <p class="CardDate">{{ date }}</p>
+          <p class="CardSummary">{{ summary }}</p>
+          <div class="CardFooter">
+            <StandardBtn variant="primary" @click="$emit('click')">Læs mere</StandardBtn>
+          </div>
+        </template>
+
+        <template v-else-if="variant === 'Simple'">
+          <!-- No extra content for Simple -->
+        </template>
+      </div>
     </div>
-
-    <div class="CardContent">
-      <h3 class="cardTitle">{{ title }}</h3>
-
-      <template v-if="variant === 'News'">
-        <p class="CardDate">{{ date }}</p>
-        <p class="CardSummary">{{ summary }}</p>
-        <div class="CardFooter">
-          <StandardBtn variant="primary" @click="$emit('click')">Læs mere</StandardBtn>
-        </div>
-      </template>
-
-      <template v-else-if="variant === 'Simple'">
-        <!-- Add content here if needed -->
-      </template>
-    </div>
-  </div>
+  </a>
 </template>
 
 
@@ -100,7 +106,7 @@ const props = defineProps({
   margin: 0 auto;
 }
 
-.CardImage {
+.CardImage img{
   width: 100%;
   height: 160px;
   object-fit: cover;
@@ -112,6 +118,10 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+a{
+  text-decoration: none;
 }
 
 .CardFooter {

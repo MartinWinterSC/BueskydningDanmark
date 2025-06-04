@@ -1,16 +1,21 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import globalNavData from './globalNavData.js'
 
-// Logo import
-import BueskydningLogo from '@/assets/BueskydningLogo.svg'
-
 // Mobile menu toggle
+const route = useRoute()
 const isMobileMenuOpen = ref(false)
+
+watch(route, () => {
+  isMobileMenuOpen.value = false
+})
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
+
+
 </script>
 
 <template>
@@ -99,16 +104,12 @@ const toggleMobileMenu = () => {
   padding: var(--space-xs);
 }
 
-.navLink{
-  
-}
-
 .navLink,
 .navLabel {
   font-weight: bold;
   color: white;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 .navLink:hover {

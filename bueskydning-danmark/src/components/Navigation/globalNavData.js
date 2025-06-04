@@ -68,14 +68,13 @@ export default [
         label: 'Information',
         to: null,
         children: [
-            {label: 'Kontaktinformation', to: null},
-            {label: 'Clubs overview', to: null},
-            {label: 'Committee', to: null},
-            {label: 'Courses', to: null},
-            {label: 'Federation', to: null},
-            {label: 'Adminstration', to: null},
-            {label: 'Sponsors', to: null},
-
+            {label: 'Kontakt Information', to: '/contact'},
+            {label: 'Kluboversigt', to: null},
+            {label: 'Udvalg', to: null},
+            {label: 'Kursus', to: null},
+            {label: 'Forbund', to: null},
+            {label: 'Administration', to: '/contact'},
+            {label: 'Sponsorer', to: null},
         ]
     }
 ]

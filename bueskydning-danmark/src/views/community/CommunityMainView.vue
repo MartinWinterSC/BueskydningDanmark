@@ -1,96 +1,59 @@
 <script setup>
+import { ref, onMounted } from 'vue';
 import TextImageSection from '@/components/SectionComponents/TextImageSection.vue';
 import BaseCard from '@/components/Cards/BaseCard.vue';
 import StandardBtn from '@/components/Buttons/StandardBtn.vue';
+import communityHero from '@/assets/Billeder/Community.png';
 
-const Newscards = [
-  {
-    variant: 'News',
-    title: 'Testing',
-    date: '2023-10-01',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-  {
-    variant: 'News',
-    title: 'Testing 2',
-    date: '2023-10-01',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-   {
-    variant: 'News',
-    title: 'Testing 3',
-    date: '2023-10-01',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-];
-
-const Forumscards = [
-  {
-    variant: 'Simple',
-    title: 'Testing',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-  {
-    variant: 'Simple',
-    title: 'Testing 2',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-   {
-    variant: 'Simple',
-    title: 'Testing 3',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-];
-
-const Magasincards = [
-  {
-    variant: 'Simple',
-    title: 'Testing',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-  {
-    variant: 'Simple',
-    title: 'Testing 2',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-   {
-    variant: 'Simple',
-    title: 'Testing 3',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-];
+const Magasincards = ref([]);
+const Newscards = ref([]);
+const Forumscards = ref([]);
 
 const baseURL = "https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/";
-const categoryPrint = "print";
 
-const fetchRequest = [
-  fetch(baseURL + categoryPrint)
-];
+onMounted(() => {
+  fetch(baseURL + "news?per_page=3&_embed")
+    .then(response => response.json())
+    .then(data => {
+      Newscards.value = data.map(post => ({
+        variant: 'News',
+        title: post.title.rendered,
+        date: post.date?.slice(0, 10),
+        summary: post.acf?.summary || '',
+        image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
+        link: post.link || '#'
+      }));
+    })
+    .catch(error => console.error("News fetch error:", error));
 
-fetchRequest[0]
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Something went wrong, go look at the code dumbass");
-    }
-    return response.json();
-  })
-  .then(data => {
-    console.log("Fetched data:", data); // ✅ This will print your data
-  })
-  .catch(error => {
-    console.error("Fetch error:", error); // ✅ Catch any issues
-  });
+  fetch(baseURL + "forum?per_page=3&_embed")
+    .then(response => response.json())
+    .then(data => {
+      Forumscards.value = data.map(post => ({
+        variant: 'Simple',
+        title: post.title.rendered,
+        summary: post.acf?.summary || '',
+        image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
+        link: post.link || '#'
+      }));
+    })
+    .catch(error => console.error("Forum fetch error:", error));
 
+    fetch(baseURL + "print?per_page=3&_embed")
+    .then(response => response.json())
+    .then(data => {
+      Magasincards.value = data.map(post => ({
+        variant: 'Simple',
+        title: post.title.rendered,
+        image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
+        link: post.acf?.print_pdf?.url || '#'
+      }));
+    })
+    .catch(error => console.error("Print fetch error:", error));
+});
 </script>
+
+
 
 <template>
     <main>
@@ -102,8 +65,8 @@ fetchRequest[0]
         </div>
        </div>
       <TextImageSection 
-        Breadtekst="Velkommen til Fællesskabet. Dette er stedet, hvor du kan holde dig opdateret med  nyheder fra bueskydningsverdenen, dykke ned i inspirerende magasiner, udforske tidligere indhold og deltage i forummet, hvor du kan stille spørgsmål, dele erfaringer og hjælpe andre bueskyttere. "
-        Image="" 
+        Breadtekst="Velkommen til Fællesskabet. Dette er stedet, hvor du kan holde dig opdateret med  nyheder fra bueskydningsverdenen, dykke ned i inspirerende magasiner, udforske tidligere indhold og deltage i forummet, hvor du kan stille spørgsmål, dele erfaringer og hjælpe andre bueskyttere."
+        :image="communityHero" 
       />
     </section>
 
@@ -139,19 +102,19 @@ fetchRequest[0]
       </div>
     </section>
 
-     <section class="headerSection"> 
-        <div class="titleWithLine">
-         <h2>Magasiner</h2>
-         <div class="line"></div>
-        </div>
-         <div class="cardGrid">
+    <section class="headerSection" id="print"> 
+      <div class="titleWithLine">
+        <h2>Magasiner</h2>
+        <div class="line"></div>
+      </div>
+      <div class="cardGrid">
         <BaseCard 
-          v-for="(Magasincards,index) in Magasincards"
-          :key="Magasincards.title"
-          v-bind="Magasincards"/>
-        </div>
-        <div class="seeMoreBtnContainer">
-         <StandardBtn variant="primary">Se flere magasiner</StandardBtn>
+        v-for="(Magasincards,index) in Magasincards"
+        :key="Magasincards.title"
+        v-bind="Magasincards"/>
+      </div>
+      <div class="seeMoreBtnContainer">
+        <StandardBtn variant="primary">Se flere magasiner</StandardBtn>
       </div>
     </section>
     </main>
@@ -173,7 +136,6 @@ fetchRequest[0]
   gap: var(--space-md);
   justify-content: center;
   max-width: 1000px;
-  margin: 0 1 auto;
   margin-top: 1rem;
   
 }
@@ -189,7 +151,6 @@ fetchRequest[0]
 @media (min-width: 1024px) {
   .cardGrid {
     grid-template-columns: repeat(3, 1fr);
-  }
-  
+  } 
 }
 </style>

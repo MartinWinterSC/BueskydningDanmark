@@ -1,3 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=DM+Serif+Display:ital@0;1&display=swap');
+h1, h2, h3{
+  font-family: "DM Serif Display", serif
+}
+
+p{
+  font-family: "DM Sans", sans-serif;
+  line-height: 1.5rem;
+}
+
 *,
 *::before,
 *::after {
@@ -8,11 +18,9 @@
 }
 
 :root {
-
   /*Color variables*/
   --color-background: #f9f9f9;
   --Main-color:#98161D ;
-  --Accent-color: var(--);
 
   /*Button variables*/
   --BtnColor:#1e40af;
@@ -49,8 +57,6 @@
   /*Card variables*/
   --cardText: white;
   --cardHeader: white;
-  --cardBackground: ;
-
 }
 
 #app {
@@ -93,6 +99,7 @@ p{
   display: flex;
   align-items: baseline;
   gap: var(--space-md);
+  margin: 20px;
 }
 
 .titleWithLine .line {
@@ -124,27 +131,30 @@ p{
   
 }
 
-
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-    background-color: var(--color-background);
-  }
-
-:root {
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-  --space-xxl: 4rem;
+main {
+  padding: var(--space-xs);
 }
+  
+@media (min-width: 1024px) {
+    body {
+      display: flex;
+      place-items: center;
+      background-color: var(--color-background);
+    }
 
-  #app {
-    display: flex;
-    flex-direction: column;
+  :root {
+    --space-xs: 0.5rem;
+    --space-sm: 1rem;
+    --space-md: 1.5rem;
+    --space-lg: 2rem;
+    --space-xl: 3rem;
+    --space-xxl: 4rem;
   }
+
+    #app {
+      display: flex;
+      flex-direction: column;
+    }
 }
 
 @media (max-width: 767px) {
@@ -160,10 +170,4 @@ p{
     --space-xl: 2rem;
     --space-xxl: 3rem;
   }
-
-  main {
-    padding: 0.5rem;
-  }
 }
-
-

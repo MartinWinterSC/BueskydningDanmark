@@ -1,4 +1,6 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+
 import TextImageSection from '@/components/SectionComponents/TextImageSection.vue';
 import BaseCard from '@/components/Cards/BaseCard.vue';
 import localNavigation from '@/components/Navigation/localNavigation.vue';
@@ -9,30 +11,24 @@ import nySkytteImg from '@/assets/Billeder/nySkytte.png';
 import StandardBtn from '@/components/Buttons/StandardBtn.vue';
 import UptoTopBtn from '@/components/Buttons/UptoTopBtn.vue';
 
+const newsCards = ref([]);
+const baseURL = "https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/";
 
-const cards = [
-  {
-    variant: 'News',
-    title: 'Testing',
-    date: '2023-10-01',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-  {
-    variant: 'News',
-    title: 'Testing 2',
-    date: '2023-10-01',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-   {
-    variant: 'News',
-    title: 'Testing 3',
-    date: '2023-10-01',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-];
+onMounted(() => {
+  fetch(baseURL + "news?per_page=3&_embed")
+    .then(response => response.json())
+    .then(data => {
+      newsCards.value = data.map(post => ({
+        variant: 'News',
+        title: post.title.rendered,
+        date: post.date?.slice(0, 10),
+        summary: post.acf?.summary || '',
+        image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
+        link: post.link || '#'
+      }));
+    })
+    .catch(error => console.error("News fetch error (frontpage):", error));
+});
 
 const breadtekst = `Bueskydning Danmark er øverste faglige myndighed inden for Bueskydning i Danmark. Vi har en høj standart inden for vidensområderne; sikkerhed og regler, træningslære og afvikling af konkurrencer. Vi tilbyder bueskydning til alle niveauer. Vi ønsker at fremme bueskydning som amatøridræt såvel praktisk som teoretisk samt understøtte de skytter, som ønsker at dygtiggøre sig imod eliteskydning. Vi ønsker at engagere de skytter, der ønsker fællesskabet, og de skytter, der finder motivation i det autonome medlemskab via tilbud, som gør bueskydning relevant og nærværende.
 
@@ -86,6 +82,7 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
 
       <div class="NewArcherContentFooter">
         <StandardBtn variant="primary" @click="$router.push('klubOversigtView')">Se klub oversigt</StandardBtn>
+        <StandardBtn variant="primary" @click="$router.push('proevBueskydning')">Prøv bueskydning</StandardBtn>
       </div>
       
     </div>
@@ -109,9 +106,9 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
         </div>
        <div class="cardGrid">
         <BaseCard 
-          v-for="(card,index) in cards"
-          :key="card.title"
-          v-bind="card"/>
+        v-for="(card, index) in newsCards"
+        :key="card.title"
+        v-bind="card"/>
       </div>
     </section>
     <UptoTopBtn />
@@ -194,6 +191,9 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
   border-radius: 15px;
 }
 
+.NewArcherContentFooter button{
+    margin: 5px;
+  }
 
 .NewArcherContentText{
   max-width: 60ch;
@@ -219,7 +219,7 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
 
 .NewArcherContentFooter{
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   margin: 0;
 }
 .NewArcherContentFooter *{
@@ -237,11 +237,6 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
 
 /* Media queries */
 @media (max-width: 768px) {
-  .newArcherSection {
-    display: flex;
-    flex-direction: column;
-  }
-  
   .NewArcherContent h2 {
     font-size: 1.5rem;
   }
@@ -249,8 +244,14 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
   .HomeSection h1 {
     font-size: 2rem;
   }
+}
 
-   .newArcherContainer {
+@media (max-width: 1000px){
+  .newArcherSection {
+    display: flex;
+    flex-direction: column;
+  }
+  .newArcherContainer {
     position: relative;
     top: unset;
     left: 50%;
@@ -262,11 +263,18 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
   }
 
    .newArcherImg {
-    width: 100%;     /* Make image full width */
-    height: auto;    /* Let height adjust automatically */
+    width: 100%;
+    height: auto;
     border-radius: 15px;
     margin-bottom: -20px;
   }
+}
+
+@media (max-width: 1000px){
+  .NewArcherContentFooter{
+    flex-direction: column;
+  }
+  
 }
 
 /* Tablet: 2 kolonner */
