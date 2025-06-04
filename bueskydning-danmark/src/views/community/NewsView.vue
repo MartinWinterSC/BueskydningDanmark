@@ -1,58 +1,52 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import BaseCard from '@/components/Cards/BaseCard.vue';
 import StandardBtn from '@/components/Buttons/StandardBtn.vue';
 import NewsletterModal from '@/components/Modals/NewsletterModal.vue';
 
-const showNewsletterModal = ref(false)
+const showNewsletterModal = ref(false);
 
-const ArticleCards = [
-  {
-    variant: 'News',
-    title: 'Testing',
-    date: '2023-10-01',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-  {
-    variant: 'News',
-    title: 'Testing 2',
-    date: '2023-10-01',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-   {
-    variant: 'News',
-    title: 'Testing 3',
-    date: '2023-10-01',
-    summary: 'this is a test so far, I just wanna see if this works',
-    image: ''
-  },
-];
+const featuredNews = ref(null);
+const sidebarNews = ref([]);
+const articleCards = ref([]);
+
+const baseURL = "https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/";
 
 const readMore = (id) => {
-};
-
-const signupNewsletter = () => {
+  console.log("Navigate to post ID:", id);
+  // Example: router.push({ name: 'ArticlesPostView', params: { id } });
 };
 
 const openNewsletterModal = () => {
-  showNewsletterModal.value = true
-}
+  showNewsletterModal.value = true;
+};
 
 const handleNewsletterSubmit = (formData) => {
-  console.log('Newsletter signup data:', formData)
-}
+  console.log('Newsletter signup data:', formData);
+};
+
+onMounted(() => {
+  fetch(`${baseURL}news?per_page=100&_embed`)
+    .then(res => res.json())
+    .then(data => {
+      if (data.length > 0) {
+        featuredNews.value = data[0];
+        sidebarNews.value = data.slice(1, 3);
+        articleCards.value = data.slice(3);
+      }
+    })
+    .catch(err => console.error("News fetch error:", err));
+});
 </script>
 
 <template>
   <main>
     <div class="headerSection">
-    <div class="titleWithLine">
-         <h1>Nyheder</h1>
+      <div class="titleWithLine">
+        <h1>Nyheder</h1>
         <div class="line"></div>
+      </div>
     </div>
-  </div>
 
     <div class="contentWrapper">
       <section class="contentSection">
@@ -60,15 +54,20 @@ const handleNewsletterSubmit = (formData) => {
           <h2>Seneste nyheder</h2>
         </div>
 
-        <div class="featuredNews" @click="readMore('')">
+        <div
+          class="featuredNews"
+          v-if="featuredNews"
+          @click="readMore(featuredNews.id)"
+        >
           <div class="newsImage">
-            <img src="" alt="DM-UGEN Aalborg" />
+            <img
+              :src="featuredNews._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''"
+              :alt="featuredNews.title.rendered"
+            />
           </div>
           <div class="newsContent">
-            <h3 class="newsTitle">HOLD DM 2025 – DIF DM-UGEN</h3>
-            <p class="newsExcerpt">
-              Bueskydning Danmark ser igen i 2025 frem til KÆMPE......
-            </p>
+            <h3 class="newsTitle" v-html="featuredNews.title.rendered"></h3>
+            <p class="newsExcerpt" v-html="featuredNews.excerpt?.rendered || ''"></p>
             <StandardBtn class="readMoreBtn" variant="primary">Læs mere</StandardBtn>
           </div>
         </div>
@@ -85,39 +84,37 @@ const handleNewsletterSubmit = (formData) => {
 
         <div class="sidebarNews">
           <BaseCard
-            variant="horizontalNews"
-            title="Koldt hoved og god teknik"
-            summary="Nedenstående artikel er bragt i bladet BUESKYDNING i..."
-            date="Maj 2025"
-            image=""
-            @click="readMore('sidebar-1')"
-          />
-
-          <BaseCard
-            variant="horizontalNews"
-            title="Invitation til Sommerskydning 2025"
-            summary="Bueskydning Danmark er klar med invitationen for..."
-            date="April 2025"
-            image=""
-            @click="readMore('sidebar-2')"
+            v-for="post in sidebarNews"
+            :key="post.id"
+            :title="post.title.rendered"
+            :summary="post.excerpt?.rendered"
+            :date="new Date(post.date).toLocaleDateString('da-DK')"
+            :image="post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''"
+            @click="readMore(post.id)"
           />
         </div>
       </aside>
     </div>
 
-     <section class="SubHeaderSection">
-         <h2>Articles</h2>
-        <div class="cardGrid">
-        <BaseCard 
-          v-for="(ArticleCards,index) in ArticleCards"
-          :key="ArticleCards.title"
-          v-bind="ArticleCards"/>
+    <section class="SubHeaderSection">
+      <h2>Articles</h2>
+      <div class="cardGrid">
+        <BaseCard
+          v-for="post in articleCards"
+          :key="post.id"
+          variant="News"
+          :title="post.title.rendered"
+          :summary="post.excerpt?.rendered"
+          :date="new Date(post.date).toLocaleDateString('da-DK')"
+          :image="post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''"
+          @click="readMore(post.id)"
+        />
       </div>
     </section>
 
-    <NewsletterModal 
-      v-model="showNewsletterModal" 
-      @submit="handleNewsletterSubmit" 
+    <NewsletterModal
+      v-model="showNewsletterModal"
+      @submit="handleNewsletterSubmit"
     />
   </main>
 </template>
@@ -135,6 +132,7 @@ const handleNewsletterSubmit = (formData) => {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
+  cursor: pointer;
 }
 
 .newsImage img {
@@ -196,6 +194,13 @@ const handleNewsletterSubmit = (formData) => {
   display: flex;
   flex-direction: column;
   gap: var(--space-lg);
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
 }
 
 /* Responsive */

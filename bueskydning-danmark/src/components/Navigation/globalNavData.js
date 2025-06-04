@@ -9,7 +9,7 @@ export default [
         children: [
             {label: 'Nyheder', to: '/newsView'},
             {label: 'Forum', to: '/ForumView'},
-            {label: 'Arkiv', to: null},
+            {label: 'Arkiv', to: '/ArchiveView'},
         ]
     },
     { label: 'Kalender', to: '/CalendarMainView'},
@@ -64,7 +64,7 @@ export default [
         ]
     },
 
-     {
+    {
         label: 'Information',
         to: null,
         children: [
@@ -77,4 +77,5 @@ export default [
             {label: 'Sponsorer', to: null},
         ]
     }
+    
 ]

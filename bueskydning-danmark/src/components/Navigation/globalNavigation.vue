@@ -25,9 +25,14 @@ const toggleMobileMenu = () => {
         <router-link to="/" class="navLogoContainer">
           <img src="@/assets/BueskydningLogo.svg" alt="Logo" class="navLogo" />
         </router-link>
-        <button class="mobileToggle" @click="toggleMobileMenu" aria-label="Toggle navigation">
-          <font-awesome-icon :icon="isMobileMenuOpen ? 'xmark' : 'bars'" class="mobileToggleIcon" />
-        </button>
+        <div class="rightAlign">
+          <div class="searchFuntion" id="mobile">
+            <font-awesome-icon icon="magnifying-glass" />
+          </div>
+          <button class="mobileToggle" @click="toggleMobileMenu" aria-label="Toggle navigation">
+            <font-awesome-icon :icon="isMobileMenuOpen ? 'xmark' : 'bars'" class="mobileToggleIcon" />
+          </button>
+        </div>
       </div>
     
       <ul class="navList" :class="{ open: isMobileMenuOpen }">
@@ -44,6 +49,7 @@ const toggleMobileMenu = () => {
                 <font-awesome-icon icon="chevron-down" />
               </span>
             </span>
+            
           
             <ul v-if="item.children" class="submenu">
               <li v-for="child in item.children" :key="child.label" class="dropdownItem">
@@ -55,6 +61,9 @@ const toggleMobileMenu = () => {
             </ul>
           </li>
       </ul>
+      <div class="searchFuntion" id="desktop">
+            <font-awesome-icon icon="magnifying-glass" />
+      </div>
     </nav>
   </header>
 </template>
@@ -66,15 +75,27 @@ const toggleMobileMenu = () => {
   vertical-align: middle;
 }
 
+.rightAlign {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
 .nav {
   background: #98161D;
   padding: 1rem;
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#mobile {
+  display: none;
 }
 
 .navInner {
   display: flex;
-  /* grid-template-columns: auto .8fr; */
   align-items: center;
   column-gap: 2rem;
   width: 100%;
@@ -97,6 +118,7 @@ const toggleMobileMenu = () => {
   margin: 0;
   padding: 0;
   width: 100%;
+  z-index: 5;
 }
 
 .navItem {
@@ -125,22 +147,24 @@ const toggleMobileMenu = () => {
   top: 100%;
   left: 0;
   z-index: 10;
+  width: 160px;
 }
 
 .navItem:hover .submenu {
   display: block;
 }
 
-.navIcon{
+.navIcon {
   margin-left: var(--space-xs);
   display: inline-block;
 }
 
-.navItem:hover .navIcon{
+.navItem:hover .navIcon {
   transform: rotate(180deg);
 }
 
-.dropdownLink, .dropdownLabel {
+.dropdownLink,
+.dropdownLabel {
   display: block;
   padding: var(--space-xs);
   color: #fff;
@@ -155,18 +179,26 @@ const toggleMobileMenu = () => {
   background: none;
   border: none;
   color: white;
-  font-size: 2rem;
+  font-size: 30px;
   cursor: pointer;
-  display: none; /* hidden on desktop */
+  display: none;
+  width: 35px;
 }
 
 .mobileToggleIcon {
   pointer-events: none;
 }
 
-.navTopBar{
+.navTopBar {
   display: flex;
   justify-content: space-between;
+  position: relative;
+  z-index: 10;
+}
+
+.searchFuntion {
+  color: white;
+  font-size: 25px;
 }
 
 @media screen and (max-width: 1200px) {
@@ -174,8 +206,9 @@ const toggleMobileMenu = () => {
     justify-content: space-between;
   }
 
-  .nav{
+  .nav {
     display: block;
+    position: relative;
   }
 
   .mobileToggle {
@@ -183,46 +216,59 @@ const toggleMobileMenu = () => {
   }
 
   .navList {
-    display: none;
     flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 100%;
+    left: 0;
     width: 100%;
-    align-items: flex-end;
-    margin-top: 1rem;
+    background: #98161D;
+    z-index: 20;
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    width: 100%;
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
   }
 
   .navList.open {
-    display: flex;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .submenu {
     position: static;
-    /* padding-left: 1rem; */
-  }
-
-  .navItem:hover .submenu {
-    display: none;
-  }
-
-  .navItem .submenu {
     display: block;
+    padding-left: 0;
   }
 
   .navItem:hover .submenu {
     display: block !important;
   }
 
-  .navList{
-    align-items: center;
-    /* justify-content: center; */
-  }
-
-  .navIcon{
+  .navIcon {
     display: none;
   }
 
   .navItem {
     text-align: center;
     margin-top: var(--space-md);
+  }
+
+  .navTopBar {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  #mobile {
+    display: block;
+  }
+
+  #desktop {
+    display: none;
   }
 }
 </style>

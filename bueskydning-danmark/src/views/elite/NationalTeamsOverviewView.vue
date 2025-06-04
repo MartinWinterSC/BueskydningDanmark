@@ -3,6 +3,13 @@
   import { useRouter } from 'vue-router';
   import BaseCard from '@/components/Cards/BaseCard.vue';
 
+  import recurve from '@/assets/Billeder/recurveLandshold.jpg';
+  import compound from '@/assets/Billeder/compoundLandshold.jpg';
+  import threeD from '@/assets/Billeder/3DLandsholdet.jpg';
+  import mens from '@/assets/Billeder/mandLandshold.jpg';
+  import womens from '@/assets/Billeder/kvindeLandshold.png';
+  import youth from '@/assets/Billeder/ungdomsLandshold.jpg';
+
   const router = useRouter();
 
   function handleClick(team) {
@@ -10,12 +17,12 @@
   }
 
   const NationalTeams = ref([
-    { slug: 'recurve', name: 'Recurve landsholdet', image: '' },
-    { slug: 'compound', name: 'Compound landsholdet', image: '' },
-    { slug: '3d', name: '3D landsholdet', image: '' },
-    { slug: 'man', name: 'Herre landsholdet', image: '' },
-    { slug: 'woman', name: 'Kvinde landsholdet', image: '' },
-    { slug: 'youth', name: 'Ungdoms landsholdet', image: '' },
+    { slug: 'recurve', name: 'Recurve landsholdet', image: recurve },
+    { slug: 'compound', name: 'Compound landsholdet', image: compound },
+    { slug: '3d', name: '3D landsholdet', image: threeD },
+    { slug: 'man', name: 'Herre landsholdet', image: mens },
+    { slug: 'woman', name: 'Kvinde landsholdet', image: womens },
+    { slug: 'youth', name: 'Ungdoms landsholdet', image: youth },
 ]);
 </script>
 

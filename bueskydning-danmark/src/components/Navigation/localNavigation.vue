@@ -1,21 +1,21 @@
 <template>
-  <div class="localNnavigation">
+  <div class="localNavigation">
     <div class="navContainer">
-      <router-link to="/bue-udregner" class="navItem">
+      <router-link to="/EquipmentView" class="navItem">
         <div class="navIcon">
           <img src="@/assets/Billeder/Vector.png" alt="" class="oddOneOut">
         </div>
         <span class="navText">Bue udregner</span>
       </router-link>
       
-      <router-link to="/kalender" class="navItem">
+      <router-link to="/CalendarMainView" class="navItem">
         <div class="navIcon">
           <font-awesome-icon :icon="['far', 'calendar']" />
         </div>
         <span class="navText">Kalender</span>
       </router-link>
       
-      <router-link to="/faelleskabbet" class="navItem">
+      <router-link to="/communityMainView" class="navItem">
         <div class="navIcon">
           <font-awesome-icon icon="users" />
         </div>
@@ -41,18 +41,14 @@
   height: 50px;
 }
 .localNavigation {
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  max-width: 800px;
-  margin: 0 auto;
+  width: 700px;
 }
 
 .navContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  border-radius: 20px;
+  border-radius: 12px;
   background-color: #064373;
 }
 
@@ -68,6 +64,7 @@
   transition: all 0.3s ease;
   cursor: pointer;
   text-align: center;
+  padding: 25px;
 }
 
 .navItem:hover {
@@ -97,6 +94,7 @@
   .localNavigation {
     padding: 16px;
     border-radius: 12px;
+    width: 350px;
   }
   
   .navContainer {
@@ -105,12 +103,12 @@
   }
   
   .navItem {
-    padding: 12px 8px;
+    padding: 20px;
   }
   
   .navIcon {
-    width: 32px;
-    height: 32px;
+    /* width: 32px;
+    height: 32px; */
     margin-bottom: 8px;
   }
   
@@ -125,14 +123,14 @@
     gap: 8px;
   }
   
-  .navItem {
-    padding: 10px 6px;
-  }
+  /* .navItem {
+    padding: 15px;
+  } */
   
-  .navIcon {
+  /* .navIcon {
     width: 28px;
     height: 28px;
-  }
+  } */
   
   .navText {
     font-size: 11px;

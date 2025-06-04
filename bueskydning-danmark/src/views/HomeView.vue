@@ -50,12 +50,11 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
     </section>
 
   <main>
-
     <div class="headerSection">
-    <div class="titleWithLine">
-         <h1>Om Bueskydning Danmark</h1>
-        <div class="line"></div>
-    </div>
+      <div class="titleWithLine">
+          <h1>Om Bueskydning Danmark</h1>
+          <div class="line"></div>
+      </div>
     </div>
 
     <section class="HomeSection">
@@ -91,8 +90,8 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
 
   <section class="headerSection">
     <div class="titleWithLine">
-         <h2>Kalender</h2>
-        <div class="line"></div>
+      <h2>Kalender</h2>
+      <div class="line"></div>
     </div>
     <div>
       <Calendar />
@@ -148,15 +147,16 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   margin-bottom: 0.5rem;
 }
+.HeroContent h4{
+  font-size: var(--Font-h2Size);
+  font-weight: bold;
+}
 
 .LocalNav {
   position: absolute;
-  width: 65%;
-  bottom: -2.5rem;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   z-index: 2;
-  padding-bottom: 1.5rem;
 }
 
 .newArcherSection {
@@ -235,6 +235,10 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
   margin: 0 auto;
 }
 
+main .headerSection:first-child{
+  margin-top: 50px;
+}
+
 /* Media queries */
 @media (max-width: 768px) {
   .NewArcherContent h2 {
@@ -243,6 +247,10 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
   
   .HomeSection h1 {
     font-size: 2rem;
+  }
+
+  main .headerSection:first-child{
+    margin-top: 100px;
   }
 }
 

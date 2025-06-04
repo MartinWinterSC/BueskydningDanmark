@@ -99,7 +99,7 @@ p{
   display: flex;
   align-items: baseline;
   gap: var(--space-md);
-  margin: 20px;
+  /* margin: 20px; */
 }
 
 .titleWithLine .line {
