@@ -7,34 +7,34 @@ const drawWeight = ref('')
 const result = ref('')
 
 function calculate() {
-  const heightVal = parseFloat(height.value)
-  const armspanVal = parseFloat(armspan.value)
-  const drawWeightVal = parseFloat(drawWeight.value)
+    const heightVal = parseFloat(height.value)
+    const armspanVal = parseFloat(armspan.value)
+    const drawWeightVal = parseFloat(drawWeight.value)
 
-  let drawLength
+    let drawLength
 
-  if (!isNaN(armspanVal)) {
-    drawLength = (armspanVal / 2.54) / 2.5
-  } else if (!isNaN(heightVal)) {
-    drawLength = (heightVal / 2.54) / 2.5
-  } else {
-    result.value = 'Indtast mindst højde eller armspændvidde.'
-    return
-  }
+    if (!isNaN(armspanVal)) {
+        drawLength = (armspanVal / 2.54) / 2.5
+    } else if (!isNaN(heightVal)) {
+        drawLength = (heightVal / 2.54) / 2.5
+    } else {
+        result.value = 'Indtast mindst højde eller armspændvidde.'
+        return
+    }
 
-  drawLength = drawLength.toFixed(2)
+    drawLength = drawLength.toFixed(2)
 
-  let output = `Beregnede værdier:\nTræklængde: ${drawLength} tommer\nTrækstyrke: ${!isNaN(drawWeightVal) ? drawWeightVal + ' lbs' : 'ikke angivet'}\n`
+    let output = `Beregnede værdier:\nTræklængde: ${drawLength} tommer\nTrækstyrke: ${!isNaN(drawWeightVal) ? drawWeightVal + ' lbs' : 'ikke angivet'}\n`
 
-  if (drawLength < 26 && drawWeightVal <= 25) {
-    output += 'Anbefalet prisniveau: Budget bue (ca. 1000 kr)'
-  } else if (drawLength >= 26 && drawLength <= 29 && drawWeightVal <= 35) {
-    output += 'Anbefalet prisniveau: Mellemklasse (ca. 2000-3000 kr)'
-  } else {
-    output += 'Anbefalet prisniveau: Avanceret bue (3000+ kr)'
-  }
+    if (drawLength < 26 && drawWeightVal <= 25) {
+        output += 'Anbefalet prisniveau: Budget bue (ca. 1000 kr)'
+    } else if (drawLength >= 26 && drawLength <= 29 && drawWeightVal <= 35) {
+        output += 'Anbefalet prisniveau: Mellemklasse (ca. 2000-3000 kr)'
+    } else {
+        output += 'Anbefalet prisniveau: Avanceret bue (3000+ kr)'
+    }
 
-  result.value = output
+    result.value = output
 }
 </script>
 

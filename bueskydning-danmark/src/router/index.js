@@ -20,6 +20,7 @@ import EliteMainView from '../views/elite/EliteMainView.vue'
 import klubOversigtView from '@/views/klubOversigtView.vue'
 import proevBueskydning from '@/views/bredde/proevBueskydning.vue'
 import contact from '@/views/Contact.vue'
+import about from '@/views/AboutView.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -38,10 +39,7 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      component: about,
     },
     
     //Fællesskab sider
@@ -59,7 +57,8 @@ const router = createRouter({
       path: '/articlesPostView',
       name: 'Artikle',
       component: ArticlesPostView,
-    },{
+    },
+    {
       path: '/ForumView',
       name: 'Forum',
       component: ForumView,
@@ -103,11 +102,13 @@ const router = createRouter({
       props: true,
     },
     {
-      path: '/Landsholdet/:id',
+      path: '/Landsholdet/:category',
       name: 'NationalTeamView',
       component: NationalTeamView,
       props: true,
-    },
+},
+
+    // Admin
     {
       path: '/contact',
       name: 'contact',

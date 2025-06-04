@@ -4,32 +4,28 @@
     document.addEventListener("DOMContentLoaded", function () {
     const expandables = document.querySelectorAll(".expandable");
 
-    expandables.forEach((expandable) => {
-      const header = expandable.querySelector("h3");
-      const content = expandable.querySelector(".expandableContent");
+        expandables.forEach((expandable) => {
+            const headerContainer = expandable.querySelector(".expandableHeader");
+            const content = expandable.querySelector(".expandableContent");
+            const toggleIcon = expandable.querySelector(".toggleIcon");
 
-      // Ensure all content starts hidden
-      content.style.display = "none";
+            // Start with content hidden and icon as "+"
+            content.style.display = "none";
+            toggleIcon.textContent = "+";
 
-      header.addEventListener("click", () => {
-        const isVisible = content.style.display === "block";
-
-        // Optional: close all others if you want only one open at a time
-        // expandables.forEach((other) => {
-        //   if (other !== expandable) {
-        //     other.querySelector(".expandableContent").style.display = "none";
-        //   }
-        // });
-
-        content.style.display = isVisible ? "none" : "block";
-      });
+            headerContainer.addEventListener("click", () => {
+                const isVisible = content.style.display === "block";
+                content.style.display = isVisible ? "none" : "block";
+                toggleIcon.textContent = isVisible ? "+" : "–";
+            });
+        });
     });
-  });
 </script>
 
 <template>
     <main>
         <section class="intro">
+            <img src="@/assets/Billeder/Bue-Buddy-hjemmeside-1.1.jpg" alt="">
             <h1>Det er sjovt at skyde med bue!</h1>
             <p>Som ny skytte finder man rundt om i Danmark, mere end 60 klubber som er klar til at give en god oplevelse. De fleste klubber har buer og pile, som man kan låne i starten, så man ikke skal ud og investere en masse penge får man er sikker på at man bliver bidt af bueskydning.</p>
             <div class="buttonContainer">
@@ -37,7 +33,7 @@
             </div>
         </section>
         <section>
-            <video src=""></video>
+            <video src="@/assets/Bueskydning-Danmark-Profilfilm.mp4"></video>
             <h2>Hvad er bueskydning?</h2>
             <p>Bueskydning er en sport og fritidsbeskæftigelse for alle. Drenge og piger i alle aldre kan være med og få sig en hyggelig stund på skydebanen eller i skoven.</p>
             <p>Bueskydning er en individuel sport og man kan frit bestemme selv, hvor meget man vil gøre ud af bueskydningen. Mange har stor fornøjelse af at bruge bueskydningen som rekreation og afslapning – og til at koble fra med. Andre sætter sig mål som de forsøger at opnå, hvorefter de sætter nye mål og atter andre har evnerne til at blive blandt verdens bedste bueskytter.</p>
@@ -78,7 +74,11 @@
         <section>
             <h2>Alt der er værd at vide om bueskydning</h2>
             <div class="expandable">
-                <h3>HVOR KAN JEG PRØVE BUESKYDNING?</h3>
+                <div class="expandableHeader">
+                    <h3>HVOR KAN JEG PRØVE BUESKYDNING?</h3>
+                    <span class="toggleIcon">+</span>
+                </div>
+                
                 <div class="expandableContent">
                     <p>Kunne du godt tænke dig at prøve bueskydning? Så har du flere muligheder!</p>
                     <ul>
@@ -90,7 +90,11 @@
                 </div>
             </div>
             <div class="expandable">
-                <h3>ER BUESKYDNING SVÆRT SOM NYBEGYNDER?</h3>
+                <div class="expandableHeader">
+                    <h3>ER BUESKYDNING SVÆRT SOM NYBEGYNDER?</h3>
+                    <span class="toggleIcon">+</span>
+                </div>
+                
                 <div class="expandableContent">
                     <p>Det er let at lære de indledende trin i bueskydning, som at få fat i en bue og pil og forstå den grundlæggende mekanik, er ligetil. Det er svært at mestre at opnå ensartet præcision og udvikle en solid teknik tager tid og gentagelse.</p>
                     <p>Bueskydning kræver tålmodighed og en vilje til at øve sig regelmæssigt. Forvent ikke at blive ekspert med det samme. Tålmodighed er nøglen!</p>
@@ -98,13 +102,21 @@
                 </div>
             </div>
             <div class="expandable">
-                <h3>ER DER EN ALDERSGRÆNSE FOR BUESKYDNING?</h3>
+                <div class="expandableHeader">
+                    <h3>ER DER EN ALDERSGRÆNSE FOR BUESKYDNING?</h3>
+                    <span class="toggleIcon">+</span>
+                </div>
+                
                 <div class="expandableContent">
                     <p>Bueskydning er for alle alder! Dog har de fleste bueforeninger en minimumsalder omkring de 10 år. Minimumsalderen er grundet sikkerhed og even til at trække buen. Det er op til foreningerne selv i forhold til at have en minimumsalder samt hvad den er. Derfor bør du høre din lokale forening, om de har en minimumsalder for at gå til bueskydning.</p>
                 </div>
             </div>
             <div class="expandable">
-                <h3>ER DER FORSKELLIGE DISCIPLINER I BUESKYDNING?</h3>
+                <div class="expandableHeader">
+                    <h3>ER DER FORSKELLIGE DISCIPLINER I BUESKYDNING?</h3>
+                    <span class="toggleIcon">+</span>
+                </div>
+                
                 <div class="expandableContent">
                     <p>I princippet er der 3 hoved discipliner i bueskydning: Skiveskydning, feltskydning og 3D.</p>
                     <h4>Skiveskydning</h4>
@@ -116,7 +128,10 @@
                 </div>
             </div>
             <div class="expandable">
-                <h3>HVILKE BUETYPER KAN JEG SKYDE MED?</h3>
+                <div class="expandableHeader">
+                    <h3>HVILKE BUETYPER KAN JEG SKYDE MED?</h3>
+                    <span class="toggleIcon">+</span>
+                </div>
                 <div class="expandableContent">
                     <p>De fire primære buetyper er; Recurvebue, Barbue, Compoundbue og Langbue.</p>
                     <h4>Recurvebue</h4>
@@ -138,14 +153,22 @@
                 </div>
             </div>
             <div class="expandable">
-                <h3>HVAD KRÆVER DET AT STARTE TIL BUESKYDNING?</h3>
+                <div class="expandableHeader">
+                    <h3>HVAD KRÆVER DET AT STARTE TIL BUESKYDNING?</h3>
+                    <span class="toggleIcon">+</span>
+                </div>
+                
                 <div class="expandableContent">
                     <p>Du skal ikke købe dig fattig i udstyr, før du dukker op til din første træning. Bueforeningerne har buer og pile samt andet relevant udstyr, som du kan låne. Fra ca. april til oktober skyder foreningerne udendørs, hvor fra oktober til april skyder indendørs. Derfor skal du også klæde dig på efter vejret udendørs.</p>
                     <p>Det vil være en god íde at kontakte din lokale forening før du kommer til en prøve træning. </p>
                 </div>
             </div>
             <div class="expandable">
-                <h3>KAN JEG GÅ TIL BUESKYDNING ÅRET RUNDT?</h3>
+                <div class="expandableHeader">
+                    <h3>KAN JEG GÅ TIL BUESKYDNING ÅRET RUNDT?</h3>
+                    <span class="toggleIcon">+</span>
+                </div>
+                
                 <div class="expandableContent">
                     <p>Du kan starte til bueskydning hele året! Bueskydning har både en inde sæson og en ude sæson. Indesæsonen være ca. fra oktober til med marts, mens udesæsonen er fra april til og med september.</p>
                 </div>
@@ -158,10 +181,18 @@
     .intro{
         background-color: var(--Main-color);
     }
+    .intro img{
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+    }
     .intro p, h1{
         color: white;
     }
-    section{
+    section:not(.intro){
+        padding: var(--space-xs);
+    }
+    .intro *:not(img){
         padding: var(--space-xs);
     }
     main{
@@ -169,5 +200,31 @@
     }
     .buttonContainer{
         text-align: center;
+    }
+    video{
+        width: 100%;
+    }
+    .expandable{
+        background-color: var(--BtnColor);
+    }
+    .expandable *{
+        color: white;
+        margin: var(--space-xs);
+        padding: var(--space-xs);
+    }
+    h4, dt{
+        font-weight: bold;
+        font-size: 1rem;
+    }
+    p, li, dd, dt, h3, h4, h2{
+        margin: var(--space-xs);
+    }
+    .toggleIcon{
+        font-size: 30px;
+    }
+    .expandableHeader{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 </style>

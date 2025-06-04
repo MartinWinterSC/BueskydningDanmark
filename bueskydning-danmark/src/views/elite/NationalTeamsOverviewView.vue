@@ -1,23 +1,22 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import BaseCard from '@/components/Cards/BaseCard.vue';
+  import { ref } from 'vue';
+  import { useRouter } from 'vue-router';
+  import BaseCard from '@/components/Cards/BaseCard.vue';
 
-const router = useRouter();
+  const router = useRouter();
 
-function handleClick(team) {
-  router.push({ name: 'NationalTeamView', params: { id: team.id } });
-}
+  function handleClick(team) {
+    router.push({ name: 'NationalTeamView', params: { category: team.slug } });
+  }
 
-const NationalTeams = ref([
-  { id: 1, name: 'Recurve landsholdet', image: '' },
-  { id: 2, name: 'Compound landsholdet', image: '' },
-  { id: 3, name: '3D landsholdet', image: '' },
-  { id: 4, name: 'Herre landsholdet', image: '' },
-  { id: 5, name: 'Kvinde landsholdet', image: '' },
-  { id: 6, name: 'Ungdoms landsholdet', image: '' },
+  const NationalTeams = ref([
+    { slug: 'recurve', name: 'Recurve landsholdet', image: '' },
+    { slug: 'compound', name: 'Compound landsholdet', image: '' },
+    { slug: '3d', name: '3D landsholdet', image: '' },
+    { slug: 'man', name: 'Herre landsholdet', image: '' },
+    { slug: 'woman', name: 'Kvinde landsholdet', image: '' },
+    { slug: 'youth', name: 'Ungdoms landsholdet', image: '' },
 ]);
-
 </script>
 
 <template>
@@ -42,8 +41,6 @@ const NationalTeams = ref([
     </div>
   </section>
   </main>
-  
-
 </template>
 
 <style scoped>

@@ -1,39 +1,45 @@
 <template>
   <div class="localNnavigation">
     <div class="navContainer">
-      <a href="/bue-udregner" class="navItem">
+      <router-link to="/bue-udregner" class="navItem">
         <div class="navIcon">
-          
+          <img src="@/assets/Billeder/Vector.png" alt="" class="oddOneOut">
         </div>
         <span class="navText">Bue udregner</span>
-      </a>
+      </router-link>
       
-      <a href="/kalender" class="navItem">
+      <router-link to="/kalender" class="navItem">
         <div class="navIcon">
-          
+          <font-awesome-icon :icon="['far', 'calendar']" />
         </div>
         <span class="navText">Kalender</span>
-      </a>
+      </router-link>
       
-      <a href="/faelleskabbet" class="navItem">
+      <router-link to="/faelleskabbet" class="navItem">
         <div class="navIcon">
-          
+          <font-awesome-icon icon="users" />
         </div>
         <span class="navText">Fælleskabbet</span>
-      </a>
+      </router-link>
       
-      <a href="/resultater" class="navItem">
+      <router-link to="/resultater" class="navItem">
         <div class="navIcon">
-          
+          <font-awesome-icon icon="medal" />
         </div>
         <span class="navText">Resultater</span>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
 
 <style scoped>
 
+.navIcon{
+  font-size: 50px;
+}
+.oddOneOut{
+  height: 50px;
+}
 .localNavigation {
   border-radius: 16px;
   padding: 20px;

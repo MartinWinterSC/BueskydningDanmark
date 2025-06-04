@@ -50,29 +50,29 @@ const props = defineProps({
   </div>
 
   <!-- Vertical layout (News, Simple) -->
-  <a :href="link" target="_blank" rel="noopener" class="CardLinkWrapper">
+  <div class="CardLinkWrapper" @click="$emit('click')">
     <div class="Card" :class="variant">
       <div class="CardImage">
         <img :src="image" alt="Card Image" />
       </div>
-
+    
       <div class="CardContent">
         <h3 class="cardTitle">{{ title }}</h3>
-
+      
         <template v-if="variant === 'News'">
           <p class="CardDate">{{ date }}</p>
           <p class="CardSummary">{{ summary }}</p>
           <div class="CardFooter">
-            <StandardBtn variant="primary" @click="$emit('click')">Læs mere</StandardBtn>
+            <StandardBtn variant="primary">Læs mere</StandardBtn>
           </div>
         </template>
-
+      
         <template v-else-if="variant === 'Simple'">
           <!-- No extra content for Simple -->
         </template>
       </div>
     </div>
-  </a>
+  </div>
 </template>
 
 

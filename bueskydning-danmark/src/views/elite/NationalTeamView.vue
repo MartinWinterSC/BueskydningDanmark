@@ -1,104 +1,50 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, onMounted, watch } from 'vue';
+import { useRoute } from 'vue-router';
 import AthleteCard from '@/components/Cards/AtheleteCard.vue';
 import AtheleteModal from '@/components/Modals/AtheleteModal.vue';
 
-
 const props = defineProps({
-  id: String
-})
+  category: String,
+});
 
+const baseURL = 'https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/';
+const athletes = ref([]);
 const selectedAthlete = ref(null);
 const showModal = ref(false);
+const route = useRoute();
 
-//temp Data
-const athletes = ref([
-  {
-    id: 1,
-    name: 'Oliver Staudt',
-    category: 'Herre recurve',
-    elite: true,
-    club: 'Aalborg',
-    image: '',
-    Banner: '',
-    clubLogo: '',
-    birthdate: '1998-06-15',
-    bow: 'Recurve',
-    bestScore: 683,
-    worldRanking: 42
-  },
-  {
-    id: 2,
-    name: 'Anna Hansen',
-    category: 'Dame compound',
-    elite: true,
-    club: 'København',
-     image: '',
-    Banner: '',
-    clubLogo: '',
-    birthdate: '2001-03-22',
-    bow: 'Compound',
-    bestScore: 705,
-    worldRanking: 18
-  },
-  {
-    id: 3,
-    name: 'Jonas Madsen',
-    category: 'Herre recurve',
-    elite: true,
-    club: 'Odense',
-    image: '',
-    Banner: '',
-    clubLogo: '',
-    birthdate: '1995-11-04',
-    bow: 'Recurve',
-    bestScore: 665,
-    worldRanking: 57
-  },
-  {
-    id: 4,
-    name: 'Frederikke Olsen',
-    category: 'Dame recurve',
-    elite: true,
-    club: 'Viborg',
-    image: '',
-    Banner: '',
-    clubLogo: '',
-    birthdate: '2002-08-30',
-    bow: 'Recurve',
-    bestScore: 672,
-    worldRanking: 30
-  },
-  {
-    id: 5,
-    name: 'Emil Thomsen',
-    category: 'Herre compound',
-    elite: true,
-    club: 'Aarhus',
-    image: '',
-    Banner: '',
-    clubLogo: '',
-    birthdate: '1993-05-12',
-    bow: 'Compound',
-    bestScore: 712,
-    worldRanking: 25
-  },
-  {
-    id: 6,
-    name: 'Sofie Jensen',
-    category: 'Dame recurve',
-    elite: true,
-    club: 'Esbjerg',
-    image: '',
-    Banner: '',
-    clubLogo: '',
-    birthdate: '2000-12-10',
-    bow: 'Recurve',
-    bestScore: 678,
-    worldRanking: 39
-  }
-]);
+onMounted(() => {
+  fetch(baseURL + 'nationalteam?per_page=100&_embed')
+    .then((response) => response.json())
+    .then((data) => {
+      athletes.value = data
+        .filter((post) =>
+          post.acf?.nationalTeamCategory?.includes(props.category.toLowerCase())
+        )
+        .map((post) => ({
+          id: post.id,
+          name: post.title.rendered,
+          category: post.acf?.nationalTeamCategory?.[0] || '',
+          club: post.acf?.clubName || '',
+          birthdate: post.acf?.birthday || '',
+          bow: post.acf?.nationalTeamCategory?.[0] || '',
+          bestScore: post.acf?.bestScore || '',
+          worldRanking: post.acf?.worldRanking || '',
+          image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
+          banner: post.acf?.profileHero || '',
+          clubLogo: post.acf?.clubLogo || '',
+          gender: post.acf?.gender || '',
+          instagram: post.acf?.socialMedia || '',
+          worldArchery: post.acf?.internationalCompetitions || ''
+        }));
 
+      console.log(`✅ Athletes fetched for category: ${props.category}`, athletes.value);
+    })
+    .catch((error) =>
+      console.error('Something went wrong, check your code dumbass', error)
+    );
+});
 
 function handleClick(athlete) {
   selectedAthlete.value = athlete;
@@ -113,8 +59,8 @@ function closeModal() {
 <template>
    <div class="headerSection">
     <div class="titleWithLine">
-          <h1>Landsholdet {{ props.id }}</h1>
-        <div class="line"></div>
+      <h1>Landsholdet {{ category }}</h1>
+      <div class="line"></div>
     </div>
   </div>
 

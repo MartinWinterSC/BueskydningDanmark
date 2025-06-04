@@ -15,27 +15,28 @@ const emit = defineEmits(['close']);
 
       <!-- Athlete content -->
       <div class="athlete-profile">
-        <img class="background" :src="athlete.background || ''" />
+        <img class="background" :src="athlete.banner" />
         <div class="left-panel">
           <img class="portrait" :src="athlete.image" />
           <div class="club-banner">
             <img :src="athlete.clubLogo || ''" />
           </div>
         </div>
-        <div class="right-panel">
-          <h2>{{ athlete.name }}</h2>
-          <p><strong>Fødselsdag:</strong> {{ athlete.birthdate || 'Ikke oplyst' }}</p>
-          <p><strong>Bue:</strong> {{ athlete.bow || 'Ukendt' }}</p>
-          <p><strong>Klub:</strong> {{ athlete.club }}</p>
-          <div class="socials">
-            <a href="#"><img src="" /></a>
+        <div class="info">
+          <div class="right-panel">
+            <h2>{{ athlete.name }}</h2>
+            <p><strong>Fødselsdag:</strong> {{ athlete.birthdate || 'Ikke oplyst' }}</p>
+            <p><strong>Bue:</strong> {{ athlete.bow || 'Ukendt' }}</p>
+            <p><strong>Klub:</strong> {{ athlete.club }}</p>
+            <div class="socials">
+              <a href="#"><img src="" /></a>
+            </div>
           </div>
-        </div>
-
-       <div class="stats-boxes">
-          <div class="stat"><p>Bedste score</p><strong>{{ athlete?.bestScore || 'N/A' }}</strong></div>
-          <div class="stat"><p>World Ranking</p><strong>{{ athlete?.worldRanking || 'N/A' }}</strong></div>
-          <div class="stat"><p>Internationale stævner</p><a href="#"><strong>Klik her</strong></a></div>
+          <div class="stats-boxes">
+            <div class="stat"><p>Bedste score</p><strong>{{ athlete?.bestScore || 'N/A' }}</strong></div>
+            <div class="stat"><p>World Ranking</p><strong>{{ athlete?.worldRanking || 'N/A' }}</strong></div>
+            <div class="stat" id="rallies"><p>Internationale stævner</p><a href="#"><strong>Klik her</strong></a></div>
+          </div>
         </div>
       </div>
     </div>
@@ -68,11 +69,21 @@ const emit = defineEmits(['close']);
   right: 1rem;
   background: transparent;
   border: none;
-  font-size: 1.5rem;
+  font-size: 30px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 50px;
+  cursor: pointer;
 }
 
-.athlete-profile {
-  padding: 2rem;
+.background{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 
 .left-panel {
@@ -87,20 +98,69 @@ const emit = defineEmits(['close']);
 }
 
 .portrait {
-  width: 120px;
+  width: 100%;
   border-radius: 50%;
 }
 
 .stats-boxes {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xs);
+}
+.right-panel p{
+  margin-top: var(--space-md);
 }
 
 .stat {
-  border: 2px solid #a00;
+  border: 4px solid #a00;
   padding: 1rem;
   text-align: center;
   border-radius: 10px;
+}
+.left-panel{
+  background-color: var(--Main-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
+}
+.portrait{
+  width: 103%;
+  transform: translateY(-50%);
+}
+.club-banner img{
+  width: 80%;
+  transform: translateY(-40%);
+}
+.info{
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-lg);
+}
+@media (max-width: 800px){
+  .stats-boxes{
+    grid-template-columns: repeat(2, 1fr);
+  }
+  #rallies {
+    grid-column: span 2;
+  }
+}
+@media (max-width: 800px){
+  .left-panel{
+    background-color: unset;
+    margin-top: -20%;
+  }
+  .club-banner{
+    display: none;
+  }
+  .athlete-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .portrait{
+    transform: translateY(0);
+  }
 }
 </style>
