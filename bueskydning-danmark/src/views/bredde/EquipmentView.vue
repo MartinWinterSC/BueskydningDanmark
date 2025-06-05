@@ -40,7 +40,12 @@ function calculate() {
 
 <template>
     <main>
-        <h1>Find dit udstyr</h1>
+        <div class="headerSection">
+      <div class="titleWithLine">
+        <h1>Find dit Udstyr</h1>
+        <div class="line"></div>
+      </div>
+    </div>
         <section class="calculator">
             <div class="calculation">
                 <img src="@/assets/Billeder/equipment.png" alt="">

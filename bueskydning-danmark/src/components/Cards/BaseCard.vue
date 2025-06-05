@@ -24,12 +24,12 @@ const props = defineProps({
     },
     image: {
         type: String,
-        required: true,
+        required: false,
     },
     link: {
         type: String,
         required: false,
-    }
+    },
 
 });
 </script>
@@ -50,11 +50,11 @@ const props = defineProps({
   </div>
 
   <!-- Vertical layout (News, Simple) -->
-  <div class="CardLinkWrapper" @click="$emit('click')">
-    <div class="Card" :class="variant">
-      <div class="CardImage">
-        <img :src="image" alt="Card Image" />
-      </div>
+ <div v-else class="CardLinkWrapper" @click="$emit('click')">
+  <div class="Card" :class="variant">
+    <div class="CardImage">
+      <img :src="image" alt="Card Image" />
+    </div>
     
       <div class="CardContent">
         <h3 class="cardTitle">{{ title }}</h3>

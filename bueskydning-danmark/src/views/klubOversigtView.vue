@@ -182,4 +182,24 @@ const sortedClubs = computed(() => {
   border-top: 1px solid #ccc;
   padding-top: 10px;
 }
+
+@media (max-width: 768px) {
+  .contentSection {
+    flex-direction: column;
+  }
+
+  .mapWrapper {
+    order: 1;  /* Sørg for at mappen kommer først */
+  }
+
+  .sidebar {
+    order: 2;  /* Listen under */
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+
+  .clubList {
+    max-height: 300px; /* evt. juster højde på listen */
+  }
+}
 </style>

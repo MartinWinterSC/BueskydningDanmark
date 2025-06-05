@@ -50,9 +50,12 @@ onMounted(() => {
 
     <div class="contentWrapper">
       <section class="contentSection">
-        <div class="SubHeaderSection">
-          <h2>Seneste nyheder</h2>
-        </div>
+       <div class="headerSection">
+      <div class="titleWithLine">
+        <h2>Seneste Nyheder</h2>
+        <div class="line"></div>
+      </div>
+    </div>
 
         <div
           class="featuredNews"
@@ -86,18 +89,25 @@ onMounted(() => {
           <BaseCard
             v-for="post in sidebarNews"
             :key="post.id"
+            variant="horizontalNews" 
             :title="post.title.rendered"
             :summary="post.excerpt?.rendered"
             :date="new Date(post.date).toLocaleDateString('da-DK')"
             :image="post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''"
             @click="readMore(post.id)"
           />
+          
         </div>
       </aside>
     </div>
 
-    <section class="SubHeaderSection">
-      <h2>Articles</h2>
+    <section>
+     <div class="headerSection">
+      <div class="titleWithLine">
+        <h2>Alle Nyheder</h2>
+        <div class="line"></div>
+      </div>
+    </div>
       <div class="cardGrid">
         <BaseCard
           v-for="post in articleCards"
