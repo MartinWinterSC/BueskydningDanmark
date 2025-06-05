@@ -1,48 +1,49 @@
 <script setup>
-import { ref, computed } from 'vue'
-import ClubKort from '@/components/SectionComponents/ClubKort.vue'
+import { ref, computed } from 'vue';
+import ClubKort from '@/components/SectionComponents/ClubKort.vue';
+import AalborgLogo from '@/assets/Billeder/AalborgLogo.png';
+import AarhusLogo from '@/assets/Billeder/AarhusLogo.png';
+import OdenseLogo from '@/assets/Billeder/OdenseLogo.jpg';
+import Copenhagen from '@/assets/Billeder/CopenhagenLogo.png'
 
-const clubList = ref([
-  {
-    id: 1,
-    name: 'København Bueskytteklub',
-    lat: 55.6761,
-    lng: 12.5683,
-    city: 'København',
-    region: 'Sjælland',
-    phone: '45 11 22 33',
-    logo: ''
-  },
-  {
-    id: 2,
-    name: 'Aarhus Bueskytteforening',
-    lat: 56.1629,
-    lng: 10.2039,
-    city: 'Aarhus',
-    region: 'Midtjylland',
-    phone: '45 44 55 66',
-    logo: ''
-  },
-  {
-    id: 3,
-    name: 'Odense Bueskyttelaug',
-    lat: 55.4038,
-    lng: 10.4024,
-    city: 'Odense',
-    region: 'Sydjylland',
-    phone: '45 77 88 99',
-    logo: ''
-  },
-  {
-    id: 4,
-    name: 'Nordjylland Bueskyttelaug',
-    lat: 57.0488,
-    lng: 9.9217,
-    city: 'Aalborg',
-    region: 'Nordjylland',
-    phone: '45 88 77 66',
-    logo: ''
-  }
+
+const clubs = ref([
+  { id: 1, name: 'København Bueskytteklub', 
+  lat: 55.6761, lng: 12.5683, 
+  city: 'København',
+  region: 'Sjælland', 
+  phone: '45 11 22 33', 
+  logo: Copenhagen 
+},
+
+  { id: 2, 
+    name: 'Aarhus Bueskytteforening', 
+    lat: 56.1629, 
+    lng: 10.2039, 
+    city: 'Aarhus', 
+    region: 'Midtjylland', 
+    phone: '45 44 55 66', 
+    logo: AarhusLogo 
+},
+
+  { id: 3, 
+    name: 'Odense Bueskyttelaug', 
+    lat: 55.4038, 
+    lng: 10.4024, 
+    city: 'Odense', 
+    region: 'Sydjylland', 
+    phone: '45 77 88 99', 
+    logo: OdenseLogo 
+},
+  { id: 4, 
+    name: 'Nordjylland Bueskyttelaug', 
+    lat: 57.0488, 
+    lng: 9.9217, 
+    city: 'Aalborg', 
+    region: 'Nordjylland', 
+    phone: '45 88 77 66', 
+    logo: AalborgLogo 
+}
 ])
 
 const regions = ['Alle', 'Nordjylland', 'Midtjylland', 'Sydjylland', 'Sjælland']
@@ -168,5 +169,25 @@ const sortedClubs = computed(() => {
 .clubInfo {
   border-top: 1px solid #ccc;
   padding-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .contentSection {
+    flex-direction: column;
+  }
+
+  .mapWrapper {
+    order: 1;  /* Sørg for at mappen kommer først */
+  }
+
+  .sidebar {
+    order: 2;  /* Listen under */
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+
+  .clubList {
+    max-height: 300px; /* evt. juster højde på listen */
+  }
 }
 </style>

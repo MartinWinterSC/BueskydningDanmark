@@ -52,7 +52,7 @@ const props = defineProps({
 }
 
 .ImageContent img {
-    width: 100%;
+    width: 75%;
     /* max-width: 60vh; */
     height: auto;
     object-fit: cover;

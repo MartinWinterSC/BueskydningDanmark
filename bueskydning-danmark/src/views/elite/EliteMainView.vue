@@ -2,16 +2,17 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import BaseCard from '@/components/Cards/BaseCard.vue';
+import BueskydningLogo from '@/assets/Billeder/BueskydningDanmarklogo.png';
 
 const router = useRouter();
 
 const EliteNavPoints = ref([
-  { id: 1, name: 'Landsholdet', image: '' },
-  { id: 2, name: 'Skytterepræsentant', image: '' },
-  { id: 3, name: 'Talecenter', image: '' },
-  { id: 4, name: 'Talentudvikling', image: '' },
-  { id: 5, name: 'Skole og uddannelse', image: '' },
-  { id: 6, name: 'Antidoping', image: '' },
+  { id: 1, name: 'Landsholdet', image: BueskydningLogo},
+  { id: 2, name: 'Skytterepræsentant', image: BueskydningLogo },
+  { id: 3, name: 'Talecenter', image: BueskydningLogo },
+  { id: 4, name: 'Talentudvikling', image: BueskydningLogo },
+  { id: 5, name: 'Skole og uddannelse', image: BueskydningLogo },
+  { id: 6, name: 'Antidoping', image: BueskydningLogo},
 ]);
 
 function handleClick(NavPoint) {

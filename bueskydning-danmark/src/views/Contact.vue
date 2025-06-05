@@ -23,7 +23,12 @@ onMounted(() => {
 <template>
 <main>
     <section>
+        <div class="headerSection">
+      <div class="titleWithLine">
         <h1>Kontakt</h1>
+        <div class="line"></div>
+      </div>
+    </div>
         <div class="contactContainer">
             <div class="contactElement">
                 <img src="" alt="Telefon ikon" />

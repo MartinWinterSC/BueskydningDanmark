@@ -39,23 +39,29 @@ function calculate() {
 </script>
 
 <template>
-<main>
-    <h1>Find dit udstyr</h1>
-    <section class="calculator">
-        <div class="calculation">
-            <img src="@/assets/Billeder/equipment.png" alt="">
-            <div class="indputBoxes">
-                <div class="inputContainer">
-                    <label for="height">Din Højde i cm</label>
-                    <input type="number" id="height" v-model="height" placeholder="Højde i cm">
-                </div>
-                <div class="inputContainer">
-                    <label for="armspan">Din Armspændvidde i cm</label>
-                    <input type="number" id="armspan" v-model="armspan" placeholder="Armspændvidde i cm">
-                </div>
-                <div class="inputContainer">
-                    <label for="drawWeight">Din Trækstyrke i Pund</label>
-                    <input type="number" id="drawWeight" v-model="drawWeight" placeholder="Trækstyrke i Pund">
+    <main>
+        <div class="headerSection">
+      <div class="titleWithLine">
+        <h1>Find dit Udstyr</h1>
+        <div class="line"></div>
+      </div>
+    </div>
+        <section class="calculator">
+            <div class="calculation">
+                <img src="@/assets/Billeder/equipment.png" alt="">
+                <div class="indputBoxes">
+                    <div class="inputContainer">
+                        <label for="height">Din Højde i cm</label>
+                        <input type="number" id="height" v-model="height" placeholder="Højde i cm">
+                    </div>
+                    <div class="inputContainer">
+                        <label for="armspan">Din Armspændvidde i cm</label>
+                        <input type="number" id="armspan" v-model="armspan" placeholder="Armspændvidde i cm">
+                    </div>
+                    <div class="inputContainer">
+                        <label for="drawWeight">Din Trækstyrke i Pund</label>
+                        <input type="number" id="drawWeight" v-model="drawWeight" placeholder="Trækstyrke i Pund">
+                    </div>
                 </div>
             </div>
         </div>

@@ -46,41 +46,68 @@ onMounted(() => {
       <h1>Nyheder</h1>
       <div class="line"></div>
     </div>
-  </div>
-  <div class="contentWrapper">
-    <section class="contentSection">
-      <div class="SubHeaderSection">
-        <h2>Seneste nyheder</h2>
+
+    <div class="contentWrapper">
+      <section class="contentSection">
+       <div class="headerSection">
+      <div class="titleWithLine">
+        <h2>Seneste Nyheder</h2>
+        <div class="line"></div>
       </div>
-      <div 
-        class="featuredNews" 
-        v-if="featuredNews" 
-        @click="readMore(featuredNews.id)"
-      >
-        <div class="newsImage">
-          <img 
-            :src="featuredNews._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''" 
-            :alt="featuredNews.title?.rendered || 'Nyhedsbillede'" 
+    </div>
+
+        <div
+          class="featuredNews"
+          v-if="featuredNews"
+          @click="readMore(featuredNews.id)"
+        >
+          <div class="newsImage">
+            <img
+              :src="featuredNews._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''"
+              :alt="featuredNews.title.rendered"
+            />
+          </div>
+          <div class="newsContent">
+            <h3 class="newsTitle" v-html="featuredNews.title.rendered"></h3>
+            <p class="newsExcerpt" v-html="featuredNews.excerpt?.rendered || ''"></p>
+            <StandardBtn class="readMoreBtn" variant="primary">Læs mere</StandardBtn>
+          </div>
+        </div>
+      </section>
+
+      <aside class="sidebar">
+        <div class="newsletterSection">
+          <h3 class="newsletterTitle">Tilmeld dig vores nyhedsbrev her</h3>
+          <p class="newsletterText">
+            Skriv dig op til vores nyhedsbrev og hold dig opdateret på det nyeste som sker
+          </p>
+          <StandardBtn variant="primary" @click="openNewsletterModal">Tilmeld nyhedsbrev</StandardBtn>
+        </div>
+
+        <div class="sidebarNews">
+          <BaseCard
+            v-for="post in sidebarNews"
+            :key="post.id"
+            variant="horizontalNews" 
+            :title="post.title.rendered"
+            :summary="post.excerpt?.rendered"
+            :date="new Date(post.date).toLocaleDateString('da-DK')"
+            :image="post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''"
+            @click="readMore(post.id)"
           />
+          
         </div>
-        <div class="newsContent">
-          <h3 class="newsTitle" v-html="featuredNews.title?.rendered"></h3>
-          <p class="newsExcerpt" v-html="featuredNews.excerpt?.rendered || ''"></p>
-          <StandardBtn class="readMoreBtn" variant="primary">Læs mere</StandardBtn>
-        </div>
+      </aside>
+    </div>
+
+    <section>
+     <div class="headerSection">
+      <div class="titleWithLine">
+        <h2>Alle Nyheder</h2>
+        <div class="line"></div>
       </div>
-    </section>
-    <aside class="sidebar">
-      <div class="newsletterSection">
-        <h3 class="newsletterTitle">Tilmeld dig vores nyhedsbrev her</h3>
-        <p class="newsletterText">
-          Skriv dig op til vores nyhedsbrev og hold dig opdateret på det nyeste som sker
-        </p>
-        <StandardBtn variant="primary" @click="openNewsletterModal">
-          Tilmeld nyhedsbrev
-        </StandardBtn>
-      </div>
-      <div class="sidebarNews">
+    </div>
+      <div class="cardGrid">
         <BaseCard
           v-for="post in sidebarNews"
           :key="post.id"
