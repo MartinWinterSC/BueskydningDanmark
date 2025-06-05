@@ -1,6 +1,10 @@
 <script setup>
 import { ref, computed } from 'vue';
 import ClubKort from '@/components/SectionComponents/ClubKort.vue';
+import AalborgLogo from '@/assets/Billeder/AalborgLogo.png';
+import AarhusLogo from '@/assets/Billeder/AarhusLogo.png';
+import OdenseLogo from '@/assets/Billeder/OdenseLogo.jpg';
+import Copenhagen from '@/assets/Billeder/CopenhagenLogo.png'
 
 
 const clubs = ref([
@@ -9,7 +13,7 @@ const clubs = ref([
   city: 'København',
   region: 'Sjælland', 
   phone: '45 11 22 33', 
-  logo: '' 
+  logo: Copenhagen 
 },
 
   { id: 2, 
@@ -19,7 +23,7 @@ const clubs = ref([
     city: 'Aarhus', 
     region: 'Midtjylland', 
     phone: '45 44 55 66', 
-    logo: '' 
+    logo: AarhusLogo 
 },
 
   { id: 3, 
@@ -29,7 +33,7 @@ const clubs = ref([
     city: 'Odense', 
     region: 'Sydjylland', 
     phone: '45 77 88 99', 
-    logo: '' 
+    logo: OdenseLogo 
 },
   { id: 4, 
     name: 'Nordjylland Bueskyttelaug', 
@@ -38,7 +42,7 @@ const clubs = ref([
     city: 'Aalborg', 
     region: 'Nordjylland', 
     phone: '45 88 77 66', 
-    logo: '' 
+    logo: AalborgLogo 
 }
 ])
 

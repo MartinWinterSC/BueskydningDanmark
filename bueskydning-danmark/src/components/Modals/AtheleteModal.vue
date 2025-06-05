@@ -1,5 +1,6 @@
 <script setup>
 
+
 const props = defineProps({
   athlete: Object,
   visible: Boolean
@@ -32,10 +33,24 @@ const emit = defineEmits(['close']);
               <a href="#"><img src="" /></a>
             </div>
           </div>
-          <div class="stats-boxes">
-            <div class="stat"><p>Bedste score</p><strong>{{ athlete?.bestScore || 'N/A' }}</strong></div>
-            <div class="stat"><p>World Ranking</p><strong>{{ athlete?.worldRanking || 'N/A' }}</strong></div>
-            <div class="stat" id="rallies"><p>Internationale stævner</p><a href="#"><strong>Klik her</strong></a></div>
+          <div class="StatBoxes">
+             <div class="stat">
+              <font-awesome-icon icon="fa-solid fa-medal" class="stat-icon" />
+              <p>Bedste score</p>
+              <strong>{{ athlete?.bestScore || 'N/A' }}</strong>
+            </div>
+
+            <div class="stat">
+              <font-awesome-icon icon="fa-solid fa-arrow-up" class="stat-icon" />
+              <p>World Ranking</p>
+              <strong>{{ athlete?.worldRanking || 'N/A' }}</strong>
+            </div>
+
+            <div class="stat" id="rallies">
+              <font-awesome-icon icon="fa-solid fa-earth-europe" class="stat-icon" />
+              <p>Internationale stævner</p>
+              <a href="#"><strong>Klik her</strong></a>
+            </div>
           </div>
         </div>
       </div>
@@ -102,7 +117,7 @@ const emit = defineEmits(['close']);
   border-radius: 50%;
 }
 
-.stats-boxes {
+.StatBoxes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-xs);
