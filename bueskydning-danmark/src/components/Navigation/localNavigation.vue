@@ -22,7 +22,7 @@
         <span class="navText">Fælleskabbet</span>
       </router-link>
       
-      <router-link to="/resultater" class="navItem">
+      <router-link to="/ArchiveRallyView" class="navItem">
         <div class="navIcon">
           <font-awesome-icon icon="medal" />
         </div>

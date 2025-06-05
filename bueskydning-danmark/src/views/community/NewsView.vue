@@ -99,8 +99,6 @@ onMounted(() => {
         </div>
       </aside>
     </div>
-
-    <section>
      <div class="headerSection">
       <div class="titleWithLine">
         <h2>Alle Nyheder</h2>
@@ -118,7 +116,6 @@ onMounted(() => {
           @click="readMore(post.id)"
         />
       </div>
-    </aside>
   </div>
   <section class="SubHeaderSection">
     <h2>Articles</h2>

@@ -9,9 +9,17 @@ import HeroImage from '@/assets/Billeder/heroImage.png';
 import nySkytteImg from '@/assets/Billeder/nySkytte.png';
 import StandardBtn from '@/components/Buttons/StandardBtn.vue';
 import UptoTopBtn from '@/components/Buttons/UptoTopBtn.vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const newsCards = ref([]);
 const baseURL = "https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/";
+
+const goTo = (path) => {
+  if (path) {
+    router.push(path);
+  }
+};
 
 onMounted(() => {
   fetch(baseURL + "news?per_page=3&_embed")
@@ -96,6 +104,9 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
       v-for="(card, index) in newsCards"
       :key="card.title"
       v-bind="card"/>
+    </div>
+    <div class="seeMoreBtnContainer">
+      <StandardBtn variant="primary" @click="goTo('/newsView')">Se flere Nyheder</StandardBtn>
     </div>
   </section>
   <UptoTopBtn />
@@ -208,6 +219,11 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
 }
 main .headerSection:first-child {
   margin-top: 50px;
+}
+.seeMoreBtnContainer{
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-sm);
 }
 @media (max-width: 768px) {
   .NewArcherContent h2 {

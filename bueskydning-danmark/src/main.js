@@ -10,6 +10,7 @@ import { faChevronDown, faBars, faXmark, faUsers, faMedal, faMagnifyingGlass, fa
 import { faCalendar as faCalendarRegular } from '@fortawesome/free-regular-svg-icons'
 
 library.add(faChevronDown, faBars, faXmark, faUsers, faMedal, faMagnifyingGlass, faArrowUp, faEarthEurope)
+
 library.add(faCalendarRegular)
 
 const app = createApp(App)

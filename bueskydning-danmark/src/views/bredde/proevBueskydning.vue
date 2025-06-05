@@ -124,7 +124,7 @@ const toggleAccordion = (index) => {
                 <h3>ER DER FORSKELLIGE DISCIPLINER I BUESKYDNING?</h3>
                 <span class="toggleIcon">+</span>
             </div>
-        </section>
+        </div>
 
         <section>
             <video src="@/assets/Bueskydning-Danmark-Profilfilm.mp4"></video>
@@ -232,6 +232,7 @@ const toggleAccordion = (index) => {
           </template>
         </div>
       </div>
+    </section>
     </section>
   </main>
 </template>

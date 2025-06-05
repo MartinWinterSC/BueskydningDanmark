@@ -5,13 +5,19 @@ import FacebookLogo from '@/assets/FacebookLogo.png';
 import InstagramLogo from '@/assets/InstagramLogo.png';
 import Logo from '@/assets/BueskydningLogo.svg';
 const email = ref('');
+const isSubmitted  = ref(false);
 
 function subscribeNewsletter() {
   if (email.value) {
-    alert(`Tak for tilmeldingen! Email: ${email.value}`);
-    email.value = '';
+    isSubmitted.value = true;
+
+    setTimeout(() => {
+      email.value = '';
+      isSubmitted.value = false;
+    }, 2000);
   }
 }
+
 </script>
 
 <template>
@@ -73,13 +79,23 @@ function subscribeNewsletter() {
             class="newsletterInput"
             required
           >
-          <button type="submit" class="newsletterButton">Tilmeld</button>
+          <button type="submit" class="newsletterButton">
+            <template v-if="!isSubmitted">Tilmeld</template>
+            <template v-else>
+              <!-- Checkmark brought to us by the curtosy of Arthur D'huy -->
+              <!-- https://codepen.io/led8/pen/yLLddyb -->
+              <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+              </svg>
+              <!-- End -->
+            </template>
+          </button>
         </form>
       </div>
     </div>
   </footer>
 </template>
-
 
 <style scoped>
 .footer {
@@ -195,34 +211,79 @@ function subscribeNewsletter() {
   padding: 8px 20px;
   border: none;
   background-color: var(--BtnColor);
-  border-radius: 16px;
+  border-radius: 25px;
   font-weight: bold;
   cursor: pointer;
   color: white;
   transition: background-color 0.2s ease;
+  font-size: 22px;
 }
 
 .newsletterButton:hover {
   background-color: var(--BtnColorhover);
 }
 
-/* Responsive Design */
+/* Checkmark brought to us by the curtosy of Arthur D'huy */
+/* https://codepen.io/led8/pen/yLLddyb */
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 4;
+  stroke-miterlimit: 10;
+  stroke: white;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+.checkmark {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: green;
+  stroke-miterlimit: 10;
+  margin: 0 auto;
+  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #fff;
+  }
+}
+/* End */
+
 @media (max-width: 768px) {
   .footerContainer {
     grid-template-columns: 1fr;
     gap: 30px;
     text-align: center;
   }
-  
   .logo {
     justify-content: center;
   }
-  
   .socialIcons {
     justify-content: center;
   }
 }
-
 @media (max-width: 1024px) and (min-width: 769px) {
   .footerContainer {
     grid-template-columns: 1fr 1fr;

@@ -64,7 +64,6 @@ function calculate() {
                     </div>
                 </div>
             </div>
-        </div>
         <div class="results">
             <button @click="calculate">Beregn</button>
             <pre id="result">{{ result }}</pre>

@@ -4,10 +4,21 @@ import TextImageSection from '@/components/SectionComponents/TextImageSection.vu
 import BaseCard from '@/components/Cards/BaseCard.vue';
 import StandardBtn from '@/components/Buttons/StandardBtn.vue';
 import communityHero from '@/assets/Billeder/Community.png';
+import { useRouter } from 'vue-router';
 
 const Magasincards = ref([]);
 const Newscards = ref([]);
 const Forumscards = ref([]);
+
+const router = useRouter();
+const goToArticle = (id) => {
+  router.push({ name: 'Artikle', query: { id } });
+};
+const goTo = (path) => {
+  if (path) {
+    router.push(path);
+  }
+};
 
 const baseURL = "https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/";
 
@@ -16,6 +27,7 @@ onMounted(() => {
     .then(res => res.json())
     .then(data => {
       Newscards.value = data.map(post => ({
+        id: post.id,
         variant: 'News',
         title: post.title.rendered,
         date: post.date?.slice(0, 10),
@@ -30,6 +42,7 @@ onMounted(() => {
     .then(res => res.json())
     .then(data => {
       Forumscards.value = data.map(post => ({
+        id: post.id,
         variant: 'Simple',
         title: post.title.rendered,
         summary: post.acf?.summary || '',
@@ -46,10 +59,11 @@ onMounted(() => {
         variant: 'Simple',
         title: post.title.rendered,
         image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
-        link: post.acf?.print_pdf?.url || '#'
+        link: post.acf?.printPDF || '#'
       }));
     })
     .catch(err => console.error("Print fetch error:", err));
+
 });
 </script>
 
@@ -75,10 +89,12 @@ onMounted(() => {
         v-for="(card, index) in Newscards"
         :key="`news-${index}`"
         v-bind="card"
+        variant="News"
+        @click="goToArticle(card.id)"
       />
     </div>
     <div class="seeMoreBtnContainer">
-      <StandardBtn variant="primary">Se flere Nyheder</StandardBtn>
+      <StandardBtn variant="primary" @click="goTo('/newsView')">Se flere Nyheder</StandardBtn>
     </div>
   </section>
   <section class="headerSection"> 
@@ -91,28 +107,38 @@ onMounted(() => {
         v-for="(card, index) in Forumscards"
         :key="`forum-${index}`"
         v-bind="card"
+        variant="News"
+        @click="goToArticle(card.id)"
       />
     </div>
     <div class="seeMoreBtnContainer">
-      <StandardBtn variant="primary">Se flere Posts</StandardBtn>
+      <StandardBtn variant="primary" @click="goTo('/ForumView')">Se flere Posts</StandardBtn>
     </div>
   </section>
   <section class="headerSection" id="print"> 
-    <div class="titleWithLine">
-      <h2>Magasiner</h2>
-      <div class="line"></div>
-    </div>
-    <div class="cardGrid">
-      <BaseCard 
-        v-for="(card, index) in Magasincards"
-        :key="`magazine-${index}`"
-        v-bind="card"
+  <div class="titleWithLine">
+    <h2>Magasiner</h2>
+    <div class="line"></div>
+  </div>
+  <div class="cardGrid">
+    <a
+      v-for="(card, index) in Magasincards"
+      :key="`magazine-${index}`"
+      :href="card.link"
+      target="_blank"
+      rel="noopener"
+      class="CardLinkWrapper"
+    >
+      <BaseCard
+        v-bind="card" 
+        variant="News"
       />
-    </div>
-    <div class="seeMoreBtnContainer">
-      <StandardBtn variant="primary">Se flere magasiner</StandardBtn>
-    </div>
-  </section>
+    </a>
+  </div>
+  <div class="seeMoreBtnContainer">
+    <StandardBtn variant="primary">Se flere magasiner</StandardBtn>
+  </div>
+</section>
 </main>
 </template>
 
