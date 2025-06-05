@@ -34,7 +34,6 @@ const toggleMobileMenu = () => {
           </button>
         </div>
       </div>
-    
       <ul class="navList" :class="{ open: isMobileMenuOpen }">
         <li v-for="item in globalNavData" :key="item.label" class="navItem">
             <router-link v-if="item.to" :to="item.to" class="navLink">
@@ -49,8 +48,6 @@ const toggleMobileMenu = () => {
                 <font-awesome-icon icon="chevron-down" />
               </span>
             </span>
-            
-          
             <ul v-if="item.children" class="submenu">
               <li v-for="child in item.children" :key="child.label" class="dropdownItem">
                 <router-link v-if="child.to" :to="child.to" class="dropdownLink">

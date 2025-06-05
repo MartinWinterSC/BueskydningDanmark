@@ -27,14 +27,13 @@
 </script>
 
 <template>
-  <main>
-     <div class="headerSection">
+<main>
+  <div class="headerSection">
     <div class="titleWithLine">
-         <h1>Landshold</h1>
-        <div class="line"></div>
+      <h1>Landshold</h1>
+      <div class="line"></div>
     </div>
   </div>
-
   <section class="BaseSection">
     <div class="Container">
       <BaseCard
@@ -47,38 +46,29 @@
         />
     </div>
   </section>
-  </main>
+</main>
 </template>
 
 <style scoped>
-
 .BaseSection {
   padding: 2rem;
 }
-
-/* Responsive flex container */
 .Container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
 }
-
-/* Each card item */
 .Container > * {
   flex: 1 1 100%; 
   max-width: 100%;
 }
-
-/* Tablet: 2 columns */
 @media (min-width: 640px) {
   .Container > * {
     flex: 1 1 calc(50% - 1rem);
     max-width: calc(50% - 1rem);
   }
 }
-
-/* Desktop: 3 columns */
 @media (min-width: 1024px) {
   .Container > * {
     flex: 1 1 calc(33.333% - 1rem);

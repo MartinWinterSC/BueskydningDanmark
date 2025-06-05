@@ -50,31 +50,29 @@ function handleClick(athlete) {
   selectedAthlete.value = athlete;
   showModal.value = true;
 }
-
 function closeModal() {
   showModal.value = false;
 }
 </script>
 
 <template>
-   <div class="headerSection">
-    <div class="titleWithLine">
-      <h1>Landsholdet {{ category }}</h1>
-      <div class="line"></div>
-    </div>
+<div class="headerSection">
+  <div class="titleWithLine">
+    <h1>Landsholdet {{ category }}</h1>
+    <div class="line"></div>
   </div>
-
-  <section class="BaseSection">
-    <div class="Container">
-      <AthleteCard
-        v-for="athlete in athletes"
-        :key="athlete.id"
-        :athlete="athlete"
-        @cardClicked="handleClick"
-      />
-    </div>
-  </section>
-  <AtheleteModal
+</div>
+<section class="BaseSection">
+  <div class="Container">
+    <AthleteCard
+      v-for="athlete in athletes"
+      :key="athlete.id"
+      :athlete="athlete"
+      @cardClicked="handleClick"
+    />
+  </div>
+</section>
+<AtheleteModal
   :athlete="selectedAthlete"
   :visible="showModal"
   @close="closeModal"
@@ -82,39 +80,29 @@ function closeModal() {
 </template>
 
 <style scoped>
-
 .BaseSection {
   padding: 2rem;
 }
-
-/* Responsive flex container */
 .Container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
 }
-
-/* Each card item */
 .Container > * {
   flex: 1 1 100%; 
   max-width: 100%;
 }
-
-/* Tablet: 2 columns */
 @media (min-width: 640px) {
   .Container > * {
     flex: 1 1 calc(50% - 1rem);
     max-width: calc(50% - 1rem);
   }
 }
-
-/* Desktop: 3 columns */
 @media (min-width: 1024px) {
   .Container > * {
     flex: 1 1 calc(33.333% - 1rem);
     max-width: calc(33.333% - 1rem);
   }
 }
-
 </style>

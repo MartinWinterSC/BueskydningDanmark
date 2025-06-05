@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 
-// Reactive state
 const isLiked = ref(false)
 const isBookmarked = ref(false)
 
@@ -67,7 +66,6 @@ const sidebarItems = ref([
   }
 ])
 
-// Methods
 const toggleLike = () => {
   isLiked.value = !isLiked.value
 }
@@ -78,114 +76,102 @@ const toggleBookmark = () => {
 </script>
 
 <template>
-  <main>
-  <div class="PostContainer">
-    <div class="headerSection">
+<main>
+<div class="PostContainer">
+  <div class="headerSection">
     <div class="titleWithLine">
-         {{ post.title }}
-        <div class="line"></div>
+      {{ post.title }}
+      <div class="line"></div>
     </div>
   </div>
-
-    <!-- Flyttes evt til eget resuable component (breadcrumbs) -->
-    <nav class="navigation">
-      <a href="#" class="backLink">
-        <span class="backArrow">‹</span> Tilbage
-      </a>
-    </nav>
-
-    <div class="postLayout">
-      <!-- Main Content -->
-      <section class="mainContent">
-        <!-- Post Image -->
-        <div class="postImageContainer">
-          <img 
-            :src="post.image" 
-            :alt="post.imageAlt"
-            class="postImage"
-          />
+  <!-- Flyttes evt til eget resuable component (breadcrumbs) -->
+  <nav class="navigation">
+    <a href="#" class="backLink">
+      <span class="backArrow">‹</span> Tilbage
+    </a>
+  </nav>
+  <div class="postLayout">
+    <!-- Main Content -->
+    <section class="mainContent">
+      <!-- Post Image -->
+      <div class="postImageContainer">
+        <img 
+          :src="post.image" 
+          :alt="post.imageAlt"
+          class="postImage"
+        />
+      </div>
+      <!-- Post Actions -->
+      <div class="postActions">
+        <button 
+          class="actionBtn"
+          :class="{ active: isLiked }"
+          @click="toggleLike"
+        >
+          <span class="heartIcon"></span>
+        </button>
+        <button 
+          class="actionBtn"
+          :class="{ active: isBookmarked }"
+          @click="toggleBookmark"
+        >
+          <span class="bookmarkIcon">🏷</span>
+        </button>
+      </div>
+      <!-- Post Content -->
+      <article class="postContent">
+        <h2 class="postTitle">{{ post.title }}</h2>
+        <div class="postBody">
+          <p v-for="(paragraph, index) in post.content" :key="index">
+            {{ paragraph }}
+          </p>
+          <ul v-if="post.bulletPoints" class="bullet-points">
+            <li v-for="(point, index) in post.bulletPoints" :key="index">
+              {{ point }}
+            </li>
+          </ul>
         </div>
-
-        <!-- Post Actions -->
-        <div class="postActions">
-          <button 
-            class="actionBtn"
-            :class="{ active: isLiked }"
-            @click="toggleLike"
+      </article>
+      <!-- Comment Section -->
+      <section class="commentsSection">
+        <button class="commentBtn">Skriv en kommentar</button>
+        <div class="commentsList">
+          <div 
+            v-for="comment in comments" 
+            :key="comment.id"
+            class="comment"
           >
-            <span class="heartIcon"></span>
-          </button>
-          <button 
-            class="actionBtn"
-            :class="{ active: isBookmarked }"
-            @click="toggleBookmark"
-          >
-            <span class="bookmarkIcon">🏷</span>
-          </button>
-        </div>
-
-        <!-- Post Content -->
-        <article class="postContent">
-          <h2 class="postTitle">{{ post.title }}</h2>
-          <div class="postBody">
-            <p v-for="(paragraph, index) in post.content" :key="index">
-              {{ paragraph }}
-            </p>
-            <ul v-if="post.bulletPoints" class="bullet-points">
-              <li v-for="(point, index) in post.bulletPoints" :key="index">
-                {{ point }}
-              </li>
-            </ul>
-          </div>
-        </article>
-
-        <!-- Comment Section -->
-        <section class="commentsSection">
-          <button class="commentBtn">Skriv en kommentar</button>
-          
-          <div class="commentsList">
-            <div 
-              v-for="comment in comments" 
-              :key="comment.id"
-              class="comment"
-            >
-              <div class="commentAvatar">
-                <img :src="comment.avatar" :alt="comment.username" />
+            <div class="commentAvatar">
+              <img :src="comment.avatar" :alt="comment.username" />
+            </div>
+            <div class="commentContent">
+              <div class="commentHeader">
+                <span class="commentUsername">{{ comment.username }}</span>
+                <span class="commentTime">{{ comment.timestamp }}</span>
               </div>
-
-              <div class="commentContent">
-                <div class="commentHeader">
-                  <span class="commentUsername">{{ comment.username }}</span>
-                  <span class="commentTime">{{ comment.timestamp }}</span>
-                </div>
-                <p class="commentText">{{ comment.text }}</p>
-              </div>
-
+              <p class="commentText">{{ comment.text }}</p>
             </div>
           </div>
-        </section>
-      </section>
-
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        <div 
-          v-for="item in sidebarItems" 
-          :key="item.id"
-          class="sidebarCard"
-        >
-          <img :src="item.image" :alt="item.title" class="sidebarImage" />
-          <div class="sidebarContent">
-            <h3 class="sidebarTitle">{{ item.title }}</h3>
-          </div>
         </div>
-      </aside>
-
-
-    </div>
+      </section>
+    </section>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div 
+        v-for="item in sidebarItems" 
+        :key="item.id"
+        class="sidebarCard"
+      >
+        <img :src="item.image" :alt="item.title" class="sidebarImage" />
+        <div class="sidebarContent">
+          <h3 class="sidebarTitle">{{ item.title }}</h3>
+        </div>
+      </div>
+    </aside>
   </div>
-  </main>
+</div>
+</main>
 </template>
-
 
 <style scoped>
 .PostContainer {
@@ -195,22 +181,18 @@ const toggleBookmark = () => {
   font-family: var(--font-family);
   background-color: var(--color-background);
 }
-
 .postHeader {
   margin-bottom: var(--space-md);
 }
-
 .postTitle {
   font-size: 24px;
   font-weight: bold;
   color: var(--headerFont);
   margin-bottom: var(--space-xs);
 }
-
 .navigation {
   margin-bottom: var(--space-md);
 }
-
 .backLink {
   color: #666;
   text-decoration: none;
@@ -219,28 +201,23 @@ const toggleBookmark = () => {
   align-items: center;
   gap: var(--space-xs);
 }
-
 .backLink:hover {
   color: var(--font-color);
 }
-
 .backArrow {
   font-size: 18px;
 }
-
 .postLayout {
   display: grid;
   grid-template-columns: 1fr 300px;
   gap: var(--space-lg);
 }
-
 .mainContent {
   background: white;
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-
 .postImageContainer {
   width: 100%;
   height: 300px;
@@ -250,21 +227,18 @@ const toggleBookmark = () => {
   justify-content: center;
   background-color: #f8f9fa;
 }
-
 .postImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
   background-color: #e9ecef;
 }
-
 .postActions {
   padding: var(--space-md);
   display: flex;
   gap: var(--space-sm);
   border-bottom: 1px solid #eee;
 }
-
 .actionBtn {
   background: none;
   border: none;
@@ -274,46 +248,37 @@ const toggleBookmark = () => {
   border-radius: 4px;
   transition: background-color 0.2s;
 }
-
 .actionBtn:hover {
   background-color: #f0f0f0;
 }
-
 .actionBtn.active .heartIcon {
   color: #dc3545;
 }
-
 .actionBtn.active .bookmarkIcon {
   color: var(--BtnColor);
 }
-
 .postContent {
   padding: var(--space-md);
 }
-
 .postBody p {
   margin-bottom: var(--space-sm);
   line-height: var(--text-line-Height);
   color: var(--textFont);
 }
-
 .bullet-points {
   margin: var(--space-md) 0;
   padding-left: var(--space-md);
 }
-
 .bullet-points li {
   margin-bottom: var(--space-xs);
   line-height: var(--text-line-Height);
   color: var(--textFont);
 }
-
 /* Kommentare Section */
 .commentsSection {
   border-top: 1px solid #eee;
   padding: var(--space-md);
 }
-
 .commentBtn {
   background-color: #e9ecef;
   border: none;
@@ -327,17 +292,14 @@ const toggleBookmark = () => {
   width: 100%;
   text-align: left;
 }
-
 .commentBtn:hover {
   background-color: #dee2e6;
 }
-
 .commentsList {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 }
-
 .comment {
   display: flex;
   gap: var(--space-sm);
@@ -345,7 +307,6 @@ const toggleBookmark = () => {
   background-color: #f8f9fa;
   border-radius: 8px;
 }
-
 .commentAvatar img {
   width: 40px;
   height: 40px;
@@ -353,44 +314,35 @@ const toggleBookmark = () => {
   object-fit: cover;
   background-color: #dee2e6;
 }
-
 .commentContent {
   flex: 1;
 }
-
 .commentHeader {
   display: flex;
   align-items: center;
   gap: var(--space-xs);
   margin-bottom: var(--space-xs);
 }
-
 .commentUsername {
   font-weight: 600;
   color: var(--font-color);
   font-size: 14px;
 }
-
 .commentTime {
   color: #666;
   font-size: 12px;
 }
-
 .commentText {
   margin: 0;
   line-height: 1.5;
   color: var(--textFont);
   font-size: 14px;
 }
-
-
-/*Side artikler  */
 .sidebar {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
 }
-
 .sidebarCard {
   background: white;
   border-radius: 8px;
@@ -399,54 +351,43 @@ const toggleBookmark = () => {
   cursor: pointer;
   transition: transform 0.2s;
 }
-
 .sidebarCard:hover {
   transform: translateY(-2px);
 }
-
 .sidebarImage {
   width: 100%;
   height: 120px;
   object-fit: cover;
   background-color: #e9ecef;
 }
-
 .sidebarContent {
   padding: var(--space-sm);
   background-color: var(--BtnColor);
   color: var(--BtnTextColor);
 }
-
 .sidebarTitle {
   margin: 0;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
 }
-
-
-/* Media queries */
 @media (max-width: 768px) {
   .postLayout {
     grid-template-columns: 1fr;
     gap: var(--space-md);
   }
-
   .sidebar {
     order: -1;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--space-sm);
   }
-
   .comment {
     flex-direction: column;
   }
-
   .commentHeader {
     flex-direction: column;
     align-items: flex-start;
   }
 }
-
 </style>

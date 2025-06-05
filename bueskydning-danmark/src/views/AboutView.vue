@@ -16,5 +16,4 @@ import EventCard from '@/components/Cards/CalendarCards.vue'
     align-items: center;
   }
 }
-
 </style>

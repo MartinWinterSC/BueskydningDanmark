@@ -38,50 +38,42 @@ const filteredEvents = computed(() => {
 </script>
 
 <template>
-    <main>
-    <div class="headerSection">
-    <div class="titleWithLine">
-         <h1>Kalender</h1>
-        <div class="line"></div>
-    </div>
-    <Calendar :events="events"/>
+<main>
+  <div class="headerSection">
+  <div class="titleWithLine">
+    <h1>Kalender</h1>
+    <div class="line"></div>
   </div>
-
-    <section>
-     <div class="titleWithLine">
-        <div class="line"></div>
-     </div>
-
-     <section class="filterSection">
-      <label for="eventType">Filtrér efter type:</label>
-      <select id="eventType" v-model="defaultType">
-        <option v-for="type in eventTypes" :key="type" :value="type">{{ type }}</option>
-      </select>
-    </section>
-
-     <section>
-         <EventCard
-        v-for="(event, index) in filteredEvents"
-        :key="index"
-        :title="event.title"
-        :description="event.description"
-        :date="event.date"
-        :time="event.time"
-        :location="event.location"
-        :image="event.image"
-        buttonText="Læs mere"
-        />
-     </section>
-    </section>
-
-    </main>
-
-
-
+  <Calendar :events="events"/>
+  </div>
+  <section>
+   <div class="titleWithLine">
+      <div class="line"></div>
+   </div>
+   <section class="filterSection">
+    <label for="eventType">Filtrér efter type:</label>
+    <select id="eventType" v-model="defaultType">
+      <option v-for="type in eventTypes" :key="type" :value="type">{{ type }}</option>
+    </select>
+  </section>
+  <section>
+    <EventCard
+      v-for="(event, index) in filteredEvents"
+      :key="index"
+      :title="event.title"
+      :description="event.description"
+      :date="event.date"
+      :time="event.time"
+      :location="event.location"
+      :image="event.image"
+      buttonText="Læs mere"
+    />
+  </section>
+  </section>
+</main>
 </template>
 
 <style>
-
 .filterSection {
   margin: 2rem 0;
   display: flex;
@@ -91,12 +83,10 @@ const filteredEvents = computed(() => {
   border-radius: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
-
 .filterSection label {
   font-weight: bold;
   font-size: 1rem;
 }
-
 select {
   padding: 0.6rem 1rem;
   min-width: 8rem;
@@ -109,7 +99,4 @@ select {
   background-size: 1rem;
   cursor: pointer;
 }
-
-
-
 </style>

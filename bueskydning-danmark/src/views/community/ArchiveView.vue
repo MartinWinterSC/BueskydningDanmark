@@ -1,19 +1,20 @@
 <script setup>
-    import { useRouter } from 'vue-router';
-    import StandardBtn from '@/components/Buttons/StandardBtn.vue';
+import { useRouter } from 'vue-router';
+import StandardBtn from '@/components/Buttons/StandardBtn.vue';
 
-    const router = useRouter();
+const router = useRouter();
 
-    function goToArchiveGalleryView() {
-        router.push('/ArchiveGalleryView');
-    }
-    function goToArchiveRallyView() {
-        router.push('/ArchiveRallyView');
-    }
+function goToArchiveGalleryView() {
+    router.push('/ArchiveGalleryView');
+}
+    
+function goToArchiveRallyView() {
+    router.push('/ArchiveRallyView');
+}
 </script>
 
 <template>
-  <main>
+<main>
     <h1>Arkiv</h1>
     <section>
         <h2>Billeder</h2>
@@ -43,29 +44,28 @@
             </StandardBtn>
         </div>
     </section>
-
-  </main>
+</main>
 </template>
 
 <style scoped>
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-    li {
-        margin-bottom: 0.5rem;
-    }
-    a {
-        color: #007bff;
-        text-decoration: none;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-    section, h1{
-        margin: 25px 0;
-    }
-    h2{
-        margin: 10px 0;
-    }
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin-bottom: 0.5rem;
+}
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+section, h1{
+    margin: 25px 0;
+}
+h2{
+    margin: 10px 0;
+}
 </style>
