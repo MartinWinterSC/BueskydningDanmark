@@ -19,6 +19,14 @@ const goTo = (path) => {
     router.push(path);
   }
 };
+const stripHtml = (html) => {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return div.textContent || div.innerText || '';
+};
+const shortenText = (text, length = 100) => {
+  return text.length > length ? text.slice(0, length) + '...' : text;
+};
 
 const baseURL = "https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/";
 
@@ -31,7 +39,7 @@ onMounted(() => {
         variant: 'News',
         title: post.title.rendered,
         date: post.date?.slice(0, 10),
-        summary: post.acf?.summary || '',
+        summary: shortenText(stripHtml(post.content?.rendered || '')),
         image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
         link: post.link || '#'
       }));
@@ -45,7 +53,7 @@ onMounted(() => {
         id: post.id,
         variant: 'Simple',
         title: post.title.rendered,
-        summary: post.acf?.summary || '',
+        summary: shortenText(stripHtml(post.content?.rendered || '')),
         image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
         link: post.link || '#'
       }));

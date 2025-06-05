@@ -15,10 +15,24 @@ const router = useRouter();
 const newsCards = ref([]);
 const baseURL = "https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/";
 
+const stripHtml = (html) => {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return div.textContent || div.innerText || '';
+};
+
+const shortenText = (text, length = 100) => {
+  return text.length > length ? text.slice(0, length) + '...' : text;
+};
+
 const goTo = (path) => {
   if (path) {
     router.push(path);
   }
+};
+
+const goToArticle = (id) => {
+  router.push({ name: 'Artikle', query: { id } });
 };
 
 onMounted(() => {
@@ -26,10 +40,11 @@ onMounted(() => {
     .then(response => response.json())
     .then(data => {
       newsCards.value = data.map(post => ({
+        id: post.id,
         variant: 'News',
         title: post.title.rendered,
         date: post.date?.slice(0, 10),
-        summary: post.acf?.summary || '',
+        summary: shortenText(stripHtml(post.content?.rendered || '')),
         image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
         link: post.link || '#'
       }));
@@ -44,66 +59,71 @@ Bueskydning Danmark er en del af et større fællesskab via medlemsskab af Danma
 
 <template>
 <section class="HeroSection">
-    <img :src="HeroImage" alt="Hero Image" class="HeroImage" />
-    <div class="HeroContent">
-      <h1>Bueskydning Danmark</h1>
-      <h4>Det er sjovt at skyde med bue!</h4>
-    </div>
-    <div class="LocalNav">
-      <localNavigation />
-    </div>
+  <img :src="HeroImage" alt="Hero Image" class="HeroImage" />
+  <div class="HeroContent">
+    <h1>Bueskydning Danmark</h1>
+    <h4>Det er sjovt at skyde med bue!</h4>
+  </div>
+  <div class="LocalNav">
+    <localNavigation />
+  </div>
 </section>
+
 <main>
   <div class="headerSection">
     <div class="titleWithLine">
-        <h1>Om Bueskydning Danmark</h1>
-        <div class="line"></div>
+      <h1>Om Bueskydning Danmark</h1>
+      <div class="line"></div>
     </div>
   </div>
+
   <section class="HomeSection">
     <TextImageSection 
-      :Breadtekst= breadtekst
-       :image="instrucktorImg"
+      :Breadtekst="breadtekst"
+      :image="instrucktorImg"
     />
   </section>
+
   <section class="newArcherSection">
-  <img :src="nySkytteImg" alt="New Archer Image" class="newArcherImg" />
-  <div class="newArcherContainer">
-    <div class="newArcherContent">
-      <h2>Er du ny skytte?</h2>
-      <div class="NewArcherContentText">
-        <p>
-          Drømmer du om at prøve kræfter med bueskydning? Uanset om du er barn, voksen eller noget midt imellem, er bueskydning en sport for alle.
-          Som ny skytte bliver du en del af et fællesskab, hvor der er plads til både sjov, fordybelse og personlig udvikling.
-        </p>
-        <p>Find ud af hvor du kan afprøve bueskydning henne tæt på dig</p>
+    <img :src="nySkytteImg" alt="New Archer Image" class="newArcherImg" />
+    <div class="newArcherContainer">
+      <div class="newArcherContent">
+        <h2>Er du ny skytte?</h2>
+        <div class="NewArcherContentText">
+          <p>
+            Drømmer du om at prøve kræfter med bueskydning? Uanset om du er barn, voksen eller noget midt imellem, er bueskydning en sport for alle.
+            Som ny skytte bliver du en del af et fællesskab, hvor der er plads til både sjov, fordybelse og personlig udvikling.
+          </p>
+          <p>Find ud af hvor du kan afprøve bueskydning henne tæt på dig</p>
+        </div>
       </div>
+      <div class="NewArcherContentFooter">
+        <StandardBtn variant="primary" @click="$router.push('klubOversigtView')">Se klub oversigt</StandardBtn>
+        <StandardBtn variant="primary" @click="$router.push('proevBueskydning')">Prøv bueskydning</StandardBtn>
+      </div>    
     </div>
-    <div class="NewArcherContentFooter">
-      <StandardBtn variant="primary" @click="$router.push('klubOversigtView')">Se klub oversigt</StandardBtn>
-      <StandardBtn variant="primary" @click="$router.push('proevBueskydning')">Prøv bueskydning</StandardBtn>
-    </div>    
-  </div>
-</section>
-<section class="headerSection">
-  <div class="titleWithLine">
-    <h2>Kalender</h2>
-    <div class="line"></div>
-  </div>
-  <div>
-    <Calendar />
-  </div>
   </section>
+
+  <section class="headerSection">
+    <div class="titleWithLine">
+      <h2>Kalender</h2>
+      <div class="line"></div>
+    </div>
+    <Calendar />
+  </section>
+
   <section class="headerSection"> 
-      <div class="titleWithLine">
-       <h2>Nyeste Nyheder</h2>
-       <div class="line"></div>
-      </div>
-     <div class="cardGrid">
+    <div class="titleWithLine">
+      <h2>Nyeste Nyheder</h2>
+      <div class="line"></div>
+    </div>
+    <div class="cardGrid">
       <BaseCard 
-      v-for="(card, index) in newsCards"
-      :key="card.title"
-      v-bind="card"/>
+        v-for="(card, index) in newsCards"
+        :key="card.title"
+        v-bind="card"
+        @click="goToArticle(card.id)"
+      />
     </div>
     <div class="seeMoreBtnContainer">
       <StandardBtn variant="primary" @click="goTo('/newsView')">Se flere Nyheder</StandardBtn>

@@ -1,20 +1,19 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import BaseCard from '@/components/Cards/BaseCard.vue';
 import StandardBtn from '@/components/Buttons/StandardBtn.vue';
 import NewsletterModal from '@/components/Modals/NewsletterModal.vue';
 
 const showNewsletterModal = ref(false);
-
 const featuredNews = ref(null);
 const sidebarNews = ref([]);
 const articleCards = ref([]);
 
-const baseUrl = 'https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/';
+const router = useRouter();
 
-const readMore = (id) => {
-  console.log('Navigate to post ID:', id);
-  // e.g., router.push({ name: 'ArticlesPostView', params: { id } });
+const goToArticle = (id) => {
+  router.push({ name: 'Artikle', query: { id } });
 };
 
 const openNewsletterModal = () => {
@@ -25,14 +24,34 @@ const handleNewsletterSubmit = (formData) => {
   console.log('Newsletter signup data:', formData);
 };
 
+const stripHtml = (html) => {
+  const div = document.createElement('div');
+  div.innerHTML = html;
+  return div.textContent || div.innerText || '';
+};
+
+const shortenText = (text, length = 100) => {
+  return text.length > length ? text.slice(0, length) + '...' : text;
+};
+
+const baseUrl = 'https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/';
+
 onMounted(() => {
   fetch(`${baseUrl}news?per_page=100&_embed`)
     .then(res => res.json())
     .then(data => {
       if (data.length > 0) {
-        featuredNews.value = data[0];
-        sidebarNews.value = data.slice(1, 3);
-        articleCards.value = data.slice(3);
+        const cleaned = data.map(post => ({
+          id: post.id,
+          title: post.title?.rendered,
+          summary: shortenText(stripHtml(post.content?.rendered || '')),
+          date: new Date(post.date).toLocaleDateString('da-DK'),
+          image: post._embedded?.['wp:featuredmedia']?.[0]?.source_url || '',
+        }));
+
+        featuredNews.value = cleaned[0];
+        sidebarNews.value = cleaned.slice(1, 3);
+        articleCards.value = cleaned.slice(3);
       }
     })
     .catch(err => console.error('News fetch error:', err));
@@ -49,27 +68,27 @@ onMounted(() => {
 
     <div class="contentWrapper">
       <section class="contentSection">
-       <div class="headerSection">
-      <div class="titleWithLine">
-        <h2>Seneste Nyheder</h2>
-        <div class="line"></div>
-      </div>
-    </div>
+        <div class="headerSection">
+          <div class="titleWithLine">
+            <h2>Seneste Nyheder</h2>
+            <div class="line"></div>
+          </div>
+        </div>
 
         <div
           class="featuredNews"
           v-if="featuredNews"
-          @click="readMore(featuredNews.id)"
+          @click="goToArticle(featuredNews.id)"
         >
           <div class="newsImage">
             <img
-              :src="featuredNews._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''"
-              :alt="featuredNews.title.rendered"
+              :src="featuredNews.image"
+              :alt="featuredNews.title"
             />
           </div>
           <div class="newsContent">
-            <h3 class="newsTitle" v-html="featuredNews.title.rendered"></h3>
-            <p class="newsExcerpt" v-html="featuredNews.excerpt?.rendered || ''"></p>
+            <h3 class="newsTitle" v-html="featuredNews.title"></h3>
+            <p class="newsExcerpt">{{ featuredNews.summary }}</p>
             <StandardBtn class="readMoreBtn" variant="primary">Læs mere</StandardBtn>
           </div>
         </div>
@@ -89,34 +108,35 @@ onMounted(() => {
             v-for="post in sidebarNews"
             :key="post.id"
             variant="horizontalNews" 
-            :title="post.title.rendered"
-            :summary="post.excerpt?.rendered"
-            :date="new Date(post.date).toLocaleDateString('da-DK')"
-            :image="post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''"
-            @click="readMore(post.id)"
+            :title="post.title"
+            :summary="post.summary"
+            :date="post.date"
+            :image="post.image"
+            @click="goToArticle(post.id)"
           />
-          
         </div>
       </aside>
     </div>
-     <div class="headerSection">
+
+    <div class="headerSection">
       <div class="titleWithLine">
         <h2>Alle Nyheder</h2>
         <div class="line"></div>
       </div>
     </div>
-      <div class="cardGrid">
-        <BaseCard
-          v-for="post in sidebarNews"
-          :key="post.id"
-          :title="post.title?.rendered"
-          :summary="post.excerpt?.rendered"
-          :date="new Date(post.date).toLocaleDateString('da-DK')"
-          :image="post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''"
-          @click="readMore(post.id)"
-        />
-      </div>
+    <div class="cardGrid">
+      <BaseCard
+        v-for="post in sidebarNews"
+        :key="post.id"
+        :title="post.title"
+        :summary="post.summary"
+        :date="post.date"
+        :image="post.image"
+        @click="goToArticle(post.id)"
+      />
+    </div>
   </div>
+
   <section class="SubHeaderSection">
     <h2>Articles</h2>
     <div class="cardGrid">
@@ -124,14 +144,15 @@ onMounted(() => {
         v-for="post in articleCards"
         :key="post.id"
         variant="News"
-        :title="post.title?.rendered"
-        :summary="post.excerpt?.rendered"
-        :date="new Date(post.date).toLocaleDateString('da-DK')"
-        :image="post._embedded?.['wp:featuredmedia']?.[0]?.source_url || ''"
-        @click="readMore(post.id)"
+        :title="post.title"
+        :summary="post.summary"
+        :date="post.date"
+        :image="post.image"
+        @click="goToArticle(post.id)"
       />
     </div>
   </section>
+
   <NewsletterModal
     v-model="showNewsletterModal"
     @submit="handleNewsletterSubmit"

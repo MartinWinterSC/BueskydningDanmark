@@ -1,30 +1,17 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router';
 
-const isLiked = ref(false)
-const isBookmarked = ref(false)
-
-// Placeholder data til post som skal erstattes med aktuelt data fra wordpress eller API
+const route = useRoute();
 const post = ref({
-  title: "Emne: Træningsips til bedre fokus og stabilitet - hvad virker for jer?",
-  image: "",
-  imageAlt: "Training exercise demonstration",
-  content: [
-    "Hej alle sammen!",
-    "Jeg vil gerne få skytte og har været i gang i lidt over 3 måneder nu. Jeg har altid på det grundlæggende, men jeg synes stadig at have fokus og stabilitet, især når jeg skyder flere serier i træk.",
-    "Jeg vil rigtig gerne høre jeres bedste træningsips, både fysisk og mentalt.",
-    "Hvordan arbejder I med fx:"
-  ],
-  bulletPoints: [
-    "At holde kroppen afslappet men stabil?",
-    "At fastholde koncentrationen under en hel træning?",
-    "At arbejde med vejrtrækning - og hvordan bruger I det?",
-    "Jeg er især interesseret i enkle øvelser eller rutiner, man kan bruge som del af opvarmning eller hjemmetræning.",
-    "Gerne mig til at have jeres erfaringer og måske få lidt inspiration til næste træningspass!",
-    "Bedste hilsner,",
-    "Mads"
-  ]
-})
+  title: '',
+  image: '',
+  imageAlt: '',
+  contentHtml: '',
+});
+
+const isLiked = ref(false);
+const isBookmarked = ref(false);
 
 const comments = ref([
   {
@@ -41,7 +28,7 @@ const comments = ref([
     avatar: "",
     text: "Fedt at høre om din træning! Jeg har haft god gavn af at styrketræning og balanceøvelser - især core og ben. Træntræning med fokus på åftræk og sige hjælper også med at holde teknikken skarp. For koncentration bruger jeg faste rutiner og små mentale pauser mellem serier. Hilsen Marianne"
   }
-])
+]);
 
 const sidebarItems = ref([
   {
@@ -64,112 +51,115 @@ const sidebarItems = ref([
     title: "Emme: Recurvebue sælges",
     image: ""
   }
-])
+]);
 
 const toggleLike = () => {
-  isLiked.value = !isLiked.value
-}
+  isLiked.value = !isLiked.value;
+};
 
 const toggleBookmark = () => {
-  isBookmarked.value = !isBookmarked.value
-}
+  isBookmarked.value = !isBookmarked.value;
+};
+
+onMounted(async () => {
+  const id = route.query.id;
+  if (!id) return;
+
+  try {
+    const res = await fetch(`https://www.mmd-s23-afsluttende-wp.dk/wp-json/wp/v2/news/${id}?_embed`);
+    const data = await res.json();
+
+    post.value.title = data.title.rendered;
+    post.value.image = data._embedded?.['wp:featuredmedia']?.[0]?.source_url || '';
+    post.value.imageAlt = data._embedded?.['wp:featuredmedia']?.[0]?.alt_text || data.title.rendered;
+    post.value.contentHtml = data.content?.rendered || '';
+  } catch (err) {
+    console.error('Failed to fetch post:', err);
+  }
+});
 </script>
 
 <template>
 <main>
-<div class="PostContainer">
-  <div class="headerSection">
-    <div class="titleWithLine">
-      {{ post.title }}
-      <div class="line"></div>
+  <div class="PostContainer">
+    <div class="headerSection">
+      <div class="titleWithLine">
+        {{ post.title }}
+        <div class="line"></div>
+      </div>
     </div>
-  </div>
-  <!-- Flyttes evt til eget resuable component (breadcrumbs) -->
-  <nav class="navigation">
-    <a href="#" class="backLink">
-      <span class="backArrow">‹</span> Tilbage
-    </a>
-  </nav>
-  <div class="postLayout">
-    <!-- Main Content -->
-    <section class="mainContent">
-      <!-- Post Image -->
-      <div class="postImageContainer">
-        <img 
-          :src="post.image" 
-          :alt="post.imageAlt"
-          class="postImage"
-        />
-      </div>
-      <!-- Post Actions -->
-      <div class="postActions">
-        <button 
-          class="actionBtn"
-          :class="{ active: isLiked }"
-          @click="toggleLike"
-        >
-          <span class="heartIcon"></span>
-        </button>
-        <button 
-          class="actionBtn"
-          :class="{ active: isBookmarked }"
-          @click="toggleBookmark"
-        >
-          <span class="bookmarkIcon">🏷</span>
-        </button>
-      </div>
-      <!-- Post Content -->
-      <article class="postContent">
-        <h2 class="postTitle">{{ post.title }}</h2>
-        <div class="postBody">
-          <p v-for="(paragraph, index) in post.content" :key="index">
-            {{ paragraph }}
-          </p>
-          <ul v-if="post.bulletPoints" class="bullet-points">
-            <li v-for="(point, index) in post.bulletPoints" :key="index">
-              {{ point }}
-            </li>
-          </ul>
+    <nav class="navigation">
+      <a href="#" class="backLink">
+        <span class="backArrow">‹</span> Tilbage
+      </a>
+    </nav>
+    <div class="postLayout">
+      <section class="mainContent">
+        <div class="postImageContainer">
+          <img 
+            :src="post.image" 
+            :alt="post.imageAlt"
+            class="postImage"
+          />
         </div>
-      </article>
-      <!-- Comment Section -->
-      <section class="commentsSection">
-        <button class="commentBtn">Skriv en kommentar</button>
-        <div class="commentsList">
-          <div 
-            v-for="comment in comments" 
-            :key="comment.id"
-            class="comment"
+        <div class="postActions">
+          <button 
+            class="actionBtn"
+            :class="{ active: isLiked }"
+            @click="toggleLike"
           >
-            <div class="commentAvatar">
-              <img :src="comment.avatar" :alt="comment.username" />
-            </div>
-            <div class="commentContent">
-              <div class="commentHeader">
-                <span class="commentUsername">{{ comment.username }}</span>
-                <span class="commentTime">{{ comment.timestamp }}</span>
+            <span class="heartIcon"></span>
+          </button>
+          <button 
+            class="actionBtn"
+            :class="{ active: isBookmarked }"
+            @click="toggleBookmark"
+          >
+            <span class="bookmarkIcon">🏷</span>
+          </button>
+        </div>
+        <article class="postContent">
+          <h2 class="postTitle">{{ post.title }}</h2>
+          <div class="postBody" v-html="post.contentHtml"></div>
+        </article>
+
+        <section class="commentsSection">
+          <button class="commentBtn">Skriv en kommentar</button>
+          <div class="commentsList">
+            <div 
+              v-for="comment in comments" 
+              :key="comment.id"
+              class="comment"
+            >
+              <div class="commentAvatar">
+                <img :src="comment.avatar" :alt="comment.username" />
               </div>
-              <p class="commentText">{{ comment.text }}</p>
+              <div class="commentContent">
+                <div class="commentHeader">
+                  <span class="commentUsername">{{ comment.username }}</span>
+                  <span class="commentTime">{{ comment.timestamp }}</span>
+                </div>
+                <p class="commentText">{{ comment.text }}</p>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
-    </section>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div 
-        v-for="item in sidebarItems" 
-        :key="item.id"
-        class="sidebarCard"
-      >
-        <img :src="item.image" :alt="item.title" class="sidebarImage" />
-        <div class="sidebarContent">
-          <h3 class="sidebarTitle">{{ item.title }}</h3>
+
+      <aside class="sidebar">
+        <div 
+          v-for="item in sidebarItems" 
+          :key="item.id"
+          class="sidebarCard"
+        >
+          <img :src="item.image" :alt="item.title" class="sidebarImage" />
+          <div class="sidebarContent">
+            <h3 class="sidebarTitle">{{ item.title }}</h3>
+          </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+    </div>
   </div>
-</div>
 </main>
 </template>
 
