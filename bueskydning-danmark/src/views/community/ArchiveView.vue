@@ -1,12 +1,15 @@
 <script setup>
-import { useRouter } from 'vue-router';
-import StandardBtn from '@/components/Buttons/StandardBtn.vue';
+    import { useRouter } from 'vue-router';
+    import StandardBtn from '@/components/Buttons/StandardBtn.vue';
 
-const router = useRouter();
+    const router = useRouter();
 
-function goToArchiveRallyView() {
-  router.push('/ArchiveRallyView');
-}
+    function goToArchiveGalleryView() {
+        router.push('/ArchiveGalleryView');
+    }
+    function goToArchiveRallyView() {
+        router.push('/ArchiveRallyView');
+    }
 </script>
 
 <template>
@@ -15,7 +18,9 @@ function goToArchiveRallyView() {
     <section>
         <h2>Billeder</h2>
         <div class="seeMoreBtnContainer">
-          <StandardBtn variant="primary">Se alle billeder</StandardBtn>
+            <StandardBtn variant="primary" @click="goToArchiveGalleryView">
+                Se alle billeder
+            </StandardBtn>
         </div>
     </section>
     <section>

@@ -8,7 +8,8 @@ import CommunityMainView from '../views/community/CommunityMainView.vue'
     import ArticlesPostView from '../views/community/ArticlesPostView.vue'
     import ForumView from '../views/community/ForumView.vue'
     import ArchiveView from '../views/community/ArchiveView.vue'
-    import ArchiveRallyView from '../views/community/ArchiveRallyView.vue'
+      import ArchiveRallyView from '../views/community/ArchiveRallyView.vue'
+      import ArchiveGalleryView from '../views/community/ArchiveGalleryView.vue'
 
 import CalendarMainView from '../views/calendar/CalendarMainView.vue'
 
@@ -74,6 +75,11 @@ const router = createRouter({
       path: '/ArchiveRallyView',
       name: 'ArchiveRallyView',
       component: ArchiveRallyView,
+    },
+    {
+      path: '/ArchiveGalleryView',
+      name: 'ArchiveGalleryView',
+      component: ArchiveGalleryView,
     },
 
     // Kalender side
